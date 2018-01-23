@@ -1,7 +1,21 @@
-parameters:
-
 services:
-    _defaults:
-        autowire: false      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        public: false       # Allows optimizing the container by removing unused services; this also means
+  _defaults:
+    autowire: false      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: true       # Allows optimizing the container by removing unused services; this also means
+
+  sewik.database:
+    class: Sewik\Infrastructure\MysqlDatabase
+    arguments:
+      - 'localhost'
+      - 'root'
+      - 'dupa.8'
+      - 'sewik_warszawa_2016'
+  sewik.query_repository:
+    class: Sewik\Infrastructure\HardcodedQueryRepository
+
+  sewik.service:
+    class: Sewik\Domain\SewikService
+    arguments:
+      - '@sewik.database'
+      - '@sewik.query_repository'

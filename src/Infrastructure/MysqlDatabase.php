@@ -30,7 +30,7 @@ class MysqlDatabase implements DatabaseInterface
         if (!$this->isFiltered) throw new \RuntimeException('You cannot run queries on unfiltered database!');
         $query = $this->link->query($query->getSqlQuery());
         if (!$query) throw new \RuntimeException('Query Failed: ' . $this->link->error);
-        $result = $query->fetch_assoc();
+        $result = $query->fetch_all();
         $query->close();
         return new Report($result);
     }

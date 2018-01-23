@@ -24,15 +24,14 @@ class HardcodedQueryRepository implements QueryRepositoryInterface
         $this->queries[] = 'SELECT sswa.opis AS warunki, zdarzenia FROM (
     SELECT SSWA_KOD, count(*) AS zdarzenia FROM zdarzenie GROUP BY SSWA_KOD) AS zdarzenie
 LEFT JOIN sswa ON sswa.kod=zdarzenie.sswa_kod ORDER BY zdarzenia DESC';
-        $this->queries[] = 'SELECT $typ, COUNT($typ) ilosc FROM zdarzenie GROUP BY powiat ORDER BY ilosc DESC LIMIT 30';
-        $this->queries[] = 'SELECT $typ, COUNT($typ) ilosc FROM zdarzenie GROUP BY miejscowosc ORDER BY ilosc DESC LIMIT 30';
-        $this->queries[] = 'SELECT $typ, COUNT($typ) ilosc FROM zdarzenie GROUP BY predkosc_dopuszczalna ORDER BY ilosc DESC LIMIT 30';
+        $this->queries[] = 'SELECT powiat, COUNT(*) ilosc FROM zdarzenie GROUP BY powiat ORDER BY ilosc DESC LIMIT 30';
+        $this->queries[] = 'SELECT miejscowosc, COUNT(*) ilosc FROM zdarzenie GROUP BY miejscowosc ORDER BY ilosc DESC LIMIT 30';
+        $this->queries[] = 'SELECT predkosc_dopuszczalna, COUNT(*) ilosc FROM zdarzenie GROUP BY predkosc_dopuszczalna ORDER BY ilosc DESC LIMIT 30';
         $this->queries[] = 'SELECT chmz.opis AS miejsce, zdarzenia FROM
   (SELECT chmz_kod, COUNT(*) AS zdarzenia
    FROM zdarzenie GROUP BY chmz_kod) AS zdarzenie
   LEFT JOIN chmz ON chmz.kod=zdarzenie.chmz_kod
 ORDER BY zdarzenia DESC';
-        $this->queries[] = 'SELECT $typ, COUNT($typ) ilosc FROM zdarzenie GROUP BY powiat ORDER BY ilosc DESC LIMIT 30';
         $this->queries[] = 'SELECT zabu.opis AS obszar, zdarzenia FROM
   (SELECT ZABU_KOD, COUNT(*) AS zdarzenia FROM zdarzenie GROUP BY ZABU_KOD) AS zdarzenie
   INNER JOIN zabu ON zabu.kod=zdarzenie.zabu_kod ORDER BY zdarzenia DESC';

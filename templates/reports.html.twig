@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Test Application{% endblock %}</title>
+</head>
+<body>
+<div id="reports">
+    <pre>
+    {% for report in reports %}
+        <table>
+        {% for row in report.table %}
+            <tr>
+                {% for cell in row %}
+                    <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+        {% else %}
+            <tr><td>Empty table.</td></tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        No reports.
+    {% endfor %}
+    </pre>
+</div>
+
+</body>
+</html>
