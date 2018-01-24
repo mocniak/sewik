@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Test Application{% endblock %}</title>
-</head>
-<body>
-<div id="reports">
+{% extends 'base.html.twig' %}
+{% block body %}
     <pre>
     {% for report in reports %}
         <table>
@@ -23,7 +17,4 @@
         No reports.
     {% endfor %}
     </pre>
-</div>
-
-</body>
-</html>
+{% endblock %}
