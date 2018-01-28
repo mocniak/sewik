@@ -27,12 +27,13 @@ class MysqlDatabase implements DatabaseInterface
 
     public function executeQuery(Query $query): Report
     {
+        $time = microtime(true);
         if (!$this->isFiltered) throw new \RuntimeException('You cannot run queries on unfiltered database!');
         $query = $this->link->query($query->getSqlQuery());
         if (!$query) throw new \RuntimeException('Query Failed: ' . $this->link->error);
         $result = $query->fetch_all();
         $query->close();
-        return new Report($result);
+        return new Report($result, microtime(true) - $time);
     }
 
     public function __destruct()

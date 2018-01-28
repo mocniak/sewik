@@ -13,6 +13,7 @@
             <tr><td>Empty table.</td></tr>
         {% endfor %}
         </table>
+        <p>Czas: {{ (report.timeCost * 1000) | round }} milisekund</p>
     {% else %}
         No reports.
     {% endfor %}
