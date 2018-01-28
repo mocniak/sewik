@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use Sewik\Domain\SewikService;
-use Sewik\Domain\ShowAllReportRequest;
+use Sewik\Domain\ShowAllReportsRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,7 +18,7 @@ class DefaultController extends Controller
     {
         /** @var SewikService $sewikService */
         $sewikService = $this->container->get('sewik.service');
-        $response = $sewikService->showAllReports(new ShowAllReportRequest());
+        $response = $sewikService->showAllReports(new ShowAllReportsRequest(null,'WARSZWA',null,null,null));
 
         return $this->render('reports.html.twig', ['reports' => $response->getReports()]);
     }

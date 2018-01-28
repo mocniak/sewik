@@ -2,13 +2,23 @@
 
 namespace Sewik\Domain;
 
-class Query
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
+
+class QueryTemplate
 {
     private $sqlQuery;
+    private $id;
 
     public function __construct(string $sqlQuery)
     {
+        $this->id = Uuid::uuid4();
         $this->sqlQuery = $sqlQuery;
+    }
+
+    public function getId(): UuidInterface
+    {
+        return $this->id;
     }
 
     public function getSqlQuery(): string

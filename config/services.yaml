@@ -11,11 +11,20 @@ services:
       - 'root'
       - 'dupa.8'
       - 'sewik_warszawa_2016'
-  sewik.query_repository:
-    class: Sewik\Infrastructure\HardcodedQueryRepository
+
+  sewik.template_repository:
+    class: Sewik\Infrastructure\HardcodedTemplateRepository
+
+  sewik.query_factory:
+    class: Sewik\Domain\QueryFactory
+
+  sewik.filter_factory:
+    class: Sewik\Domain\FilterFactory
 
   sewik.service:
     class: Sewik\Domain\SewikService
     arguments:
       - '@sewik.database'
-      - '@sewik.query_repository'
+      - '@sewik.template_repository'
+      - '@sewik.query_factory'
+      - '@sewik.filter_factory'

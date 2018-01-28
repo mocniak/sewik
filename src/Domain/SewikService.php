@@ -4,20 +4,30 @@ namespace Sewik\Domain;
 class SewikService
 {
     private $database;
-    private $queryRepository;
+    private $templateRepository;
+    private $factory;
+    private $filterFactory;
 
-    public function __construct(DatabaseInterface $database, QueryRepositoryInterface $queryRepository)
+    public function __construct(
+        DatabaseInterface $database,
+        TemplateRepositoryInterface $templateRepository,
+        QueryFactory $factory,
+        FilterFactory $filterFactory
+    )
     {
         $this->database = $database;
-        $this->queryRepository = $queryRepository;
+        $this->templateRepository = $templateRepository;
+        $this->factory = $factory;
+        $this->filterFactory = $filterFactory;
     }
 
-    public function showAllReports(ShowAllReportRequest $request)
+    public function showAllReports(ShowAllReportsRequest $request)
     {
-        $this->database->filter(new Filter());
-        $queries = $this->queryRepository->getAll();
+        $templates = $this->templateRepository->getAll();
+        $filter = $this->filterFactory->createFromRequest($request);
         $reports = [];
-        foreach ($queries as $query) {
+        foreach ($templates as $template) {
+            $query = $this->factory->createQuery($filter, $template);
             $reports[] = $this->database->executeQuery($query);
         }
         return new ShowAllReportResponse($reports);

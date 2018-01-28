@@ -1,10 +1,10 @@
 <?php
 namespace Sewik\Domain;
 
-interface QueryRepositoryInterface
+interface TemplateRepositoryInterface
 {
     /**
-     * @return Query[]
+     * @return QueryTemplate[]
      */
     public function getAll(): array;
 }
