@@ -12,6 +12,7 @@ class MysqlDatabase implements DatabaseInterface
     public function __construct(string $host, string $user, string $password, string $database)
     {
         $this->link = new \mysqli($host, $user, $password, $database);
+        $this->link->set_charset('utf8');
         if ($this->link->connect_errno) {
             throw new \RuntimeException("Connect failed: %s\n", $this->link->connect_error);
         }
