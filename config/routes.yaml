@@ -4,4 +4,4 @@ index:
 
 test:
     path: /reports
-    controller: App\Controller\DefaultController::reports
+    controller: App\Controller\DefaultController::showFilteredReports

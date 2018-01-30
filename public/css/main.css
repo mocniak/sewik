@@ -66,13 +66,12 @@ select {
 	width: 950px;
 	height: 200px;
 	clear: both;
-	background-image: url(img/tlo_czy.jpg);
+	background-image: url(../images/tlo_czy.jpg);
 	text-align: left;
 }
 #menu {
 	float: right;
 	height: 32px;
-	background-image: url(layout/menu_tlo.png);
 	padding: 25px 0 0 0;
 }
 #menu ul, #footer ul {

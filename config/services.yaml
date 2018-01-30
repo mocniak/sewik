@@ -10,7 +10,7 @@ services:
       - 'localhost'
       - 'root'
       - 'dupa.8'
-      - 'sewik_warszawa_2016'
+      - 'sewik_2016'
 
   sewik.template_repository:
     class: Sewik\Infrastructure\HardcodedTemplateRepository
