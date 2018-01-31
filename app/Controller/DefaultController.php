@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
@@ -17,24 +18,27 @@ class DefaultController extends Controller
         return new Response('index');
     }
 
-    public function showFilteredReports()
+    public function showFilteredReports(Request $request)
     {
-        $request = new ShowAllReportsRequest();
+        $showAllReportsRequest = new ShowAllReportsRequest();
 
-        $form = $this->createFormBuilder($request)
-            ->add('voivodeship', TextType::class)
-            ->add('locality', TextType::class)
-            ->add('street', TextType::class)
-            ->add('fromDate', DateType::class)
-            ->add('toDate', DateType::class)
+        $form = $this->createFormBuilder($showAllReportsRequest)
+            ->add('voivodeship', TextType::class, ['required' => false])
+            ->add('locality', TextType::class, ['required' => false])
+            ->add('street', TextType::class, ['required' => false])
+            ->add('fromDate', DateType::class, ['required' => false])
+            ->add('toDate', DateType::class, ['required' => false])
             ->add('save', SubmitType::class, array('label' => 'Wyświetl zdarzenia'))
             ->getForm();
 
+        $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $request = $form->getData();
+            echo 'derp';
+            $showAllReportsRequest = $form->getData();
             /** @var SewikService $sewikService */
             $sewikService = $this->container->get('sewik.service');
-            $response = $sewikService->showAllReports($request);
+            $response = $sewikService->showAllReports($showAllReportsRequest);
 
             return $this->render('reports.html.twig', ['reports' => $response->getReports()]);
         }

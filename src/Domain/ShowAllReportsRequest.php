@@ -9,27 +9,27 @@ class ShowAllReportsRequest
     private $fromDate;
     private $toDate;
 
-    public function setVoivodeship(string $voivodeship)
+    public function setVoivodeship(?string $voivodeship)
     {
         $this->voivodeship = $voivodeship;
     }
 
-    public function setLocality(string $locality)
+    public function setLocality(?string $locality)
     {
         $this->locality = $locality;
     }
 
-    public function setStreet(string $street)
+    public function setStreet(?string $street)
     {
         $this->street = $street;
     }
 
-    public function setFromDate(\DateTimeImmutable $fromDate)
+    public function setFromDate(?\DateTimeImmutable $fromDate)
     {
         $this->fromDate = $fromDate;
     }
 
-    public function setToDate(\DateTimeImmutable $toDate)
+    public function setToDate(?\DateTimeImmutable $toDate)
     {
         $this->toDate = $toDate;
     }
