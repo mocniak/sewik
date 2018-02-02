@@ -1,6 +1,7 @@
 <?php
 namespace Sewik\Infrastructure;
 
+use Ramsey\Uuid\UuidInterface;
 use Sewik\Domain\QueryTemplate;
 use Sewik\Domain\TemplateRepositoryInterface;
 
@@ -52,5 +53,10 @@ class HardcodedTemplateRepository implements TemplateRepositoryInterface
     public function save(QueryTemplate $template): void
     {
         // TODO: Implement save() method.
+    }
+
+    public function get(UuidInterface $templateId): QueryTemplate
+    {
+        // TODO: Implement get() method.
     }
 }

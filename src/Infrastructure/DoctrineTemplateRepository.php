@@ -4,10 +4,11 @@ namespace Sewik\Infrastructure;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMException;
+use Ramsey\Uuid\UuidInterface;
 use Sewik\Domain\QueryTemplate;
 use Sewik\Domain\TemplateRepositoryInterface;
 
-class DoctrineQueryTemplate implements TemplateRepositoryInterface
+class DoctrineTemplateRepository implements TemplateRepositoryInterface
 {
     private $entityManager;
     private $repository;
@@ -34,5 +35,10 @@ class DoctrineQueryTemplate implements TemplateRepositoryInterface
         } catch (ORMException $e) {
             throw new \RuntimeException('Saving Template failed: ' . $e->getMessage());
         }
+    }
+
+    public function get(UuidInterface $templateId): QueryTemplate
+    {
+        return $this->repository->find($templateId);
     }
 }

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Szablony zapytań | <a href="{{ path('create_template') }}">[dodaj nowy]</a></h2>
+    <ul>
+        {% for template in templates %}
+            <li>
+                {{ template.name }} |
+                <a href="{{ path('edit_template', {'id': template.id}) }}">[edytuj]</a>
+            </li>
+        {% else %}
+            <li>Brak zapytań.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

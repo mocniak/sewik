@@ -2,6 +2,18 @@ index:
     path: /
     controller: App\Controller\DefaultController::index
 
-test:
+reports:
     path: /reports
     controller: App\Controller\DefaultController::showFilteredReports
+
+dashboard:
+    path: /admin
+    controller: App\Controller\AdminController::dashboard
+
+create_template:
+    path: /admin/createTemplate
+    controller: App\Controller\AdminController::createTemplate
+
+edit_template:
+    path: /admin/editTemplate/{id}
+    controller: App\Controller\AdminController::editTemplate

@@ -28,8 +28,18 @@ class QueryTemplate
         return $this->sqlQuery;
     }
 
+    public function setSqlQuery(string $sqlQuery)
+    {
+        $this->sqlQuery = $sqlQuery;
+    }
+
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function setName(string $name)
+    {
+        $this->name = $name;
     }
 }

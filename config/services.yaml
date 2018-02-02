@@ -24,7 +24,9 @@ services:
       - '@sewik.database'
 
   sewik.template_repository:
-    class: Sewik\Infrastructure\HardcodedTemplateRepository
+    class: Sewik\Infrastructure\DoctrineTemplateRepository
+    arguments:
+      - "@doctrine.orm.default_entity_manager"
 
   sewik.query_factory:
     class: Sewik\Domain\QueryFactory
@@ -39,3 +41,8 @@ services:
       - '@sewik.template_repository'
       - '@sewik.query_factory'
       - '@sewik.filter_factory'
+
+  sewik.template_service:
+    class: Sewik\Domain\QueryTemplateService
+    arguments:
+      - '@sewik.template_repository'
