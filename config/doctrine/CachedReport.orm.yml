@@ -1,0 +1,12 @@
+Sewik\Infrastructure\CachedReport:
+  type: entity
+  table: cached_reports
+  id:
+    queryHash:
+      type: string
+      length: 40
+      generator: { strategy: NONE }
+
+  fields:
+    report:
+      type: reportType
