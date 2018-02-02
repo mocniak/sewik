@@ -1,21 +1,29 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <pre>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
     {% for report in reports %}
         <table>
-        {% for row in report.table %}
             <tr>
-                {% for cell in row %}
-                    <td>{{ cell }}</td>
+                {% for header in report.tableHeaders %}
+                    <th>{{ header }}</th>
                 {% endfor %}
             </tr>
-        {% else %}
-            <tr><td>Empty table.</td></tr>
-        {% endfor %}
+            {% for row in report.table %}
+                <tr>
+                    {% for cell in row %}
+                        <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% else %}
+                <tr>
+                    <td>Empty table.</td>
+                </tr>
+            {% endfor %}
         </table>
         <p>Czas: {{ (report.timeCost * 1000) | round }} milisekund</p>
     {% else %}
         No reports.
     {% endfor %}
-    </pre>
 {% endblock %}

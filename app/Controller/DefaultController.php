@@ -34,13 +34,15 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            echo 'derp';
             $showAllReportsRequest = $form->getData();
             /** @var SewikService $sewikService */
             $sewikService = $this->container->get('sewik.service');
             $response = $sewikService->showAllReports($showAllReportsRequest);
 
-            return $this->render('reports.html.twig', ['reports' => $response->getReports()]);
+            return $this->render('reports.html.twig', [
+                'reports' => $response->getReports(),
+                'form' => $form->createView(),
+            ]);
         }
 
         return $this->render('filterAccidentsForm.html.twig', array(

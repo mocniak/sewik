@@ -23,9 +23,15 @@ class MysqlDatabase implements DatabaseInterface
         $time = microtime(true);
         $resultQuery = $this->link->query($query->getSqlQuery());
         if (!$resultQuery) throw new \RuntimeException('Query Failed: ' . $this->link->error . '. Query: ' . $query->getSqlQuery());
-        $result = $resultQuery->fetch_all();
+        $result = $resultQuery->fetch_all(MYSQLI_ASSOC);
+        $fields = $resultQuery->fetch_fields();
+        $headers = [];
+        foreach ($fields as $field) {
+            $headers[] = $field->name;
+        }
+
         $resultQuery->close();
-        return new Report($result, microtime(true) - $time);
+        return new Report($result, $headers, microtime(true) - $time);
     }
 
     public function __destruct()

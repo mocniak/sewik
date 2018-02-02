@@ -9,6 +9,9 @@ class FilterFactory
         if (null !== $request->getLocality()) {
             $filters[] = Filter::COLUMN_LOCALITY . ' = \'' . $request->getLocality().'\'';
         }
+        if (null !== $request->getStreet()) {
+            $filters[] = Filter::COLUMN_STREET . ' = \'' . $request->getStreet().'\'';
+        }
         if (null !== $request->getFromDate()) {
             $filters[] = Filter::COLUMN_DATE . ' = \'' . $request->getFromDate()->format('Y-m-d').'\'';
         }
