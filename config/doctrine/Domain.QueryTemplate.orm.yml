@@ -1,0 +1,13 @@
+Sewik\Domain\QueryTemplate:
+  type: entity
+  table: query_templates
+  id:
+    id:
+      type: uuid
+      generator: { strategy: NONE }
+
+  fields:
+    name:
+      type: string
+    sqlQuery:
+      type: string

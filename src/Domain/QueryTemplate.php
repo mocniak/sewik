@@ -7,8 +7,8 @@ use Ramsey\Uuid\UuidInterface;
 
 class QueryTemplate
 {
-    private $sqlQuery;
     private $id;
+    private $sqlQuery;
     private $name;
 
     public function __construct(string $sqlQuery, string $name)

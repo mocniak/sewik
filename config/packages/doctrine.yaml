@@ -15,6 +15,7 @@ doctrine:
     # With Symfony 3.3, remove the `resolve:` prefix
     url: '%env(resolve:DATABASE_URL)%'
     types:
+      uuid: Ramsey\Uuid\Doctrine\UuidType
       queryResultType: Sewik\Infrastructure\FieldType\QueryResultType
   orm:
     auto_generate_proxy_classes: '%kernel.debug%'
@@ -25,5 +26,5 @@ doctrine:
         type: yml
         dir: '%kernel.project_dir%/config/doctrine'
         is_bundle: false
-        prefix: Sewik\Infrastructure
+        prefix: Sewik
         alias: Sewik

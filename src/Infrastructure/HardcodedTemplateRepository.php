@@ -48,4 +48,9 @@ class HardcodedTemplateRepository implements TemplateRepositoryInterface
         }
         return $queries;
     }
+
+    public function save(QueryTemplate $template): void
+    {
+        // TODO: Implement save() method.
+    }
 }
