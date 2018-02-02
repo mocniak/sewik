@@ -1,6 +1,6 @@
-Sewik\Infrastructure\CachedReport:
+Sewik\Infrastructure\CachedQueryResult:
   type: entity
-  table: cached_reports
+  table: cached_query_results
   id:
     queryHash:
       type: string
@@ -8,5 +8,5 @@ Sewik\Infrastructure\CachedReport:
       generator: { strategy: NONE }
 
   fields:
-    report:
-      type: reportType
+    queryResult:
+      type: queryResultType

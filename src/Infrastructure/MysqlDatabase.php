@@ -3,7 +3,7 @@ namespace Sewik\Infrastructure;
 
 use Sewik\Domain\DatabaseInterface;
 use Sewik\Domain\Query;
-use Sewik\Domain\Report;
+use Sewik\Domain\QueryResult;
 
 class MysqlDatabase implements DatabaseInterface
 {
@@ -18,7 +18,7 @@ class MysqlDatabase implements DatabaseInterface
         }
     }
 
-    public function executeQuery(Query $query): Report
+    public function executeQuery(Query $query): QueryResult
     {
         $time = microtime(true);
         $resultQuery = $this->link->query($query->getSqlQuery());
@@ -31,7 +31,7 @@ class MysqlDatabase implements DatabaseInterface
         }
 
         $resultQuery->close();
-        return new Report($result, $headers, microtime(true) - $time);
+        return new QueryResult($result, $headers, microtime(true) - $time);
     }
 
     public function __destruct()

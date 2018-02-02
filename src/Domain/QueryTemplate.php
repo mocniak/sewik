@@ -9,11 +9,13 @@ class QueryTemplate
 {
     private $sqlQuery;
     private $id;
+    private $name;
 
-    public function __construct(string $sqlQuery)
+    public function __construct(string $sqlQuery, string $name)
     {
         $this->id = Uuid::uuid4();
         $this->sqlQuery = $sqlQuery;
+        $this->name = $name;
     }
 
     public function getId(): UuidInterface
@@ -24,5 +26,10 @@ class QueryTemplate
     public function getSqlQuery(): string
     {
         return $this->sqlQuery;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

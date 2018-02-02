@@ -10,10 +10,10 @@ services:
       - 'localhost'
       - 'root'
       - 'dupa.8'
-      - 'sewik'
+      - 'sewik_2016'
 
   sewik.report_cache:
-    class: Sewik\Infrastructure\DoctrineReportCache
+    class: Sewik\Infrastructure\DoctrineQueryResultCache
     arguments:
       - "@doctrine.orm.default_entity_manager"
 

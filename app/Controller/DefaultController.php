@@ -23,11 +23,11 @@ class DefaultController extends Controller
         $showAllReportsRequest = new ShowAllReportsRequest();
 
         $form = $this->createFormBuilder($showAllReportsRequest)
-            ->add('voivodeship', TextType::class, ['required' => false])
-            ->add('locality', TextType::class, ['required' => false])
-            ->add('street', TextType::class, ['required' => false])
-            ->add('fromDate', DateType::class, ['required' => false])
-            ->add('toDate', DateType::class, ['required' => false])
+            ->add('voivodeship', TextType::class, ['required' => false, 'label' => 'Województwo'])
+            ->add('locality', TextType::class, ['required' => false, 'label' => 'Miejscowość'])
+            ->add('street', TextType::class, ['required' => false, 'label' => 'Ulica'])
+            ->add('fromDate', DateType::class, ['required' => false, 'label' => 'Od dnia'])
+            ->add('toDate', DateType::class, ['required' => false, 'label' => 'Do dnia'])
             ->add('save', SubmitType::class, array('label' => 'Wyświetl zdarzenia'))
             ->getForm();
 

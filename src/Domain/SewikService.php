@@ -28,7 +28,13 @@ class SewikService
         $reports = [];
         foreach ($templates as $template) {
             $query = $this->factory->createQuery($filter, $template);
-            $reports[] = $this->database->executeQuery($query);
+            $queryResult = $this->database->executeQuery($query);
+            $reports[] = new Report(
+                $template->getName(),
+                $queryResult->getTable(),
+                $queryResult->getTableHeaders(),
+                $queryResult->getTimeCost()
+            );
         }
         return new ShowAllReportResponse($reports);
     }

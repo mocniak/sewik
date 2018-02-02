@@ -5,9 +5,9 @@ namespace Sewik\Infrastructure\FieldType;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
-class ReportType extends Type
+class QueryResultType extends Type
 {
-    const NAME = 'reportType';
+    const NAME = 'queryResultType';
 
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {

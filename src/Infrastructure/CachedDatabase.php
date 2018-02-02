@@ -4,20 +4,20 @@ namespace Sewik\Infrastructure;
 
 use Sewik\Domain\DatabaseInterface;
 use Sewik\Domain\Query;
-use Sewik\Domain\Report;
+use Sewik\Domain\QueryResult;
 
 class CachedDatabase implements DatabaseInterface
 {
     private $cache;
     private $actualDatabase;
 
-    public function __construct(ReportCacheInterface $cache, DatabaseInterface $actualDatabase)
+    public function __construct(QueryResultCacheInterface $cache, DatabaseInterface $actualDatabase)
     {
         $this->cache = $cache;
         $this->actualDatabase = $actualDatabase;
     }
 
-    public function executeQuery(Query $query): Report
+    public function executeQuery(Query $query): QueryResult
     {
         $report = $this->cache->findForQuery($query);
 

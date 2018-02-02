@@ -4,6 +4,7 @@
     {{ form_widget(form) }}
     {{ form_end(form) }}
     {% for report in reports %}
+        <h3>{{ report.title }}</h3>
         <table>
             <tr>
                 {% for header in report.tableHeaders %}

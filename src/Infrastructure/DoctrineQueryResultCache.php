@@ -5,9 +5,9 @@ namespace Sewik\Infrastructure;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMException;
 use Sewik\Domain\Query;
-use Sewik\Domain\Report;
+use Sewik\Domain\QueryResult;
 
-class DoctrineReportCache implements ReportCacheInterface
+class DoctrineQueryResultCache implements QueryResultCacheInterface
 {
     private $entityManager;
     private $repository;
@@ -15,25 +15,25 @@ class DoctrineReportCache implements ReportCacheInterface
     public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->repository = $this->entityManager->getRepository(CachedReport::class);
+        $this->repository = $this->entityManager->getRepository(CachedQueryResult::class);
     }
 
-    public function findForQuery(Query $query): ?Report
+    public function findForQuery(Query $query): ?QueryResult
     {
-        /** @var CachedReport $cachedReport */
+        /** @var CachedQueryResult $cachedReport */
         $cachedReport = $this->repository->findOneBy(['queryHash' => sha1($query->getSqlQuery())]);
 
         if (null == $cachedReport) {
             return null;
         }
 
-        return $cachedReport->getReport();
+        return $cachedReport->getQueryResult();
     }
 
-    public function add(Report $report, Query $query)
+    public function add(QueryResult $report, Query $query)
     {
         try {
-            $this->entityManager->persist(new CachedReport($report, $query));
+            $this->entityManager->persist(new CachedQueryResult($report, $query));
             $this->entityManager->flush();
         } catch (ORMException $e) {
             throw new \RuntimeException('Cache failed: ' . $e->getMessage());
