@@ -28,7 +28,11 @@ class SewikService
         $reports = [];
         foreach ($templates as $template) {
             $query = $this->factory->createQuery($filter, $template);
-            $queryResult = $this->database->executeQuery($query);
+            try {
+                $queryResult = $this->database->executeQuery($query);
+            } catch (InvalidQueryException $exception) {
+                continue;
+            }
             $reports[] = new Report(
                 $template->getName(),
                 $queryResult->getTable(),

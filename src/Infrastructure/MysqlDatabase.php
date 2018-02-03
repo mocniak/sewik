@@ -2,6 +2,7 @@
 namespace Sewik\Infrastructure;
 
 use Sewik\Domain\DatabaseInterface;
+use Sewik\Domain\InvalidQueryException;
 use Sewik\Domain\Query;
 use Sewik\Domain\QueryResult;
 
@@ -22,7 +23,7 @@ class MysqlDatabase implements DatabaseInterface
     {
         $time = microtime(true);
         $resultQuery = $this->link->query($query->getSqlQuery());
-        if (!$resultQuery) throw new \RuntimeException('Query Failed: ' . $this->link->error . '. Query: ' . $query->getSqlQuery());
+        if (!$resultQuery) throw new InvalidQueryException('Query Failed: ' . $this->link->error . '. Query: ' . $query->getSqlQuery());
         $result = $resultQuery->fetch_all(MYSQLI_ASSOC);
         $fields = $resultQuery->fetch_fields();
         $headers = [];
