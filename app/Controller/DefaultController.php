@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use Sewik\Domain\Filter;
 use Sewik\Domain\SewikService;
 use Sewik\Domain\ShowAllReportsRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,7 +25,11 @@ class DefaultController extends Controller
         $showAllReportsRequest = new ShowAllReportsRequest();
 
         $form = $this->createFormBuilder($showAllReportsRequest)
-            ->add('voivodeship', TextType::class, ['required' => false, 'label' => 'Województwo'])
+            ->add('voivodeship', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Województwo',
+                'choices' => Filter::VOIVODESHIPS
+            ])
             ->add('locality', TextType::class, ['required' => false, 'label' => 'Miejscowość'])
             ->add('street', TextType::class, ['required' => false, 'label' => 'Ulica'])
             ->add('fromDate', DateType::class, ['required' => false, 'label' => 'Od dnia'])

@@ -6,6 +6,9 @@ class FilterFactory
     public function createFromRequest(ShowAllReportsRequest $request): Filter
     {
         $filters = [];
+        if (null !== $request->getVoivodeship()) {
+            $filters[] = Filter::COLUMN_VOIVODESHIP . ' = \'' . $request->getVoivodeship().'\'';
+        }
         if (null !== $request->getLocality()) {
             $filters[] = Filter::COLUMN_LOCALITY . ' = \'' . $request->getLocality().'\'';
         }
