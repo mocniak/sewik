@@ -11,3 +11,5 @@ Sewik\Domain\QueryTemplate:
       type: string
     sqlQuery:
       type: string
+    category:
+      type: string

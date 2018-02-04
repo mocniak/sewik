@@ -17,16 +17,21 @@ class EditTemplateRequest
      * @var UuidInterface
      */
     public $templateId;
+    /**
+     * @var string
+     */
+    public $category;
 
-    public function __construct(UuidInterface $templateId, string $name, string $sqlQuery)
+    public function __construct(UuidInterface $templateId, string $name, string $category, string $sqlQuery)
     {
         $this->name = $name;
         $this->sqlQuery = $sqlQuery;
+        $this->category = $category;
         $this->templateId = $templateId;
     }
 
     public static function fromTemplate(QueryTemplate $template): self
     {
-        return new self($template->getId(), $template->getName(), $template->getSqlQuery());
+        return new self($template->getId(), $template->getName(), $template->getCategory(), $template->getSqlQuery());
     }
 }

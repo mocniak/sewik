@@ -3,8 +3,10 @@ namespace Sewik\Infrastructure\FormType;
 
 use Ramsey\Uuid\Uuid;
 use Sewik\Domain\EditTemplateRequest;
+use Sewik\Domain\QueryTemplate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -18,6 +20,9 @@ class TemplateForm extends AbstractType
         $builder
             ->add('templateId', HiddenType::class)
             ->add('name')
+            ->add('category', ChoiceType::class, [
+                'choices' => QueryTemplate::CATEGORIES
+            ])
             ->add('sqlQuery', TextareaType::class)
             ->add('save', SubmitType::class);
         $builder->get('templateId')

@@ -14,14 +14,19 @@ class QueryTemplateService
 
     public function createNewTemplate()
     {
-        $template = new QueryTemplate('SELECT COUNT(*) from zdarzenie;', 'Nowy Raport');
+        $template = new QueryTemplate(
+            'SELECT COUNT(*) FROM zdarzenie;',
+            'Nowy Raport',
+            QueryTemplate::CATEGORY_OTHER);
         $this->templateRepository->save($template);
+
         return new CreateTemplateResponse($template->getId());
     }
 
     public function getTemplate(UuidInterface $templateId): QueryTemplate
     {
         $template = $this->templateRepository->get($templateId);
+
         return $template;
     }
 
@@ -30,7 +35,9 @@ class QueryTemplateService
         $template = $this->templateRepository->get($request->templateId);
         $template->setName($request->name);
         $template->setSqlQuery($request->sqlQuery);
+        $template->setCategory($request->category);
         $this->templateRepository->save($template);
+
         return new EditTemplateResult();
     }
 }
