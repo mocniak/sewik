@@ -24,7 +24,7 @@ class SewikService
     public function showAllReports(ShowAllReportsRequest $request)
     {
         $templates = $this->templateRepository->getAll();
-        $filter = $this->filterFactory->createFromRequest($request);
+        $filter = $this->filterFactory->createFromDto($request->getAccidentsFilter());
         $reports = [];
         foreach ($templates as $template) {
             $query = $this->factory->createQuery($filter, $template);

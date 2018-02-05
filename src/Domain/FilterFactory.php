@@ -3,23 +3,23 @@ namespace Sewik\Domain;
 
 class FilterFactory
 {
-    public function createFromRequest(ShowAllReportsRequest $request): Filter
+    public function createFromDto(AccidentsFilterDto $filterDto): Filter
     {
         $filters = [];
-        if (null !== $request->getVoivodeship()) {
-            $filters[] = Filter::COLUMN_VOIVODESHIP . ' = \'' . $request->getVoivodeship().'\'';
+        if (null !== $filterDto->getVoivodeship()) {
+            $filters[] = Filter::COLUMN_VOIVODESHIP . ' = \'' . $filterDto->getVoivodeship().'\'';
         }
-        if (null !== $request->getLocality()) {
-            $filters[] = Filter::COLUMN_LOCALITY . ' = \'' . $request->getLocality().'\'';
+        if (null !== $filterDto->getLocality()) {
+            $filters[] = Filter::COLUMN_LOCALITY . ' = \'' . $filterDto->getLocality().'\'';
         }
-        if (null !== $request->getStreet()) {
-            $filters[] = Filter::COLUMN_STREET . ' = \'' . $request->getStreet().'\'';
+        if (null !== $filterDto->getStreet()) {
+            $filters[] = Filter::COLUMN_STREET . ' = \'' . $filterDto->getStreet().'\'';
         }
-        if (null !== $request->getFromDate()) {
-            $filters[] = Filter::COLUMN_DATE . ' = \'' . $request->getFromDate()->format('Y-m-d').'\'';
+        if (null !== $filterDto->getFromDate()) {
+            $filters[] = Filter::COLUMN_DATE . ' >= \'' . $filterDto->getFromDate()->format('Y-m-d').'\'';
         }
-        if (null !== $request->getToDate()) {
-            $filters[] = Filter::COLUMN_DATE . ' = \'' . $request->getToDate()->format('Y-m-d').'\'';
+        if (null !== $filterDto->getToDate()) {
+            $filters[] = Filter::COLUMN_DATE . ' <= \'' . $filterDto->getToDate()->format('Y-m-d').'\'';
         }
         return new Filter($filters);
     }

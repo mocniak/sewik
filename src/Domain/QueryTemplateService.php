@@ -15,7 +15,7 @@ class QueryTemplateService
     public function createNewTemplate()
     {
         $template = new QueryTemplate(
-            'SELECT COUNT(*) FROM zdarzenie;',
+            'SELECT COUNT(*) FROM zdarzenie ' . Filter::ACCIDENTS_PLACEHOLDER . ';',
             'Nowy Raport',
             QueryTemplate::CATEGORY_OTHER);
         $this->templateRepository->save($template);

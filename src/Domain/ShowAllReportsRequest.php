@@ -3,59 +3,15 @@ namespace Sewik\Domain;
 
 class ShowAllReportsRequest
 {
-    private $voivodeship;
-    private $locality;
-    private $street;
-    private $fromDate;
-    private $toDate;
+    private $accidentsFilter;
 
-    public function setVoivodeship(?string $voivodeship)
+    public function __construct(AccidentsFilterDto $accidentsFilter)
     {
-        $this->voivodeship = $voivodeship;
+        $this->accidentsFilter = $accidentsFilter;
     }
 
-    public function setLocality(?string $locality)
+    public function getAccidentsFilter(): AccidentsFilterDto
     {
-        $this->locality = $locality;
-    }
-
-    public function setStreet(?string $street)
-    {
-        $this->street = $street;
-    }
-
-    public function setFromDate(?\DateTimeImmutable $fromDate)
-    {
-        $this->fromDate = $fromDate;
-    }
-
-    public function setToDate(?\DateTimeImmutable $toDate)
-    {
-        $this->toDate = $toDate;
-    }
-
-    public function getVoivodeship(): ?string
-    {
-        return $this->voivodeship;
-    }
-
-    public function getLocality(): ?string
-    {
-        return $this->locality;
-    }
-
-    public function getStreet(): ?string
-    {
-        return $this->street;
-    }
-
-    public function getFromDate(): ?\DateTimeImmutable
-    {
-        return $this->fromDate;
-    }
-
-    public function getToDate(): ?\DateTimeImmutable
-    {
-        return $this->toDate;
+        return $this->accidentsFilter;
     }
 }

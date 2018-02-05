@@ -10,7 +10,7 @@ services:
       - 'localhost'
       - 'root'
       - 'dupa.8'
-      - 'sewik_2016'
+      - 'sewik'
 
   sewik.report_cache:
     class: Sewik\Infrastructure\DoctrineQueryResultCache
