@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Sewik\Domain\AccidentsFilterDto;
+use Sewik\Domain\ListAccidentsRequest;
 use Sewik\Domain\SewikService;
 use Sewik\Domain\ShowAllReportsRequest;
 use Sewik\Infrastructure\FormType\FilterForm;
@@ -19,12 +20,12 @@ class DefaultController extends Controller
 
     public function showFilteredReports(Request $request)
     {
-        $formDto = new AccidentsFilterDto();
-        $form = $this->createForm(FilterForm::class, $formDto);
+        $filterDto = new AccidentsFilterDto();
+        $form = $this->createForm(FilterForm::class, $filterDto);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $showAllReportsRequest = new ShowAllReportsRequest($formDto);
+            $showAllReportsRequest = new ShowAllReportsRequest($filterDto);
             /** @var SewikService $sewikService */
             $sewikService = $this->container->get('sewik.service');
             $response = $sewikService->showAllReports($showAllReportsRequest);
@@ -39,7 +40,25 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
     }
-    public function showAccidents() {
+    public function showAccidents(Request $request) {
+        $filterDto = new AccidentsFilterDto();
+        $form = $this->createForm(FilterForm::class, $filterDto);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $listAccidentsRequest = new ListAccidentsRequest($filterDto);
+            /** @var SewikService $sewikService */
+            $sewikService = $this->container->get('sewik.service');
+            $response = $sewikService->listAccidents($listAccidentsRequest);
+
+            return $this->render('reports.html.twig', [
+                'accidents' => $response->getAccidents(),
+                'form' => $form->createView(),
+            ]);
+        }
+
+        return $this->render('filterAccidentsForm.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 }
