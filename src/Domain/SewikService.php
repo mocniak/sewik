@@ -43,11 +43,11 @@ class SewikService
         return new ShowAllReportResponse($reports);
     }
 
-    public function listAccidents(ListAccidentsRequest $request)
+    public function listAccidents(ListAccidentsRequest $request): ListAccidentsResponse
     {
         $filter = $this->filterFactory->createFromDto($request->getAccidentsFilter());
 
         $response = new ListAccidentsResponse([]);
-        return new ShowAllReportResponse($response);
+        return $response;
     }
 }
