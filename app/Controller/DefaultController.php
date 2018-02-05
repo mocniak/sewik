@@ -32,8 +32,20 @@ class DefaultController extends Controller
             ])
             ->add('locality', TextType::class, ['required' => false, 'label' => 'Miejscowość'])
             ->add('street', TextType::class, ['required' => false, 'label' => 'Ulica'])
-            ->add('fromDate', DateType::class, ['required' => false, 'label' => 'Od dnia'])
-            ->add('toDate', DateType::class, ['required' => false, 'label' => 'Do dnia'])
+            ->add('fromDate', DateType::class, [
+                'required' => false,
+                'label' => 'Od dnia',
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => ['placeholder' => 'yyyy-mm-dd']
+                ])
+            ->add('toDate', DateType::class, [
+                'required' => false,
+                'label' => 'Do dnia',
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => ['placeholder' => 'yyyy-mm-dd']
+                ])
             ->add('save', SubmitType::class, array('label' => 'Wyświetl zdarzenia'))
             ->getForm();
 
