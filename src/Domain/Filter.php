@@ -1,4 +1,5 @@
 <?php
+
 namespace Sewik\Domain;
 
 class Filter
@@ -9,6 +10,12 @@ class Filter
     const COLUMN_LOCALITY = 'miejscowosc';
     const COLUMN_DATE = 'data_zdarz';
     const COLUMN_STREET = 'ulica_adres';
+    const COLUMNS = [
+        self::COLUMN_VOIVODESHIP,
+        self::COLUMN_LOCALITY,
+        self::COLUMN_DATE,
+        self::COLUMN_STREET,
+    ];
 
     const VOIVODESHIP_DOLNOŚLĄSKIE = 'WOJ. DOLNOŚLĄSKIE';
     const VOIVODESHIP_KUJAWSKO_POMORSKIE = 'WOJ. KUJAWSKO-POMORSKIE';
