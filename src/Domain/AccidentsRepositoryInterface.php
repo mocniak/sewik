@@ -9,4 +9,6 @@ interface AccidentsRepositoryInterface
      * @return Accident[]
      */
     public function findFilteredAccidents(Filter $filter): array;
+
+    public function getAccident(int $id): Accident;
 }

@@ -11,11 +11,7 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
 
     public function __construct(string $host, string $user, string $password, string $database)
     {
-        $this->link = new \mysqli($host, $user, $password, $database);
-        $this->link->set_charset('utf8');
-        if ($this->link->connect_errno) {
-            throw new \RuntimeException("Connect failed: %s\n", $this->link->connect_error);
-        }
+        $this->link = new \PDO('mysql:dbname='.$database.';host='.$host, $user, $password);
     }
 
     /**
@@ -24,10 +20,37 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
      */
     public function findFilteredAccidents(Filter $filter): array
     {
-        $filter->getAccidentsFilter();
 
         $accidents = [];
 
         return $accidents;
+    }
+
+    public function getAccident(int $id): Accident
+    {
+        $stmt = $this->link->prepare("SELECT * FROM zdarzenie LIMIT 1");
+        $stmt->execute();
+        $row = $stmt->fetch();
+
+        return new Accident(
+            $row['ID'],
+            $row['WOJ'],
+            $row['POWIAT'],
+            $row['GMINA'],
+            $row['MIEJSCOWOSC'],
+            $row['ULICA_ADRES'],
+            new \DateTimeImmutable($row['DATA_ZDARZENIA']),
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
     }
 }
