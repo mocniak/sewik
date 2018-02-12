@@ -10,6 +10,6 @@ Sewik\Domain\QueryTemplate:
     name:
       type: string
     sqlQuery:
-      type: string
+      type: text
     category:
       type: string
