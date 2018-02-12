@@ -25,5 +25,9 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
     public function findFilteredAccidents(Filter $filter): array
     {
         $filter->getAccidentsFilter();
+
+        $accidents = [];
+
+        return $accidents;
     }
 }

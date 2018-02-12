@@ -60,8 +60,16 @@ class Filter
         $this->accidentsFilter = $accidentsFilter;
     }
 
-    public function getAccidentsFilter(): array
+    public function getAccidentsFilterSql(): string
     {
-        return $this->accidentsFilter;
+        if (!empty($this->accidentsFilter)) {
+            $query = ' WHERE ' . implode(' AND ', $this->accidentsFilter );
+        } else {
+            $query = '';
+        }
+        $query = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $query); //delete multiple spaces, newlines, etc.
+        $query = trim($query);
+
+        return $query;
     }
 }
