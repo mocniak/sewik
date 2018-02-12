@@ -17,6 +17,8 @@ class MysqlAccidentsRepositoryTest extends TestCase
 
     public function testRepositoryFetchesSingleObjectFromDatabase()
     {
-        $this->assertInstanceOf(Accident::class, $this->repository->getAccident(123));
+        $id = 98080700;
+        $accident = $this->repository->getAccident($id);
+        $this->assertEquals($id, $accident->getId());
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Sewik\Infrastructure;
 
 use Sewik\Domain\Accident;
@@ -11,7 +12,7 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
 
     public function __construct(string $host, string $user, string $password, string $database)
     {
-        $this->link = new \PDO('mysql:dbname='.$database.';host='.$host, $user, $password);
+        $this->link = new \PDO('mysql:dbname=' . $database . ';host=' . $host, $user, $password);
     }
 
     /**
@@ -28,7 +29,8 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
 
     public function getAccident(int $id): Accident
     {
-        $stmt = $this->link->prepare("SELECT * FROM zdarzenie LIMIT 1");
+        $stmt = $this->link->prepare("SELECT * FROM zdarzenie WHERE id = :id");
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
         $row = $stmt->fetch();
 
