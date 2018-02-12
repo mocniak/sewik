@@ -21,8 +21,15 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
      */
     public function findFilteredAccidents(Filter $filter): array
     {
-
         $accidents = [];
+        $stmt = $this->link->prepare("SELECT * FROM zdarzenie :where_subquery ORDER BY id ASC LIMIT 50");
+        $stmt->bindParam(':where_subquery', $filter->getAccidentsFilterSql());
+        $stmt->execute();
+        $rows = $stmt->fetchAll();
+
+        foreach ($rows as $row) {
+            $accidents[] = $this->rowToAccident($row);
+        }
 
         return $accidents;
     }
@@ -34,6 +41,11 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
         $stmt->execute();
         $row = $stmt->fetch();
 
+        return $this->rowToAccident($row);
+    }
+
+    private function rowToAccident(array $row): Accident
+    {
         return new Accident(
             $row['ID'],
             $row['WOJ'],
