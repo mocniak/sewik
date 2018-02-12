@@ -12,7 +12,11 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
 
     public function __construct(string $host, string $user, string $password, string $database)
     {
-        $this->link = new \PDO('mysql:dbname=' . $database . ';host=' . $host, $user, $password);
+        $this->link = new \PDO(
+            'mysql:dbname=' . $database . ';host=' . $host,
+            $user,
+            $password,
+            [\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"]);
     }
 
     /**
@@ -22,8 +26,7 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
     public function findFilteredAccidents(Filter $filter): array
     {
         $accidents = [];
-        $stmt = $this->link->prepare("SELECT * FROM zdarzenie :where_subquery ORDER BY id ASC LIMIT 50");
-        $stmt->bindParam(':where_subquery', $filter->getAccidentsFilterSql());
+        $stmt = $this->link->prepare("SELECT * FROM zdarzenie " . $filter->getAccidentsFilterSql() . " ORDER BY id ASC LIMIT 50");
         $stmt->execute();
         $rows = $stmt->fetchAll();
 
@@ -37,7 +40,7 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
     public function getAccident(int $id): Accident
     {
         $stmt = $this->link->prepare("SELECT * FROM zdarzenie WHERE id = :id");
-        $stmt->bindParam(':id', $id);
+        $stmt->bindValue(':id', $id);
         $stmt->execute();
         $row = $stmt->fetch();
 
