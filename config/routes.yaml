@@ -6,6 +6,10 @@ reports:
     path: /reports
     controller: App\Controller\DefaultController::showFilteredReports
 
+accident_list:
+    path: /accidentList
+    controller: App\Controller\DefaultController::accidentList
+
 dashboard:
     path: /admin
     controller: App\Controller\AdminController::dashboard

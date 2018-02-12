@@ -21,6 +21,7 @@ class FilterFactory
         if (null !== $filterDto->getToDate()) {
             $filters[] = Filter::COLUMN_DATE . ' <= \'' . $filterDto->getToDate()->format('Y-m-d').'\'';
         }
+
         return new Filter($filters);
     }
 }

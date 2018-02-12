@@ -1,4 +1,5 @@
 <?php
+
 namespace Sewik\Domain;
 
 class Filter
@@ -9,6 +10,12 @@ class Filter
     const COLUMN_LOCALITY = 'miejscowosc';
     const COLUMN_DATE = 'data_zdarz';
     const COLUMN_STREET = 'ulica_adres';
+    const COLUMNS = [
+        self::COLUMN_VOIVODESHIP,
+        self::COLUMN_LOCALITY,
+        self::COLUMN_DATE,
+        self::COLUMN_STREET,
+    ];
 
     const VOIVODESHIP_DOLNOŚLĄSKIE = 'WOJ. DOLNOŚLĄSKIE';
     const VOIVODESHIP_KUJAWSKO_POMORSKIE = 'WOJ. KUJAWSKO-POMORSKIE';
@@ -53,8 +60,16 @@ class Filter
         $this->accidentsFilter = $accidentsFilter;
     }
 
-    public function getAccidentsFilter(): array
+    public function getAccidentsFilterSql(): string
     {
-        return $this->accidentsFilter;
+        if (!empty($this->accidentsFilter)) {
+            $query = ' WHERE ' . implode(' AND ', $this->accidentsFilter );
+        } else {
+            $query = '';
+        }
+        $query = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $query); //delete multiple spaces, newlines, etc.
+        $query = trim($query);
+
+        return $query;
     }
 }

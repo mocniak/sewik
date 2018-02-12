@@ -22,7 +22,7 @@ class QueryFactoryTest extends TestCase
      */
     public function testQueryFactoryInjectsFilterSubquery($filter, $templateSql, $expectedSql)
     {
-        $template = new QueryTemplate($templateSql);
+        $template = new QueryTemplate($templateSql, "random name", QueryTemplate::CATEGORY_LOCATION);
         $expectedQuery = new Query($expectedSql);
         $filter = new Filter($filter);
         $computedQuery = $this->queryFactory->createQuery($filter, $template);

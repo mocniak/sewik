@@ -6,6 +6,10 @@ namespace Sewik\Domain;
 class Accident
 {
     /**
+     * @var int
+     */
+    private $id;
+    /**
      * @var string
      */
     private $voivodeship;
@@ -26,7 +30,7 @@ class Accident
      */
     private $address;
     /**
-     * @var \DateTime
+     * @var \DateTimeImmutable
      */
     private $time;
     /**
@@ -75,25 +79,27 @@ class Accident
     private $roadPart;
 
     public function __construct(
+        int $id,
         string $voivodeship,
         string $county,
         string $commune,
         string $locality,
         string $address,
-        \DateTime $time,
-        string $light,
-        string $weather,
-        string $type,
-        string $speedLimit,
-        string $pavement,
-        string $roadType,
-        string $trafficLights,
-        string $surfaceMarking,
+        \DateTimeImmutable $time,
+        ?string $light,
+        ?string $weather,
+        ?string $type,
+        ?string $speedLimit,
+        ?string $pavement,
+        ?string $roadType,
+        ?string $trafficLights,
+        ?string $surfaceMarking,
         ?string $intersectionType,
-        bool $builtUpArea,
-        string $roadPart
+        ?bool $builtUpArea,
+        ?string $roadPart
     )
     {
+        $this->id = $id;
         $this->voivodeship = $voivodeship;
         $this->county = $county;
         $this->commune = $commune;
@@ -111,6 +117,14 @@ class Accident
         $this->intersectionType = $intersectionType;
         $this->builtUpArea = $builtUpArea;
         $this->roadPart = $roadPart;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     /**
@@ -154,9 +168,9 @@ class Accident
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
-    public function getTime(): \DateTime
+    public function getTime(): \DateTimeImmutable
     {
         return $this->time;
     }

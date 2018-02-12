@@ -7,18 +7,21 @@ class SewikService
     private $templateRepository;
     private $factory;
     private $filterFactory;
+    private $accidentsRepository;
 
     public function __construct(
         DatabaseInterface $database,
         TemplateRepositoryInterface $templateRepository,
         QueryFactory $factory,
-        FilterFactory $filterFactory
+        FilterFactory $filterFactory,
+        AccidentsRepositoryInterface $accidentsRepository
     )
     {
         $this->database = $database;
         $this->templateRepository = $templateRepository;
         $this->factory = $factory;
         $this->filterFactory = $filterFactory;
+        $this->accidentsRepository = $accidentsRepository;
     }
 
     public function showAllReports(ShowAllReportsRequest $request)
@@ -46,8 +49,9 @@ class SewikService
     public function listAccidents(ListAccidentsRequest $request): ListAccidentsResponse
     {
         $filter = $this->filterFactory->createFromDto($request->getAccidentsFilter());
+        $accidents = $this->accidentsRepository->findFilteredAccidents($filter);
+        $response = new ListAccidentsResponse($accidents);
 
-        $response = new ListAccidentsResponse([]);
         return $response;
     }
 }
