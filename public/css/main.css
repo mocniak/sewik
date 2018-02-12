@@ -1,158 +1,200 @@
-* { font-family:  Tahoma, Arial, Helvetica, sans-serif; }
-html { margin: 0; padding: 0; font-size: 13px; }
+* {
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+}
+
 body {
-  color: #000;
-  margin: 0;
-  padding: 4px 0;
-  text-align: center; 
-  background-color: #EEEEEE;
+    color: #000;
+    margin: 0;
+    padding: 4px 0;
+    text-align: center;
+    background-color: #EEEEEE;
 }
-div {
-	/*border: solid 1px black;*/
-}
+
 a {
-	color: #006699;
-	text-decoration: none;
-	font-weight: bold;
+    color: #006699;
+    text-decoration: none;
+    font-weight: bold;
 }
+
 a:hover {
-	text-decoration: underline;
-	color: red;
+    text-decoration: underline;
+    color: red;
 }
+
 a img {
-	border: solid 1px #006699;
+    border: solid 1px #006699;
 }
+
 form {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
+
 h1 {
-	text-align: left;
-	display: block;
-	float: left;
-	margin: 0;
-	padding: 0;
-	font-size: 35px;
+    text-align: left;
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 0;
+    font-size: 35px;
 }
+
 h1 a {
-	display: block;
-	width: 450px;
-	padding: 10px 0 0 30px;
+    display: block;
+    width: 450px;
+    padding: 10px 0 0 30px;
 }
+
 h2 {
-	margin: 10px 10px 0 10px;
+    margin: 10px 10px 0 10px;
 }
-p { 
-	margin: 10px 0;
-	text-align: justify;
+
+p {
+    margin: 10px 0;
+    text-align: justify;
 }
+
 ul, ol {
-	padding: 0 0 0 20px;
-	text-align: justify;
+    padding: 0 0 0 20px;
+    text-align: justify;
 }
 
 textarea {
-	font-size: 13px;
+    font-size: 13px;
 }
+
 select {
-	width: 200px;
+    width: 200px;
 }
+
 #container {
-	width: 950px;
-	margin: 0 auto;
-	background-color: white;
+    width: 950px;
+    margin: 0 auto;
+    background-color: white;
 }
+
 #czywiesz {
-	width: 950px;
-	height: 200px;
-	clear: both;
-	background-image: url(../images/tlo_czy.jpg);
-	text-align: left;
+    width: 950px;
+    height: 200px;
+    clear: both;
+    background-image: url(../images/tlo_czy.jpg);
+    text-align: left;
 }
+
 #menu {
-	float: right;
-	height: 32px;
-	padding: 25px 0 0 0;
+    float: right;
+    height: 32px;
+    padding: 25px 0 0 0;
 }
+
 #menu ul, #footer ul {
-	padding: 0;
-	margin: 0;
-	font-weight: bold;
-	list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    list-style-type: none;
 }
+
 #menu li, #footer li {
-	padding: 0;
-	display: block;
-	float: left;
-	margin: 0;
+    padding: 0;
+    display: block;
+    float: left;
+    margin: 0;
 }
+
 #menu li, #footer li {
-	font-size: 13px;
-	padding: 8px 11px;
-	display: block;
+    font-size: 13px;
+    padding: 8px 11px;
+    display: block;
 }
-#menu li{
-        position: relative;
+
+#menu li {
+    position: relative;
 }
+
 .box {
-	text-align: justify;
-	margin: 5px 9px;
-	padding: 3px;
-	float: left;
-	width: 290px;
-	border: solid 1px gray;
+    text-align: justify;
+    margin: 5px 9px;
+    padding: 3px;
+    float: left;
+    width: 290px;
+    border: solid 1px gray;
 }
-#artykul {
-	margin: 10px;
-	text-align: justify;
-	width: 600px;
+
+#footer {
+    clear: both;
+    width: 100%;
+    background-color: silver;
+    padding: 5px 0;
+    margin: 3px 0 0 0;
 }
-#artykul h2 {
-	padding: 0;
-	margin: 5px 0;
-}
-#footer { 
-	clear: both;
-	width: 100%;
-	background-color: silver;
-	padding: 5px 0;
-	margin: 3px 0 0 0;
-}
+
 table {
-	font-size: 13px;
-	background-color: #CCCCCC;
-	text-align: center;
-	width: 650px;
-	margin: 5px auto;
+    font-size: 13px;
+    background-color: #CCCCCC;
+    text-align: center;
+    width: 650px;
+    margin: 5px auto;
 }
-table td{
-	background-color: #FFFFFF;
-	margin: 1px;
+
+table td {
+    background-color: #FFFFFF;
+    margin: 1px;
 
 }
-table th{
-	background-color: #CCCCCC;
-	margin: 1px;
+
+table th {
+    background-color: #CCCCCC;
+    margin: 1px;
 }
-table.szukaj_zaaw{
-	width: 600px;
-	border: 0;
-	background-color: #FFFFFF;
-	text-align: left;
+
+table.szukaj_zaaw {
+    width: 600px;
+    border: 0;
+    background-color: #FFFFFF;
+    text-align: left;
 }
+
 table.szukaj {
-	width: auto;
-	border: 0;
-	background-color: #FFFFFF;
-	text-align: left;
+    width: auto;
+    border: 0;
+    background-color: #FFFFFF;
+    text-align: left;
 }
+
 table.szukaj td, table.szukaj_zaaw td {
-	margin: 0;
-	padding: 0 2px;
+    margin: 0;
+    padding: 0 2px;
 }
-table.szukaj input, table.szukaj select{
-	width: 135px;
+
+#admin_form {
+    text-align: left;
 }
-table.szukaj_zaaw input, table.szukaj_zaaw select{
-	width: 400px;
+
+#admin_form div {
+    width: 800px;
+    clear: both;
+    padding: 5px;
+}
+
+#admin_form label {
+    display: block;
+    width: 250px;
+    margin: 3px;
+    float: left;
+}
+
+#admin_form input, #admin_form textarea, #admin_form select {
+    float: right;
+    display: block;
+    width: 500px;
+}
+
+#admin_form textarea {
+    height: 300px;
 }
