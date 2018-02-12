@@ -40,7 +40,7 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
     }
-    public function showAccidents(Request $request) {
+    public function accidentList(Request $request) {
         $filterDto = new AccidentsFilterDto();
         $form = $this->createForm(FilterForm::class, $filterDto);
         $form->handleRequest($request);
@@ -51,7 +51,7 @@ class DefaultController extends Controller
             $sewikService = $this->container->get('sewik.service');
             $response = $sewikService->listAccidents($listAccidentsRequest);
 
-            return $this->render('reports.html.twig', [
+            return $this->render('accidentList.html.twig', [
                 'accidents' => $response->getAccidents(),
                 'form' => $form->createView(),
             ]);

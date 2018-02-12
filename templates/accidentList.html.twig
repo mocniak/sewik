@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <h3>Lista Zdarzeń</h3>
+    <table>
+
+        {% for accident in accidents %}
+            <tr>
+                <td>{{ accident.id }}</td>
+                <td>{{ accident.commune }}</td>
+                <td>{{ accident.locality }}</td>
+                <td>{{ accident.address }}</td>
+                <td>{{ accident.time|date("Y-m-d H:i") }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>Empty table.</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

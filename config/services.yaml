@@ -12,6 +12,14 @@ services:
       - 'dupa.8'
       - 'sewik'
 
+  sewik.accident_repository:
+    class: Sewik\Infrastructure\MysqlAccidentsRepository
+    arguments:
+      - 'localhost'
+      - 'root'
+      - 'dupa.8'
+      - 'sewik'
+
   sewik.report_cache:
     class: Sewik\Infrastructure\DoctrineQueryResultCache
     arguments:
@@ -41,6 +49,7 @@ services:
       - '@sewik.template_repository'
       - '@sewik.query_factory'
       - '@sewik.filter_factory'
+      - '@sewik.accident_repository'
 
   sewik.template_service:
     class: Sewik\Domain\QueryTemplateService
