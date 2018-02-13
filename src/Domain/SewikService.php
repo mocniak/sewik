@@ -1,11 +1,14 @@
 <?php
+
 namespace Sewik\Domain;
+
+use Ramsey\Uuid\UuidInterface;
 
 class SewikService
 {
     private $database;
     private $templateRepository;
-    private $factory;
+    private $queryFactory;
     private $filterFactory;
     private $accidentsRepository;
 
@@ -19,7 +22,7 @@ class SewikService
     {
         $this->database = $database;
         $this->templateRepository = $templateRepository;
-        $this->factory = $factory;
+        $this->queryFactory = $factory;
         $this->filterFactory = $filterFactory;
         $this->accidentsRepository = $accidentsRepository;
     }
@@ -30,7 +33,7 @@ class SewikService
         $filter = $this->filterFactory->createFromDto($request->getAccidentsFilter());
         $reports = [];
         foreach ($templates as $template) {
-            $query = $this->factory->createQuery($filter, $template);
+            $query = $this->queryFactory->createQuery($filter, $template);
             try {
                 $queryResult = $this->database->executeQuery($query);
             } catch (InvalidQueryException $exception) {
@@ -53,5 +56,19 @@ class SewikService
         $response = new ListAccidentsResponse($accidents);
 
         return $response;
+    }
+
+    public function showReport(UuidInterface $queryId, AccidentsFilterDto $filterDto): Report
+    {
+        $template = $this->templateRepository->get($queryId);
+        $filter = $this->filterFactory->createFromDto($filterDto);
+        $query = $this->queryFactory->createQuery($filter, $template);
+        $queryResult = $this->database->executeQuery($query);
+        return $reports[] = new Report(
+            $template->getName(),
+            $queryResult->getTable(),
+            $queryResult->getTableHeaders(),
+            $queryResult->getTimeCost()
+        );
     }
 }
