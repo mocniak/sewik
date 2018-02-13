@@ -63,7 +63,7 @@ class Filter
     public function getAccidentsFilterSql(): string
     {
         if (!empty($this->accidentsFilter)) {
-            $query = ' WHERE ' . implode(' AND ', $this->accidentsFilter );
+            $query = implode(' AND ', $this->accidentsFilter );
         } else {
             $query = '';
         }

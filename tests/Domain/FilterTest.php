@@ -25,11 +25,11 @@ class FilterTest extends TestCase
             ],
             [
                 ["miejscowosc = 'Warszawa'"],
-                "WHERE miejscowosc = 'Warszawa'"
+                "miejscowosc = 'Warszawa'"
             ],
             [
-                ["miejscowosc = 'Warszawa'","data_zdarz >= '2011-11-01"],
-                "WHERE miejscowosc = 'Warszawa' AND data_zdarz >= '2011-11-01"
+                ["miejscowosc = 'Warszawa'", "data_zdarz >= '2011-11-01"],
+                "miejscowosc = 'Warszawa' AND data_zdarz >= '2011-11-01"
             ]
         ];
     }

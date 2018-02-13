@@ -41,7 +41,18 @@ class QueryFactoryTest extends TestCase
                 [],
                 'SELECT COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter%',
                 "SELECT COUNT(*) AS zdarzenia FROM zdarzenie"
-            ]
+            ],
+            [
+                ["miejscowosc = 'Warszawa'"],
+                "SELECT COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% AND derp = 'derp'",
+                "SELECT COUNT(*) AS zdarzenia FROM zdarzenie WHERE miejscowosc = 'Warszawa' AND derp = 'derp'"
+            ],
+            [
+                [],
+                "SELECT COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% AND derp = 'derp'",
+                "SELECT COUNT(*) AS zdarzenia FROM zdarzenie WHERE derp = 'derp'"
+            ],
+
         ];
     }
 }
