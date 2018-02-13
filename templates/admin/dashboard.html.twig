@@ -6,7 +6,7 @@
         {% for template in templates %}
             <li>
                 {{ template.name }} |
-                <a href="{{ path('edit_template', {'id': template.id}) }}">[edytuj]</a>
+                <a href="{{ path('edit_template', {'id': template.id}) }}">[edytuj]</a> | {{ template.id }}
             </li>
         {% else %}
             <li>Brak zapytań.</li>

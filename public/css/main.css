@@ -172,29 +172,29 @@ table.szukaj td, table.szukaj_zaaw td {
     padding: 0 2px;
 }
 
-#admin_form {
+#form {
     text-align: left;
 }
 
-#admin_form div {
+#form div {
     width: 800px;
     clear: both;
     padding: 5px;
 }
 
-#admin_form label {
+#form label {
     display: block;
     width: 250px;
     margin: 3px;
     float: left;
 }
 
-#admin_form input, #admin_form textarea, #admin_form select {
+#form input, #form textarea, #form select {
     float: right;
     display: block;
     width: 500px;
 }
 
-#admin_form textarea {
+#form textarea {
     height: 300px;
 }

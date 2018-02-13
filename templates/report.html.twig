@@ -1,0 +1,20 @@
+<h3>{{ report.title }}</h3>
+<table>
+    <tr>
+        {% for header in report.tableHeaders %}
+            <th>{{ header }}</th>
+        {% endfor %}
+    </tr>
+    {% for row in report.table %}
+        <tr>
+            {% for cell in row %}
+                <td>{{ cell }}</td>
+            {% endfor %}
+        </tr>
+    {% else %}
+        <tr>
+            <td>Empty table.</td>
+        </tr>
+    {% endfor %}
+</table>
+{#<p>Czas generowania raportu: {{ (report.timeCost * 1000) | round }} milisekund.</p>#}

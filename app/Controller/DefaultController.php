@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Ramsey\Uuid\Uuid;
 use Sewik\Domain\AccidentsFilterDto;
 use Sewik\Domain\ListAccidentsRequest;
 use Sewik\Domain\SewikService;
@@ -40,7 +41,9 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
     }
-    public function accidentList(Request $request) {
+
+    public function accidentList(Request $request)
+    {
         $filterDto = new AccidentsFilterDto();
         $form = $this->createForm(FilterForm::class, $filterDto);
         $form->handleRequest($request);
@@ -60,5 +63,22 @@ class DefaultController extends Controller
         return $this->render('filterAccidentsForm.html.twig', array(
             'form' => $form->createView(),
         ));
+    }
+
+    public function showReport($originalRequest, string $queryId)
+    {
+        $filterDto = new AccidentsFilterDto();
+        $form = $this->createForm(FilterForm::class, $filterDto);
+        $form->handleRequest($originalRequest);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var SewikService $sewikService */
+            $sewikService = $this->container->get('sewik.service');
+            $report = $sewikService->showReport(Uuid::fromString($queryId), $filterDto);
+            return $this->render('report.html.twig', [
+                'report' => $report,
+            ]);
+        }
+        return new Response('invalid filter');
     }
 }

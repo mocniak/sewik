@@ -1,30 +1,33 @@
 {% extends 'base.html.twig' %}
+
+{# array of report queries #}
+{% set categories = {
+    'Czas zdarzeń' : [
+        '594095eb-ccb6-4121-94dd-ace27bc1ca82'
+    ],
+    'Lokalizacja zdarzeń' : [
+        '19a27d27-9aa5-409b-ab36-40e5ba468460'
+    ],
+    'Miejsce zdarzeń' : [
+        'a0e88208-09d6-4991-bc49-8c9b6a8fa224'
+    ]
+} %}
+
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
-    {% for report in reports %}
-        <h3>{{ report.title }}</h3>
-        <table>
-            <tr>
-                {% for header in report.tableHeaders %}
-                    <th>{{ header }}</th>
-                {% endfor %}
-            </tr>
-            {% for row in report.table %}
-                <tr>
-                    {% for cell in row %}
-                        <td>{{ cell }}</td>
-                    {% endfor %}
-                </tr>
-            {% else %}
-                <tr>
-                    <td>Empty table.</td>
-                </tr>
-            {% endfor %}
-        </table>
-        <p>Czas: {{ (report.timeCost * 1000) | round }} milisekund</p>
-    {% else %}
-        No reports.
+    <div id="form">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+    {% for categoryName, queries in categories %}
+        <h2>{{ categoryName }}</h2>
+        {% for queryId in queries %}
+            {{ render(controller(
+                'App\\Controller\\DefaultController::showReport',
+                { 'originalRequest' : app.request, 'queryId': queryId }
+            )) }}
+        {% else %}
+            No reports.
+        {% endfor %}
     {% endfor %}
 {% endblock %}
