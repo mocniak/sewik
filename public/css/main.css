@@ -173,6 +173,7 @@ table.szukaj td, table.szukaj_zaaw td {
 }
 
 #form {
+    padding-left: 60px;
     text-align: left;
 }
 
