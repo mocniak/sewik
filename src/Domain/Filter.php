@@ -5,6 +5,7 @@ namespace Sewik\Domain;
 class Filter
 {
     const ACCIDENTS_PLACEHOLDER = '%zdarzenie_filter%';
+    const VEHICLES_PLACEHOLDER = '%pojazdy_filter%';
 
     const COLUMN_VOIVODESHIP = 'woj';
     const COLUMN_LOCALITY = 'miejscowosc';
