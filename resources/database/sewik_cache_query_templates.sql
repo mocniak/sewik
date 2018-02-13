@@ -1,3 +1,4 @@
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('06e8a29a-44b7-47d0-bc7c-b2bfac91a916', 'Gmina', 'SELECT gmina, COUNT(*) ilosc FROM zdarzenie %zdarzenie_filter%  GROUP BY gmina ORDER BY ilosc DESC LIMIT 30', 'location');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('0fe6048a-4ebe-4a9f-adf0-09c879d5cc1c', 'Geometria drogi', 'SELECT geod.opis AS geometria, zdarzenia FROM
   (SELECT geod_KOD, COUNT(*) AS zdarzenia FROM zdarzenie  %zdarzenie_filter%  GROUP BY geod_KOD) AS zdarzenie
   INNER JOIN geod ON geod.kod=zdarzenie.geod_kod ORDER BY zdarzenia DESC', 'site');
@@ -89,7 +90,7 @@ FROM
    GROUP BY ROK
   ) AS rl
     ON r.rok = rl.rok;', 'time');
-INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('6a0359a2-9bde-446e-ace1-cd67964fb90e', 'Prędkość dopuszczalna', 'SELECT predkosc_dopuszczalna, COUNT(*) ilosc FROM zdarzenie %zdarzenie_filter%  GROUP BY predkosc_dopuszczalna ORDER BY ilosc DESC LIMIT 30', 'site');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('6a0359a2-9bde-446e-ace1-cd67964fb90e', 'Prędkość dopuszczalna', 'SELECT predkosc_dopuszczalna, COUNT(*) ilosc FROM zdarzenie %zdarzenie_filter%  GROUP BY predkosc_dopuszczalna ORDER BY ilosc DESC LIMIT 15', 'site');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('6e33bdbf-a4de-434c-a8de-748373225407', 'Rodzaj skrzyżowania', 'SELECT skrz.opis AS skrzyżowanie, zdarzenia FROM
   (SELECT skrz_KOD, COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% GROUP BY SKRZ_KOD) AS zdarzenie
   INNER JOIN skrz ON skrz.kod=zdarzenie.skrz_kod ORDER BY zdarzenia DESC;', 'site');
