@@ -6,16 +6,18 @@ class QueryFactory
 {
     public function createQuery(Filter $filter, QueryTemplate $template): Query
     {
-        $sqlQuery = $template->getSqlQuery();
+        $query = $template->getSqlQuery();
 
         if (empty($filter->getAccidentsFilterSql())) {
-            $query = str_replace(Filter::ACCIDENTS_PLACEHOLDER . ' AND ', 'WHERE ', $sqlQuery);
+            $query = str_replace(Filter::VEHICLES_PLACEHOLDER . ' AND ', 'WHERE ', $query);
+            $query = str_replace(Filter::VEHICLES_PLACEHOLDER, '', $query);
+            $query = str_replace(Filter::ACCIDENTS_PLACEHOLDER . ' AND ', 'WHERE ', $query);
             $query = str_replace(Filter::ACCIDENTS_PLACEHOLDER, '', $query);
         } else {
             $query = str_replace(
                 Filter::VEHICLES_PLACEHOLDER,
                 'WHERE zszd_id IN (SELECT id FROM zdarzenie ' . Filter::ACCIDENTS_PLACEHOLDER . ')',
-                $sqlQuery
+                $query
             );
             $query = str_replace(Filter::ACCIDENTS_PLACEHOLDER, 'WHERE ' . $filter->getAccidentsFilterSql(), $query);
         }
