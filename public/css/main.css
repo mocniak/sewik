@@ -5,7 +5,7 @@
 html {
     margin: 0;
     padding: 0;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 body {
@@ -63,14 +63,6 @@ p {
 ul, ol {
     padding: 0 0 0 20px;
     text-align: justify;
-}
-
-textarea {
-    font-size: 13px;
-}
-
-select {
-    width: 200px;
 }
 
 #container {
@@ -137,39 +129,22 @@ select {
 table {
     font-size: 13px;
     background-color: #CCCCCC;
-    text-align: center;
+    text-align: right;
     width: 650px;
     margin: 5px auto;
 }
 
 table td {
     background-color: #FFFFFF;
-    margin: 1px;
-
+    padding: 1px 4px;
 }
 
 table th {
+    text-align: center;
     background-color: #CCCCCC;
-    margin: 1px;
 }
-
-table.szukaj_zaaw {
-    width: 600px;
-    border: 0;
-    background-color: #FFFFFF;
+table tr td:first-child {
     text-align: left;
-}
-
-table.szukaj {
-    width: auto;
-    border: 0;
-    background-color: #FFFFFF;
-    text-align: left;
-}
-
-table.szukaj td, table.szukaj_zaaw td {
-    margin: 0;
-    padding: 0 2px;
 }
 
 #form {

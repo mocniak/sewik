@@ -5,7 +5,18 @@ INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES (
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('13f0d5c9-092d-4f61-ac05-0c2b2d9cc58d', 'Rodzaj zdarzenia', 'SELECT szrd.opis AS rodzaj_zdarzenia, zdarzenia FROM
   (SELECT szrd_KOD, COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% GROUP BY szrd_KOD) AS zdarzenie
   LEFT JOIN szrd ON szrd.kod=zdarzenie.szrd_kod ORDER BY zdarzenia DESC;', 'other');
-INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('146bd589-fb42-4102-b6c4-d0e03d4eba1d', 'Nowy Raport', 'SELECT COUNT(*) FROM zdarzenie %zdarzenie_filter%;', 'other');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('146bd589-fb42-4102-b6c4-d0e03d4eba1d', 'Pojazdy uczestników', 'SELECT skar.opis AS rodzaj_pojazdu, wynik.ilosc AS pojazdy FROM (
+		skar 
+		INNER JOIN
+		(
+		SELECT pojazdy.rodzaj_pojazdu, COUNT(pojazdy.rodzaj_pojazdu) AS ilosc 
+		FROM  pojazdy %pojazdy_filter%
+
+		GROUP BY pojazdy.rodzaj_pojazdu
+		) AS wynik 
+
+		ON wynik.rodzaj_pojazdu=skar.kod)
+		ORDER BY pojazdy DESC', 'vehicles');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('19a27d27-9aa5-409b-ab36-40e5ba468460', 'Powiat', 'SELECT powiat, COUNT(*) ilosc FROM zdarzenie %zdarzenie_filter%  GROUP BY powiat ORDER BY ilosc DESC LIMIT 30', 'location');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('210ff851-09e9-4155-a9fa-588af3af7417', 'Sygnalizacja Świetlna', 'SELECT sysw.opis AS obecnosc_sygnalizacji, zdarzenia FROM
   (SELECT sysw_KOD, COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% GROUP BY sysw_KOD) AS zdarzenie
@@ -18,6 +29,25 @@ FROM zdarzenie  %zdarzenie_filter% AND ulica_skrzyz != ''''
 ) AS tablica
 GROUP BY ulica1, ulica2
 ORDER BY ilosc DESC LIMIT 50', 'location');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('3a16412c-e1bf-4039-afec-1a54596a7a9f', 'Nowy Raport', 'SELECT COUNT(*) FROM zdarzenie %zdarzenie_filter%;', 'other');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('431f604b-ee44-4ce8-ab38-993ae843bea7', 'Przyczyny pieszych', 'SELECT
+  sppi.opis AS przyczyna_zdarzenia,
+  wynik     AS ilosc
+FROM (
+       SELECT
+         sppi_kod,
+         count(sppi_kod) AS wynik
+       FROM uczestnicy
+       %pojazdy_filter% AND CHAR_LENGTH(sppi_kod) > 0
+       GROUP BY sppi_kod) AS uczestnicy
+
+  INNER JOIN
+
+  sppi
+
+    ON sppi.kod = uczestnicy.sppi_kod
+
+ORDER BY ilosc DESC', 'participants');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('4355ee95-561c-4fbc-9082-666bb6e22fae', 'Warunki atmosferyczne', 'SELECT sswa.opis AS warunki, zdarzenia FROM (
     SELECT SSWA_KOD, count(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter%  GROUP BY SSWA_KOD) AS zdarzenie
 LEFT JOIN sswa ON sswa.kod=zdarzenie.sswa_kod ORDER BY zdarzenia DESC', 'other');
@@ -90,12 +120,47 @@ FROM
    GROUP BY ROK
   ) AS rl
     ON r.rok = rl.rok;', 'time');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('59d266b1-ca93-44b3-befd-c71e33db967f', 'Przyczyny kierujących pojazdami', 'SELECT
+  opis AS przyczyna_zdarzenia,
+  ilosc
+FROM
+  spsz
+  INNER JOIN (
+               SELECT
+                 uczestnicy.spsz_kod        AS przyczyna,
+                 COUNT(uczestnicy.spsz_kod) AS ilosc
+               FROM uczestnicy
+                 INNER JOIN
+                 pojazdy
+                   ON pojazdy.id = uczestnicy.zspo_id
+               %pojazdy_filter% AND uczestnicy.spsz_kod IS NOT NULL
+               GROUP BY uczestnicy.spsz_kod
+             ) AS wynik
+    ON wynik.przyczyna = spsz.kod
+ORDER BY ilosc DESC', 'participants');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('5d947d4e-0f0c-40f0-9c8e-7cffcc046efc', 'Inne przyczyny zdarzeń', 'SELECT
+  spip.opis as inne_przyczyny,
+  zdarzenia
+FROM
+  (SELECT
+     spip_kod,
+     COUNT(*) AS zdarzenia
+   FROM zdarzenie %zdarzenie_filter%
+   GROUP BY spip_kod) AS z
+  INNER JOIN
+  spip ON spip.kod = z.spip_kod
+ORDER BY zdarzenia DESC;', 'other');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('6a0359a2-9bde-446e-ace1-cd67964fb90e', 'Prędkość dopuszczalna', 'SELECT predkosc_dopuszczalna, COUNT(*) ilosc FROM zdarzenie %zdarzenie_filter%  GROUP BY predkosc_dopuszczalna ORDER BY ilosc DESC LIMIT 15', 'site');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('6e33bdbf-a4de-434c-a8de-748373225407', 'Rodzaj skrzyżowania', 'SELECT skrz.opis AS skrzyżowanie, zdarzenia FROM
   (SELECT skrz_KOD, COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% GROUP BY SKRZ_KOD) AS zdarzenie
   INNER JOIN skrz ON skrz.kod=zdarzenie.skrz_kod ORDER BY zdarzenia DESC;', 'site');
-INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('8570a545-ca86-49fa-9951-0db9396c46b2', 'Zdarzenia wg dnia tygodnia', 'SELECT DAYOFWEEK(DATA_ZDARZ) AS lp, DAYNAME(DATA_ZDARZ) AS dzien_tygodnia, COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% GROUP BY lp,dzien_tygodnia ORDER BY lp ASC;', 'time');
-INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('92c66566-2f48-4d5d-8cca-219889208b1a', 'Zmienność miesięczna', 'SELECT MONTH(DATA_ZDARZ) AS lp, MONTHNAME(DATA_ZDARZ) AS miesiac, COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% GROUP BY lp,miesiac ORDER BY lp ASC;', 'time');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('8570a545-ca86-49fa-9951-0db9396c46b2', 'Zdarzenia wg dnia tygodnia', 'SELECT
+  CONCAT_WS(''. '', DAYOFWEEK(DATA_ZDARZ),DAYNAME(DATA_ZDARZ)) AS dzien_tygodnia,
+  COUNT(*)              AS zdarzenia
+FROM zdarzenie
+GROUP BY dzien_tygodnia %zdarzenie_filter%
+ORDER BY CAST(dzien_tygodnia AS UNSIGNED) ASC;', 'time');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('92c66566-2f48-4d5d-8cca-219889208b1a', 'Zmienność miesięczna', 'SELECT CONCAT_WS(''. '', MONTH(DATA_ZDARZ), MONTHNAME(DATA_ZDARZ)) AS miesiac, COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% GROUP BY miesiac ORDER BY CAST(miesiac AS UNSIGNED) ASC;', 'time');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('98e81bc3-e88c-419c-a9c0-3295012c7285', 'Rodzaj drogi', 'SELECT rodr.opis AS rodzaj_drogi, zdarzenia FROM
   (SELECT rodr_KOD, COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% GROUP BY rodr_KOD) AS zdarzenie
   INNER JOIN rodr ON rodr.kod=zdarzenie.rodr_kod ORDER BY zdarzenia DESC;', 'site');
