@@ -55,12 +55,22 @@ class QueryFactoryTest extends TestCase
             [
                 ["miejscowosc = 'Warszawa'"],
                 'SELECT COUNT(*) AS pojazdy FROM pojazdy %pojazdy_filter%',
-                "SELECT COUNT(*) AS pojazdy FROM pojazdy WHERE zszd_id IN (SELECT id FROM zdarzenie WHERE miejscowosc = 'Warszawa')"
+                "SELECT COUNT(*) AS pojazdy FROM pojazdy WHERE pojazdy.zszd_id IN (SELECT id FROM zdarzenie WHERE miejscowosc = 'Warszawa')"
             ],
             [
                 [],
                 'SELECT COUNT(*) AS pojazdy FROM pojazdy %pojazdy_filter%',
                 "SELECT COUNT(*) AS pojazdy FROM pojazdy"
+            ],
+            [
+                ["miejscowosc = 'Warszawa'"],
+                'SELECT COUNT(*) AS uczestnicy FROM uczestnicy %uczestnicy_filter%',
+                "SELECT COUNT(*) AS uczestnicy FROM uczestnicy WHERE uczestnicy.zszd_id IN (SELECT id FROM zdarzenie WHERE miejscowosc = 'Warszawa')"
+            ],
+            [
+                [],
+                'SELECT COUNT(*) AS uczestnicy FROM uczestnicy %uczestnicy_filter%',
+                "SELECT COUNT(*) AS uczestnicy FROM uczestnicy"
             ],
 
         ];

@@ -9,6 +9,8 @@ class QueryFactory
         $query = $template->getSqlQuery();
 
         if (empty($filter->getAccidentsFilterSql())) {
+            $query = str_replace(Filter::PARTICIPANTS_PLACEHOLDER . ' AND ', 'WHERE ', $query);
+            $query = str_replace(Filter::PARTICIPANTS_PLACEHOLDER, '', $query);
             $query = str_replace(Filter::VEHICLES_PLACEHOLDER . ' AND ', 'WHERE ', $query);
             $query = str_replace(Filter::VEHICLES_PLACEHOLDER, '', $query);
             $query = str_replace(Filter::ACCIDENTS_PLACEHOLDER . ' AND ', 'WHERE ', $query);
@@ -16,7 +18,12 @@ class QueryFactory
         } else {
             $query = str_replace(
                 Filter::VEHICLES_PLACEHOLDER,
-                'WHERE zszd_id IN (SELECT id FROM zdarzenie ' . Filter::ACCIDENTS_PLACEHOLDER . ')',
+                'WHERE pojazdy.zszd_id IN (SELECT id FROM zdarzenie ' . Filter::ACCIDENTS_PLACEHOLDER . ')',
+                $query
+            );
+            $query = str_replace(
+                Filter::PARTICIPANTS_PLACEHOLDER,
+                'WHERE uczestnicy.zszd_id IN (SELECT id FROM zdarzenie ' . Filter::ACCIDENTS_PLACEHOLDER . ')',
                 $query
             );
             $query = str_replace(Filter::ACCIDENTS_PLACEHOLDER, 'WHERE ' . $filter->getAccidentsFilterSql(), $query);

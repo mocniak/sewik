@@ -38,7 +38,7 @@ FROM (
          sppi_kod,
          count(sppi_kod) AS wynik
        FROM uczestnicy
-       %pojazdy_filter% AND CHAR_LENGTH(sppi_kod) > 0
+       %uczestnicy_filter% AND CHAR_LENGTH(sppi_kod) > 0
        GROUP BY sppi_kod) AS uczestnicy
 
   INNER JOIN
@@ -157,8 +157,8 @@ INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES (
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('8570a545-ca86-49fa-9951-0db9396c46b2', 'Zdarzenia wg dnia tygodnia', 'SELECT
   CONCAT_WS(''. '', DAYOFWEEK(DATA_ZDARZ),DAYNAME(DATA_ZDARZ)) AS dzien_tygodnia,
   COUNT(*)              AS zdarzenia
-FROM zdarzenie
-GROUP BY dzien_tygodnia %zdarzenie_filter%
+FROM zdarzenie %zdarzenie_filter%
+GROUP BY dzien_tygodnia 
 ORDER BY CAST(dzien_tygodnia AS UNSIGNED) ASC;', 'time');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('92c66566-2f48-4d5d-8cca-219889208b1a', 'Zmienność miesięczna', 'SELECT CONCAT_WS(''. '', MONTH(DATA_ZDARZ), MONTHNAME(DATA_ZDARZ)) AS miesiac, COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% GROUP BY miesiac ORDER BY CAST(miesiac AS UNSIGNED) ASC;', 'time');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('98e81bc3-e88c-419c-a9c0-3295012c7285', 'Rodzaj drogi', 'SELECT rodr.opis AS rodzaj_drogi, zdarzenia FROM

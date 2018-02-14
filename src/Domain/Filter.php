@@ -6,18 +6,19 @@ class Filter
 {
     const ACCIDENTS_PLACEHOLDER = '%zdarzenie_filter%';
     const VEHICLES_PLACEHOLDER = '%pojazdy_filter%';
+    const PARTICIPANTS_PLACEHOLDER = '%uczestnicy_filter%';
 
     const COLUMN_VOIVODESHIP = 'woj';
     const COLUMN_LOCALITY = 'miejscowosc';
     const COLUMN_DATE = 'data_zdarz';
     const COLUMN_STREET = 'ulica_adres';
+
     const COLUMNS = [
         self::COLUMN_VOIVODESHIP,
         self::COLUMN_LOCALITY,
         self::COLUMN_DATE,
         self::COLUMN_STREET,
     ];
-
     const VOIVODESHIP_DOLNOŚLĄSKIE = 'WOJ. DOLNOŚLĄSKIE';
     const VOIVODESHIP_KUJAWSKO_POMORSKIE = 'WOJ. KUJAWSKO-POMORSKIE';
     const VOIVODESHIP_LUBELSKIE = 'WOJ. LUBELSKIE';
@@ -33,8 +34,8 @@ class Filter
     const VOIVODESHIP_ZACHODNIOPOMORSKIE = 'WOJ. ZACHODNIOPOMORSKIE';
     const VOIVODESHIP_ŁÓDZKIE = 'WOJ. ŁÓDZKIE';
     const VOIVODESHIP_ŚLĄSKIE = 'WOJ. ŚLĄSKIE';
-    const VOIVODESHIP_ŚWIĘTOKRZYSKIE = 'WOJ. ŚWIĘTOKRZYSKIE';
 
+    const VOIVODESHIP_ŚWIĘTOKRZYSKIE = 'WOJ. ŚWIĘTOKRZYSKIE';
     const VOIVODESHIPS = [
         'Dolnośląskie' => self::VOIVODESHIP_DOLNOŚLĄSKIE,
         'Kujawsko-Pomorskie' => self::VOIVODESHIP_KUJAWSKO_POMORSKIE,
