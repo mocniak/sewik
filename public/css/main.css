@@ -130,13 +130,13 @@ table {
     font-size: 13px;
     background-color: #CCCCCC;
     text-align: right;
-    width: 650px;
+    width: 685px;
     margin: 5px auto;
 }
 
 table td {
     background-color: #FFFFFF;
-    padding: 1px 4px;
+    padding: 4px 5px;
 }
 
 table th {

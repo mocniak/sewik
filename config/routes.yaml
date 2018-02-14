@@ -2,13 +2,9 @@ index:
     path: /
     controller: App\Controller\DefaultController::index
 
-reports:
-    path: /reports
-    controller: App\Controller\DefaultController::showFilteredReports
-
-accident_list:
-    path: /accidentList
-    controller: App\Controller\DefaultController::accidentList
+search:
+    path: /search
+    controller: App\Controller\DefaultController::searchPage
 
 dashboard:
     path: /admin

@@ -39,7 +39,8 @@ class FilterForm extends AbstractType
                 'html5' => false,
                 'attr' => ['placeholder' => 'yyyy-mm-dd']
             ])
-            ->add('save', SubmitType::class, array('label' => 'Wyświetl zdarzenia'));
+            ->add('accidents', SubmitType::class, array('label' => 'Wyświetl zdarzenia'))
+            ->add('reports', SubmitType::class, array('label' => 'Wyświetl raporty'));
 
         $callbackTransformer = new CallbackTransformer(
             function (?\DateTimeImmutable $dateTimeImmutable) {

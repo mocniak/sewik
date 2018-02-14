@@ -19,47 +19,29 @@ class DefaultController extends Controller
         return new Response('index');
     }
 
-    public function showFilteredReports(Request $request)
+    public function searchPage(Request $request)
     {
         $filterDto = new AccidentsFilterDto();
         $form = $this->createForm(FilterForm::class, $filterDto);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $showAllReportsRequest = new ShowAllReportsRequest($filterDto);
-            /** @var SewikService $sewikService */
-            $sewikService = $this->container->get('sewik.service');
-            $response = $sewikService->showAllReports($showAllReportsRequest);
+            if ($form->get('accidents')->isClicked()) {
+                $listAccidentsRequest = new ListAccidentsRequest($filterDto);
+                /** @var SewikService $sewikService */
+                $sewikService = $this->container->get('sewik.service');
+                $response = $sewikService->listAccidents($listAccidentsRequest);
 
-            return $this->render('reports.html.twig', [
-                'reports' => $response->getReports(),
-                'form' => $form->createView(),
-            ]);
+                return $this->render('accidentList.html.twig', [
+                    'accidents' => $response->getAccidents(),
+                    'form' => $form->createView(),
+                ]);
+            } else if ($form->get('reports')->isClicked()) {
+                return $this->render('reports.html.twig', [
+                    'form' => $form->createView(),
+                ]);
+            }
         }
-
-        return $this->render('filterAccidentsForm.html.twig', array(
-            'form' => $form->createView(),
-        ));
-    }
-
-    public function accidentList(Request $request)
-    {
-        $filterDto = new AccidentsFilterDto();
-        $form = $this->createForm(FilterForm::class, $filterDto);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $listAccidentsRequest = new ListAccidentsRequest($filterDto);
-            /** @var SewikService $sewikService */
-            $sewikService = $this->container->get('sewik.service');
-            $response = $sewikService->listAccidents($listAccidentsRequest);
-
-            return $this->render('accidentList.html.twig', [
-                'accidents' => $response->getAccidents(),
-                'form' => $form->createView(),
-            ]);
-        }
-
         return $this->render('filterAccidentsForm.html.twig', array(
             'form' => $form->createView(),
         ));

@@ -1,17 +1,23 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <div id="form">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
     <h3>Lista Zdarzeń</h3>
     <table>
-
+        <tr>
+            <th>Id</th>
+            <th>Powiat</th>
+            <th>Adres</th>
+            <th>Data zdarzenia</th>
+        </tr>
         {% for accident in accidents %}
             <tr>
                 <td>{{ accident.id }}</td>
-                <td>{{ accident.commune }}</td>
-                <td>{{ accident.locality }}</td>
-                <td>{{ accident.address }}</td>
+                <td>{{ accident.county }}</td>
+                <td style="text-align: left">{{ accident.locality }} {{ accident.address }}</td>
                 <td>{{ accident.time|date("Y-m-d H:i") }}</td>
             </tr>
         {% else %}
