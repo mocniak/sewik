@@ -38,7 +38,7 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
         $rows = $stmt->fetchAll();
 
         foreach ($rows as $row) {
-            $accidents[] = $this->rowToAccident($row);
+            $accidents[] = $this->rowToAccident($row, [], []);
         }
 
         return $accidents;

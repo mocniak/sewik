@@ -22,8 +22,8 @@
                         / {{ accident.intersectionStreet }}
                     {% endif %}
                 </td>
-                <td>{{ accident.siteCharacteristic }}</td>
-                <td>{{ accident.accidentType }}</td>
+                <td>{{ ('accident.siteCharacteristic.' ~  accident.siteCharacteristic)|trans }}</td>
+                <td>{{ ('accident.accidentType.' ~ accident.accidentType)|trans }}</td>
                 <td>{{ accident.time|date("Y-m-d H:i") }}</td>
             </tr>
         {% else %}
