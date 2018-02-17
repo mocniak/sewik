@@ -280,3 +280,11 @@ vehicle:
     'IS130': 'Czterokołowiec'
     'IS131': 'Samochód ciężarowy DMC do 3,5 T'
     'IS132': 'Samochód ciężarowy DMC powyżej 3,5 T'
+  specialType:
+    'A1': Pojazd przewożący towar niebezpieczny
+    'A2': Pojazd uprzywilejowany
+    'B3': Pojazd z kierownicą po prawej stronie
+    'A2_2015': Pojazd uprzywilejowany Policja
+    'B1': Pojazd uprzywilejowany inny
+    '': Pojazd bez cech szczególnych
+
