@@ -56,18 +56,22 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
             $row['GMINA'],
             $row['MIEJSCOWOSC'],
             $row['ULICA_ADRES'],
+            $row['ULICA_SKRZYZ'],
             new \DateTimeImmutable($row['DATA_ZDARZENIA']),
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
+            $row['SZOS_KOD'],
+            $row['SSWA_KOD'],
+            $row['CHMZ_KOD'],
+            $row['PREDKOSC_DOPUSZCZALNA'],
+            $row['NADR_KOD'],
+            $row['RODR_KOD'],
+            $row['SYSW_KOD'],
+            $row['OZPO_KOD'],
+            $row['SKRZ_KOD'],
+            $row['ZABU_KOD'],
+            $row['spip_kod'],
+            $row['STNA_KOD'],
+            $row['SZRD_KOD'],
+            $row['GEOD_KOD']
         );
     }
 }

@@ -6,6 +6,10 @@ search:
     path: /search
     controller: App\Controller\DefaultController::searchPage
 
+accident_page:
+    path: /accident/{id}
+    controller: App\Controller\DefaultController::showAccident
+
 dashboard:
     path: /admin
     controller: App\Controller\AdminController::dashboard

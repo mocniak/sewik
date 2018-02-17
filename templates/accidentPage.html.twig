@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h3>Zdarzenie {{ accident.id }}</h3>
+    <ul>
+        <li>{{ accident.voivodeship }}</li>
+        <li>Powiat {{ accident.county }}</li>
+        <li>Gmina {{ accident.commune }}</li>
+        <li>{{ accident.locality }} {{ accident.street }}</li>
+        <li>Skrzyżowanie z: {{ accident.intersectionStreet }}</li>
+        <li>{{ accident.time|date("Y-m-d H:i") }}</li>
+        <li>Warunki oświetleniowe: {{ accident.light }}</li>
+        <li>Warunki pogodowe: {{ accident.weather }}</li>
+        <li>Rodzaj zdarzenia: {{ accident.accidentType }}</li>
+        <li>Charakterystyka miejsca zdarzenia: {{ accident.siteCharacteristic }}</li>
+        <li>Ograniczenie prędkości: {{ accident.speedLimit }} km/h</li>
+        <li>Typ nawierzchni: {{ accident.pavement }}</li>
+        <li>Stan nawierzchni: {{ accident.surfaceCondition }}</li>
+        <li>Typ drogi: {{ accident.roadType }}</li>
+        <li>Geometria drogi: {{ accident.roadGeometry }}</li>
+        <li>Sygnalizacja świetlna: {{ accident.trafficLights }}</li>
+        <li>Oznakowanie poziome: {{ accident.surfaceMarking }}</li>
+        <li>Rodzaj skrzyżowania: {{ accident.intersectionType }}</li>
+        <li>Teren zabudowany: {{ accident.builtUpArea }}</li>
+    </ul>
+    <h2>Inne przyczyny zdarzenia</h2>
+    <ul>
+        <li>{{ accident.otherCause }}</li>
+    </ul>
+{% endblock %}
