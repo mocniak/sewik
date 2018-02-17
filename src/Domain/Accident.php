@@ -97,6 +97,14 @@ class Accident
      * @var string
      */
     private $houseNumber;
+    /**
+     * @var array
+     */
+    private $vehicles;
+    /**
+     * @var array
+     */
+    private $pedestrians;
 
     public function __construct(
         int $id,
@@ -121,7 +129,9 @@ class Accident
         ?string $otherCause,
         ?string $surfaceCondition,
         ?string $accidentType,
-        string $roadGeometry
+        string $roadGeometry,
+        array $vehicles,
+        array $pedestrians
     )
     {
         $this->id = $id;
@@ -147,6 +157,24 @@ class Accident
         $this->roadGeometry = $roadGeometry;
         $this->intersectionStreet = $intersectionStreet;
         $this->houseNumber = $houseNumber;
+        $this->vehicles = $vehicles;
+        $this->pedestrians = $pedestrians;
+    }
+
+    /**
+     * @return array
+     */
+    public function getVehicles(): array
+    {
+        return $this->vehicles;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPedestrians(): array
+    {
+        return $this->pedestrians;
     }
 
     /**

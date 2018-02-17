@@ -5,6 +5,7 @@ namespace Sewik\Infrastructure;
 use Sewik\Domain\Accident;
 use Sewik\Domain\AccidentsRepositoryInterface;
 use Sewik\Domain\Filter;
+use Sewik\Domain\Vehicle;
 
 class MysqlAccidentsRepository implements AccidentsRepositoryInterface
 {
@@ -28,8 +29,7 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
         $accidents = [];
         if (empty($filter->getAccidentsFilterSql())) {
             $stmt = $this->link->prepare("SELECT * FROM zdarzenie ORDER BY id ASC LIMIT 50");
-        }
-        else {
+        } else {
             $stmt = $this->link->prepare("SELECT * FROM zdarzenie WHERE " . $filter->getAccidentsFilterSql() . " ORDER BY id ASC LIMIT 50");
         }
 
@@ -45,15 +45,25 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
 
     public function getAccident(int $id): Accident
     {
+        $stmt = $this->link->prepare("SELECT * FROM pojazdy WHERE zszd_id = :id");
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        $rows = $stmt->fetchAll();
+        $vehicles = [];
+        foreach ($rows as $row) {
+            $passengers = [];
+            $vehicles[] = $this->rowToVehicle($row, $passengers);
+        }
+
         $stmt = $this->link->prepare("SELECT * FROM zdarzenie WHERE id = :id");
         $stmt->bindValue(':id', $id);
         $stmt->execute();
         $row = $stmt->fetch();
-
-        return $this->rowToAccident($row);
+        $pedestrians = [];
+        return $this->rowToAccident($row, $vehicles, $pedestrians);
     }
 
-    private function rowToAccident(array $row): Accident
+    private function rowToAccident(array $row, $vehicles, $pedestrians): Accident
     {
         return new Accident(
             $row['ID'],
@@ -78,7 +88,22 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
             $row['spip_kod'],
             $row['STNA_KOD'],
             $row['SZRD_KOD'],
-            $row['GEOD_KOD']
+            $row['GEOD_KOD'],
+            $vehicles,
+            $pedestrians
+        );
+    }
+
+    private function rowToVehicle(array $row, $passengers)
+    {
+        return new Vehicle(
+            $row['ID'],
+            $row['ZSZD_ID'],
+            $row['RODZAJ_POJAZDU'],
+            $row['MARKA'],
+            $row['SPSP_KOD'],
+            $row['SPIC_KOD'],
+            $passengers
         );
     }
 }

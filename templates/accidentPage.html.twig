@@ -44,5 +44,12 @@
             <li>{{ ('accident.otherCause.' ~ accident.otherCause)|trans }}</li>
         </ul>
         <h3>Pojazdy i uczestnicy</h3>
+        <ul>
+            {% for vehicle in accident.vehicles %}
+            <li>{{ ('vehicle.type.' ~ vehicle.type)|trans }}</li>
+            {% else %}
+                <p>Brak pojazdów.</p>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}
