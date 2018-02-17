@@ -86,7 +86,7 @@ class Accident
      */
     private $accidentType;
     /**
-     * @var null|string
+     * @var string
      */
     private $roadGeometry;
     /**
@@ -121,7 +121,7 @@ class Accident
         ?string $otherCause,
         ?string $surfaceCondition,
         ?string $accidentType,
-        ?string $roadGeometry
+        string $roadGeometry
     )
     {
         $this->id = $id;

@@ -1,0 +1,6 @@
+light:
+  01: Daylight
+  02: Dawn, dusk
+  03: Night - road illuminated
+  04: Night - road insufficiently illuminated
+  05: Night - road not illuminated

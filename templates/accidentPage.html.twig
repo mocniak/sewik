@@ -1,42 +1,48 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div id="accident-page">
-    <h2>Zdarzenie {{ accident.id }}</h2>
-    <h3>Lokalizacja</h3>
-    <ul>
-        <li>{{ accident.voivodeship }}</li>
-        <li>Powiat: {{ accident.county }}</li>
-        <li>Gmina" {{ accident.commune }}</li>
-        <li>{{ accident.locality }} {{ accident.street }} {{ accident.houseNumber }}
-            {% if accident.intersectionStreet is not empty %}
-                / {{ accident.intersectionStreet }}
-            {% endif %}
-        </li>
-    </ul>
-    <h3>Czas</h3>
-    <ul>
-        <li>{{ accident.time|date("Y-m-d H:i") }}</li>
-        <li>Warunki oświetleniowe: {{ accident.light }}</li>
-        <li>Warunki pogodowe: {{ accident.weather }}</li>
-        <li>Rodzaj zdarzenia: {{ accident.accidentType }}</li>
-    </ul>
-    <h3>Miejsce zdarzenia</h3>
-    <ul>
-        <li>Charakterystyka miejsca zdarzenia: {{ accident.siteCharacteristic }}</li>
-        <li>Typ drogi: {{ accident.roadType }}</li>
-        <li>Ograniczenie prędkości: {{ accident.speedLimit }} km/h</li>
-        <li>Typ nawierzchni: {{ accident.pavement }}</li>
-        <li>Stan nawierzchni: {{ accident.surfaceCondition }}</li>
-        <li>Geometria drogi: {{ accident.roadGeometry }}</li>
-        <li>Sygnalizacja świetlna: {{ accident.trafficLights }}</li>
-        <li>Oznakowanie poziome: {{ accident.surfaceMarking }}</li>
-        <li>Rodzaj skrzyżowania: {{ accident.intersectionType }}</li>
-        <li>Teren zabudowany: {{ accident.builtUpArea }}</li>
-    </ul>
-    <h3>Inne przyczyny zdarzenia</h3>
-    <ul>
-        <li>{{ accident.otherCause }}</li>
-    </ul>
-    <h3>Pojazdy i uczestnicy</h3>
+        <h2>Zdarzenie {{ accident.id }}</h2>
+        <h3>Rodzaj zdarzenia</h3>
+        <ul>
+            <li>{{ ('accident.accidentType.' ~ accident.accidentType)|trans }}</li>
+        </ul>
+
+        <h3>Lokalizacja</h3>
+        <ul>
+            <li>{{ accident.voivodeship }}</li>
+            <li>Powiat: {{ accident.county }}</li>
+            <li>Gmina" {{ accident.commune }}</li>
+            <li>{{ accident.locality }} {{ accident.street }} {{ accident.houseNumber }}
+                {% if accident.intersectionStreet is not empty %}
+                    / {{ accident.intersectionStreet }}
+                {% endif %}
+            </li>
+        </ul>
+        <h3>Czas</h3>
+        <ul>
+            <li>Data: {{ accident.time|date("Y-m-d") }}</li>
+            <li>Godzina: {{ accident.time|date("H:i") }}</li>
+            <li>Warunki oświetleniowe: {{ ('accident.light.' ~ accident.light)|trans }}</li>
+            <li>Warunki pogodowe: {{ ('accident.weather.' ~ accident.weather)|trans }}</li>
+        </ul>
+        <h3>Miejsce zdarzenia</h3>
+        <ul>
+            <li>Charakterystyka miejsca
+                zdarzenia: {{ ('accident.siteCharacteristic.' ~  accident.siteCharacteristic)|trans }}</li>
+            <li>Typ drogi: {{ ('accident.roadType.' ~  accident.roadType)|trans }}</li>
+            <li>Ograniczenie prędkości: {{ accident.speedLimit }} km/h</li>
+            <li>Typ nawierzchni: {{ ('accident.pavement.' ~  accident.pavement)|trans }}</li>
+            <li>Stan nawierzchni: {{ ('accident.surfaceCondition.' ~  accident.surfaceCondition)|trans }}</li>
+            <li>Geometria drogi: {{ ('accident.roadGeometry.' ~  accident.roadGeometry)|trans }}</li>
+            <li>Sygnalizacja świetlna: {{ ('accident.trafficLights.' ~  accident.trafficLights)|trans }}</li>
+            <li>Oznakowanie poziome: {{ ('accident.surfaceMarking.' ~  accident.surfaceMarking)|trans }}</li>
+            <li>Rodzaj skrzyżowania: {{ ('accident.intersectionType.' ~  accident.intersectionType)|trans }}</li>
+            <li>Teren zabudowany: {{ ('accident.builtUpArea.' ~  accident.builtUpArea)|trans }}</li>
+        </ul>
+        <h3>Inne przyczyny zdarzenia</h3>
+        <ul>
+            <li>{{ ('accident.otherCause.' ~ accident.otherCause)|trans }}</li>
+        </ul>
+        <h3>Pojazdy i uczestnicy</h3>
     </div>
 {% endblock %}
