@@ -45,7 +45,7 @@
         {{ form_end(form) }}
     </div>
     {% for categoryName, queries in categories %}
-        <h2>{{ categoryName }}</h2>
+        <h2 style="text-align: center">{{ categoryName }}</h2>
         {% for queryId in queries %}
             {{ render(controller(
             'App\\Controller\\DefaultController::showReport',
