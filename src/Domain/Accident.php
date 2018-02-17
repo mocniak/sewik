@@ -93,6 +93,10 @@ class Accident
      * @var null|string
      */
     private $intersectionStreet;
+    /**
+     * @var string
+     */
+    private $houseNumber;
 
     public function __construct(
         int $id,
@@ -101,6 +105,7 @@ class Accident
         string $commune,
         string $locality,
         string $street,
+        string $houseNumber,
         ?string $intersectionStreet,
         \DateTimeImmutable $time,
         ?string $light,
@@ -141,6 +146,15 @@ class Accident
         $this->accidentType = $accidentType;
         $this->roadGeometry = $roadGeometry;
         $this->intersectionStreet = $intersectionStreet;
+        $this->houseNumber = $houseNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHouseNumber(): string
+    {
+        return $this->houseNumber;
     }
 
     /**

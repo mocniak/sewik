@@ -5,8 +5,11 @@
         <li>{{ accident.voivodeship }}</li>
         <li>Powiat {{ accident.county }}</li>
         <li>Gmina {{ accident.commune }}</li>
-        <li>{{ accident.locality }} {{ accident.street }}</li>
-        <li>Skrzyżowanie z: {{ accident.intersectionStreet }}</li>
+        <li>{{ accident.locality }} {{ accident.street }} {{ accident.houseNumber }}
+            {% if accident.intersectionStreet is not empty %}
+                / {{ accident.intersectionStreet }}
+            {% endif %}
+        </li>
         <li>{{ accident.time|date("Y-m-d H:i") }}</li>
         <li>Warunki oświetleniowe: {{ accident.light }}</li>
         <li>Warunki pogodowe: {{ accident.weather }}</li>

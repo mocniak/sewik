@@ -9,15 +9,21 @@
     <table>
         <tr>
             <th>Id</th>
-            <th>Powiat</th>
             <th>Adres</th>
+            <th>Miejsce zdarzenie</th>
+            <th>Rodzaj zdarzenia</th>
             <th>Data zdarzenia</th>
         </tr>
         {% for accident in accidents %}
             <tr>
                 <td>{{ accident.id }}</td>
-                <td>{{ accident.county }}</td>
-                <td style="text-align: left">{{ accident.locality }} {{ accident.street }}</td>
+                <td style="text-align: left">{{ accident.locality }} {{ accident.street }} {{ accident.houseNumber }}
+                    {% if accident.intersectionStreet is not empty %}
+                        / {{ accident.intersectionStreet }}
+                    {% endif %}
+                </td>
+                <td>{{ accident.siteCharacteristic }}</td>
+                <td>{{ accident.accidentType }}</td>
                 <td>{{ accident.time|date("Y-m-d H:i") }}</td>
             </tr>
         {% else %}
