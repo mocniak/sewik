@@ -17,7 +17,13 @@
         {% for accident in accidents %}
             <tr>
                 <td><a href="{{ path('accident_page', {'id': accident.id}) }}">{{ accident.id }}</a></td>
-                <td style="text-align: left">{{ accident.locality }} {{ accident.street }} {{ accident.houseNumber }}
+                <td style="text-align: left">
+                    {% if accident.locality is empty %}
+                        GMINA {{ accident.commune }}
+                    {% endif %}
+                    {{ accident.locality }}
+                    {{ accident.street }}
+                    {{ accident.houseNumber }}
                     {% if accident.intersectionStreet is not empty %}
                         / {{ accident.intersectionStreet }}
                     {% endif %}

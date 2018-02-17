@@ -82,6 +82,7 @@ accident:
     'A3_2015': 'Droga, pas ruchu, śluza dla rowerów'
     'B1': 'Przejazd dla rowerzystów'
     'A6_2015': 'Parking, plac, MOP'
+    '': Brak opisu miejsca zdarzenia
   otherCause:
     '01': 'Pożar pojazdu'
     '02': 'Niezawiniona niesprawność techniczna pojazdu'
