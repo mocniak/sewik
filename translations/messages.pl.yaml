@@ -149,6 +149,87 @@ participant:
     'B1': 'Nieustąpienie pierwszeństwa pieszemu w innych okolicznościach'
     'B3': 'Niestosowanie się do sygnalizacji świetlnej'
     'B2': 'Inne przyczyny'
+  role:
+    'I': Pieszy
+    'K': Kierujący
+    'P': Pasażer
+  drivingLicence:
+    P:	Posiada
+    N:	Nie posiada
+    B:	Nie wymagane
+  gender:
+    M: Mężczyzna
+    K: Kobieta
+    N: Nie ustalono
+  fault:
+    '01': 'Niedostosowanie prędkości do warunków ruchu'
+    '02': 'Nieudzielenie pierwszeństwa przejazdu'
+    'A1': 'Nieudzielenie pierwszeństwa pieszemu'
+    '03': 'Nieprawidłowe: wyprzedzanie'
+    '04': 'Nieprawidłowe: omijanie'
+    '05': 'Nieprawidłowe: wymijanie'
+    '06': 'Nieprawidłowe: przejeżdżanie przejścia dla pieszych'
+    'A2': 'Nieprawidłowe: przejeżdżanie przejścia dla rowerów'
+    '07': 'Nieprawidłowe: skręcanie'
+    'A3': 'Nieprawidłowe: zmienianie pasa ruchu'
+    'A4': 'Nieprawidłowe: Zawracanie'
+    '08': 'Nieprawidłowe: zatrzymywanie, postój'
+    '09': 'Nieprawidłowe: cofanie'
+    '10': 'Jazda po niewłaściwej stronie drogi'
+    '11': 'Wjazd przy czerwonym świetle'
+    '12': 'Nieprzestrzeganie innych sygnałów'
+    '13': 'Niezachowanie bezp. odl. między pojazdami'
+    '14': 'Gwałtowne hamowanie'
+    '15': 'Jazda bez wymaganego oświetlenia'
+    '16': 'Zmęczenie, zaśnięcie'
+    '17': 'Ograniczenie sprawności psychomotorycznej'
+    '18': 'Inne'
+    'A1_2015': 'Nieustąpienie pierwszeństwa pieszemu na przejściu dla pieszych'
+    'A11_201': 'Nieustąpienie pierwszeństwa pieszemu przy skręcaniu w drogę poprzeczną'
+    'A12_201': 'Wyprzedzanie pojazdu przed przejściem dla pieszych'
+    '06_2015': 'Omijanie pojazdu przed przejściem dla pieszych'
+    'A2_2015': 'Nieprawidłowe przejeżdżanie przejazdu dla rowerzystów'
+    'B1': 'Nieustąpienie pierwszeństwa pieszemu w innych okolicznościach'
+    'B3': 'Niestosowanie się do sygnalizacji świetlnej'
+    'B2': 'Inne przyczyny'
+  pedestrianFault:
+    '01': 'Stanie na jezdni, leżenie'
+    '02': 'Chodzenie nieprawidłową stroną drogi'
+    '03': 'Wejście na jezdnię przy czerwonym świetle'
+    '04': 'Nieostrożne wejście na jezdnię: przed jadącym pojazdem'
+    '05': 'Nieostrożne wejście na jezdnię: zza pojazdu, przeszkody'
+    '06': 'Zatrzymanie, cofnięcie się'
+    '07': 'Przebieganie przez jezdnię'
+    '08': 'Przekraczanie jezdni w miejscu niedozwolonym'
+    '09': 'Chodzenie po torowisku'
+    '10': 'Wskakiwanie do pojazdu w ruchu'
+    '11': 'Dzieci do lat 7: zabawa na jezdni'
+    '12': 'Dzieci do lat 7: wtargnięcie na jezdnię'
+    '13': 'Inne'
+    'B1': 'Inne przyczyny'
+  penalty:
+    'D': 'Dochodzenie'
+    'W': 'Wniosek o ukaranie'
+    'M': 'Mandat karny'
+    'P': 'Pouczenie'
+    'I': 'Inny organ'
+    'IZ': 'Inny sposób zakończenia'
+  influence:
+    'A': Alkoholu
+    'I': Innego środka
+    'N': Nie badano
+    '': Trzeźwy
+  injury:
+    'ZC': Śmierć w ciągu 30 dni
+    'ZM': Smierć na miejscu
+    'RL': Ranny lekko
+    'RC': Ranny ciężko
+    '': Brak obrażeń
+  missingUse:
+    'F': Fotelika
+    'H': Hełmu
+    'P': Pasów
+    'PH': Pasów, hełmu
 
 vehicle:
   type:

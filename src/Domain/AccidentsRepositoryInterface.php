@@ -10,5 +10,5 @@ interface AccidentsRepositoryInterface
      */
     public function findFilteredAccidents(Filter $filter): array;
 
-    public function getAccident(int $id): Accident;
+    public function getAccident(int $accidentID): Accident;
 }

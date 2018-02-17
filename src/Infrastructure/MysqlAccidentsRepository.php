@@ -5,6 +5,7 @@ namespace Sewik\Infrastructure;
 use Sewik\Domain\Accident;
 use Sewik\Domain\AccidentsRepositoryInterface;
 use Sewik\Domain\Filter;
+use Sewik\Domain\Participant;
 use Sewik\Domain\Vehicle;
 
 class MysqlAccidentsRepository implements AccidentsRepositoryInterface
@@ -43,20 +44,27 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
         return $accidents;
     }
 
-    public function getAccident(int $id): Accident
+    public function getAccident(int $accidentID): Accident
     {
-        $stmt = $this->link->prepare("SELECT * FROM pojazdy WHERE zszd_id = :id");
-        $stmt->bindValue(':id', $id);
-        $stmt->execute();
-        $rows = $stmt->fetchAll();
+        $vehicleStatement = $this->link->prepare("SELECT * FROM pojazdy WHERE zszd_id = :id");
+        $vehicleStatement->bindValue(':id', $accidentID);
+        $vehicleStatement->execute();
+        $vehicleRows = $vehicleStatement->fetchAll();
         $vehicles = [];
-        foreach ($rows as $row) {
+        foreach ($vehicleRows as $vehicleRow) {
             $passengers = [];
-            $vehicles[] = $this->rowToVehicle($row, $passengers);
+            $passengersStatement = $this->link->prepare("SELECT * FROM uczestnicy WHERE zspo_id = :id");
+            $passengersStatement->bindValue(':id', $vehicleRow['ID']);
+            $passengersStatement->execute();
+            $passengerRows = $passengersStatement->fetchAll();
+            foreach ($passengerRows as $passengerRow) {
+                $passengers[] = $this->rowToParticipant($passengerRow);
+            }
+            $vehicles[] = $this->rowToVehicle($vehicleRow, $passengers);
         }
 
         $stmt = $this->link->prepare("SELECT * FROM zdarzenie WHERE id = :id");
-        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':id', $accidentID);
         $stmt->execute();
         $row = $stmt->fetch();
         $pedestrians = [];
@@ -94,7 +102,7 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
         );
     }
 
-    private function rowToVehicle(array $row, $passengers)
+    private function rowToVehicle(array $row, $passengers): Vehicle
     {
         return new Vehicle(
             $row['ID'],
@@ -104,6 +112,25 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
             $row['SPSP_KOD'],
             $row['SPIC_KOD'],
             $passengers
+        );
+    }
+
+    private function rowToParticipant($passengerRow): Participant
+    {
+        return new Participant(
+            $passengerRow['ID'],
+            $passengerRow['ZSZD_ID'],
+            $passengerRow['SSRU_KOD'],
+            new \DateTimeImmutable($passengerRow['DATA_UR']),
+            $passengerRow['PLEC'],
+            $passengerRow['SUSU_KOD'],
+            $passengerRow['LICZBA_LAT_KIEROWANIA'],
+            $passengerRow['SPSZ_KOD'],
+            $passengerRow['SPPI_KOD'],
+            $passengerRow['SRUZ_KOD'],
+            $passengerRow['SUSW_KOD'],
+            $passengerRow['STUC_KOD'],
+            $passengerRow['SUSB_KOD']
         );
     }
 }
