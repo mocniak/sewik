@@ -67,7 +67,17 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
         $stmt->bindValue(':id', $accidentID);
         $stmt->execute();
         $row = $stmt->fetch();
+
+        $pedestrianStatement = $this->link->prepare("SELECT * FROM uczestnicy WHERE zszd_id = :id AND zspo_id IS NULL");
+        $pedestrianStatement->bindValue(':id', $accidentID);
+        $pedestrianStatement->execute();
+        $pedestrianRows = $pedestrianStatement->fetchAll();
+
         $pedestrians = [];
+        foreach ($pedestrianRows as $pedestrianRow) {
+            $pedestrians[] = $this->rowToParticipant($pedestrianRow);
+        }
+
         return $this->rowToAccident($row, $vehicles, $pedestrians);
     }
 

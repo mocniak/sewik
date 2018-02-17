@@ -60,14 +60,14 @@ class Participant
         string $role,
         \DateTimeImmutable $dateOfBirth,
         string $gender,
-        string $drivingLicence,
+        ?string $drivingLicence,
         ?int $drivingYears,
-        string $fault,
-        string $pedestrianFault,
-        string $penalty,
-        string $influence,
-        string $injury,
-        string $missingUse
+        ?string $fault,
+        ?string $pedestrianFault,
+        ?string $penalty,
+        ?string $influence,
+        ?string $injury,
+        ?string $missingUse
     )
     {
         $this->id = $id;
@@ -141,7 +141,7 @@ class Participant
     /**
      * @return string
      */
-    public function getFault(): string
+    public function getFault(): ?string
     {
         return $this->fault;
     }
@@ -149,7 +149,7 @@ class Participant
     /**
      * @return string
      */
-    public function getPedestrianFault(): string
+    public function getPedestrianFault(): ?string
     {
         return $this->pedestrianFault;
     }
@@ -157,7 +157,7 @@ class Participant
     /**
      * @return string
      */
-    public function getPenalty(): string
+    public function getPenalty(): ?string
     {
         return $this->penalty;
     }
@@ -165,7 +165,7 @@ class Participant
     /**
      * @return string
      */
-    public function getInfluence(): string
+    public function getInfluence(): ?string
     {
         return $this->influence;
     }
@@ -173,7 +173,7 @@ class Participant
     /**
      * @return string
      */
-    public function getInjury(): string
+    public function getInjury(): ?string
     {
         return $this->injury;
     }
@@ -181,7 +181,7 @@ class Participant
     /**
      * @return string
      */
-    public function getMissingUse(): string
+    public function getMissingUse(): ?string
     {
         return $this->missingUse;
     }

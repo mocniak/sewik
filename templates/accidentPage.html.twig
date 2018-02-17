@@ -44,26 +44,44 @@
             <li>{{ ('accident.otherCause.' ~ accident.otherCause)|trans }}</li>
         </ul>
         <h3>Pojazdy i uczestnicy</h3>
-        <ul>
+        <ol>
             {% for vehicle in accident.vehicles %}
-                <li>{{ ('vehicle.type.' ~ vehicle.type)|trans }}<br>
-                    {{ vehicle.brand }}<br>
-                    {{ vehicle.issues }}<br>
-                    {{ ('vehicle.specialType.' ~ vehicle.specialType)|trans }}
+                <li>{{ ('vehicle.type.' ~ vehicle.type)|trans }}
+                    <ul>
+                        <li>{{ vehicle.brand }}</li>
+                        {% if vehicle.issues is not empty %}
+                            <li>{{ vehicle.issues }}</li>
+                        {% endif %}
+                        <li>{{ ('vehicle.specialType.' ~ vehicle.specialType)|trans }}</li>
+                    </ul>
                     <ul>
                         {% for passenger in vehicle.passengers %}
-                            <li>{{ ('participant.role.' ~ passenger.role)|trans }}
+                            <li><strong>{{ ('participant.role.' ~ passenger.role)|trans }}</strong>
                                 <ul>
-                                    <li>{{ passenger.dateOfBirth|date("Y-m-d") }}</li>
+                                    <li>Data urodzenia: {{ passenger.dateOfBirth|date("Y-m-d") }}</li>
                                     <li>{{ ('participant.gender.' ~ passenger.gender)|trans }}</li>
-                                    <li>{{ ('participant.drivingLicence.' ~ passenger.drivingLicence)|trans }}</li>
-                                    <li>{{ ('participant.drivingYears.' ~ passenger.drivingYears)|trans }}</li>
-                                    <li>{{ ('participant.fault.' ~ passenger.fault)|trans }}</li>
-                                    <li>{{ ('participant.pedestrianFault.' ~ passenger.pedestrianFault)|trans }}</li>
-                                    <li>{{ ('participant.penalty.' ~ passenger.penalty)|trans }}</li>
-                                    <li>{{ ('participant.influence.' ~ passenger.influence)|trans }}</li>
-                                    <li>{{ ('participant.injury.' ~ passenger.injury)|trans }}</li>
-                                    <li>{{ ('participant.missingUse.' ~ passenger.missingUse)|trans }}</li>
+                                    {% if passenger.drivingLicence is not empty %}
+                                        <li>Uprawnienia do prowadzenia
+                                            pojazdu: {{ ('participant.drivingLicence.' ~ passenger.drivingLicence)|trans }}</li>
+                                    {% endif %}
+                                    {% if passenger.drivingYears is not empty %}
+                                        <li>Liczba lat
+                                            kierowania: {{ ('participant.drivingYears.' ~ passenger.drivingYears)|trans }}</li>
+                                    {% endif %}
+                                    {% if passenger.fault is not empty %}
+                                        <li><strong>{{ ('participant.fault.' ~ passenger.fault)|trans }}</strong></li>
+                                    {% endif %}
+                                    {% if passenger.penalty is not empty %}
+                                        <li>Kara: {{ ('participant.penalty.' ~ passenger.penalty)|trans }}</li>
+                                    {% endif %}
+                                    <li>Pod wpływem: {{ ('participant.influence.' ~ passenger.influence)|trans }}</li>
+                                    {% if passenger.injury is not empty %}
+                                        <li>Obrażenia:
+                                            <strong>{{ ('participant.injury.' ~ passenger.injury)|trans }}</strong></li>
+                                    {% endif %}
+                                    {% if passenger.missingUse is not empty %}
+                                        <li>{{ ('participant.missingUse.' ~ passenger.missingUse)|trans }}</li>
+                                    {% endif %}
                                 </ul>
                             </li>
                         {% endfor %}
@@ -72,24 +90,26 @@
             {% else %}
                 <li>Brak pojazdów.</li>
             {% endfor %}
-        </ul>
-        <ul>
+        </ol>
+        <ol>
             {% for pedestrian in accident.pedestrians %}
-                <li>{{ ('participant.role.' ~ participant.role)|trans }}
+                <li>{{ ('participant.role.' ~ pedestrian.role)|trans }}
                     <ul>
-                        <li>{{ ('participant.pedestrian.' ~ pedestrian.dateOfBirth)|trans }}</li>
+                        <li>Data urodzenia: {{ pedestrian.dateOfBirth|date("Y-m-d") }}</li>
                         <li>{{ ('participant.gender.' ~ pedestrian.gender)|trans }}</li>
-                        <li>{{ ('participant.drivingLicence.' ~ pedestrian.drivingLicence)|trans }}</li>
-                        <li>{{ ('participant.drivingYears.' ~ pedestrian.drivingYears)|trans }}</li>
-                        <li>{{ ('participant.fault.' ~ pedestrian.fault)|trans }}</li>
-                        <li>{{ ('participant.pedestrianFault.' ~ pedestrian.pedestrianFault)|trans }}</li>
-                        <li>{{ ('participant.penalty.' ~ pedestrian.penalty)|trans }}</li>
+                        {% if pedestrian.pedestrianFault is not empty %}
+                            <li>{{ ('participant.pedestrianFault.' ~ pedestrian.pedestrianFault)|trans }}</li>
+                        {% endif %}
+                        {% if pedestrian.penalty is not empty %}
+                            <li>Kara: {{ ('participant.penalty.' ~ pedestrian.penalty)|trans }}</li>
+                        {% endif %}
                         <li>{{ ('participant.influence.' ~ pedestrian.influence)|trans }}</li>
-                        <li>{{ ('participant.injury.' ~ pedestrian.injury)|trans }}</li>
-                        <li>{{ ('participant.missingUse.' ~ pedestrian.missingUse)|trans }}</li>
+                        {% if pedestrian.injury is not empty %}
+                            <li>Obrażenia: <strong>{{ ('participant.injury.' ~ pedestrian.injury)|trans }}</strong></li>
+                        {% endif %}
                     </ul>
                 </li>
             {% endfor %}
-        </ul>
+        </ol>
     </div>
 {% endblock %}
