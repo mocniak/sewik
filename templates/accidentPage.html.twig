@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div id="accident-page">
+        <h2>Zdarzenie {{ accident.id }}</h2>
+        <h3>Rodzaj zdarzenia</h3>
+        <ul>
+            <li>{{ ('accident.accidentType.' ~ accident.accidentType)|trans }}</li>
+        </ul>
+
+        <h3>Lokalizacja</h3>
+        <ul>
+            <li>{{ accident.voivodeship }}</li>
+            <li>Powiat: {{ accident.county }}</li>
+            <li>Gmina: {{ accident.commune }}</li>
+            <li>Adres: {{ accident.locality }} {{ accident.street }} {{ accident.houseNumber }}
+                {% if accident.intersectionStreet is not empty %}
+                    / {{ accident.intersectionStreet }}
+                {% endif %}
+            </li>
+        </ul>
+        <h3>Czas</h3>
+        <ul>
+            <li>Data: {{ accident.time|date("Y-m-d") }}</li>
+            <li>Godzina: {{ accident.time|date("H:i") }}</li>
+            <li>Warunki oświetleniowe: {{ ('accident.light.' ~ accident.light)|trans }}</li>
+            <li>Warunki pogodowe: {{ ('accident.weather.' ~ accident.weather)|trans }}</li>
+        </ul>
+        <h3>Miejsce zdarzenia</h3>
+        <ul>
+            <li>Charakterystyka miejsca
+                zdarzenia: {{ ('accident.siteCharacteristic.' ~  accident.siteCharacteristic)|trans }}</li>
+            <li>Typ drogi: {{ ('accident.roadType.' ~  accident.roadType)|trans }}</li>
+            <li>Ograniczenie prędkości: {{ accident.speedLimit }} km/h</li>
+            <li>Typ nawierzchni: {{ ('accident.pavement.' ~  accident.pavement)|trans }}</li>
+            <li>Stan nawierzchni: {{ ('accident.surfaceCondition.' ~  accident.surfaceCondition)|trans }}</li>
+            <li>Geometria drogi: {{ ('accident.roadGeometry.' ~  accident.roadGeometry)|trans }}</li>
+            <li>Sygnalizacja świetlna: {{ ('accident.trafficLights.' ~  accident.trafficLights)|trans }}</li>
+            <li>Oznakowanie poziome: {{ ('accident.surfaceMarking.' ~  accident.surfaceMarking)|trans }}</li>
+            <li>Rodzaj skrzyżowania: {{ ('accident.intersectionType.' ~  accident.intersectionType)|trans }}</li>
+            <li>Teren zabudowany: {{ ('accident.builtUpArea.' ~  accident.builtUpArea)|trans }}</li>
+        </ul>
+        <h3>Inne przyczyny zdarzenia</h3>
+        <ul>
+            <li>{{ ('accident.otherCause.' ~ accident.otherCause)|trans }}</li>
+        </ul>
+        <h3>Pojazdy i uczestnicy</h3>
+        <ol>
+            {% for vehicle in accident.vehicles %}
+                <li><strong>{{ ('vehicle.type.' ~ vehicle.type)|trans }}</strong>
+                    <ul>
+                        <li>{{ vehicle.brand }}</li>
+                        {% if vehicle.issues is not empty %}
+                            <li>{{ vehicle.issues }}</li>
+                        {% endif %}
+                        <li>{{ ('vehicle.specialType.' ~ vehicle.specialType)|trans }}</li>
+                    </ul>
+                    <ul>
+                        {% for passenger in vehicle.passengers %}
+                            <li><strong>{{ ('participant.role.' ~ passenger.role)|trans }}</strong>
+                                <ul>
+                                    <li>Data urodzenia: {{ passenger.dateOfBirth|date("Y-m-d") }}</li>
+                                    <li>{{ ('participant.gender.' ~ passenger.gender)|trans }}</li>
+                                    {% if passenger.drivingLicence is not empty %}
+                                        <li>Uprawnienia do prowadzenia
+                                            pojazdu: {{ ('participant.drivingLicence.' ~ passenger.drivingLicence)|trans }}</li>
+                                    {% endif %}
+                                    {% if passenger.drivingYears is not empty %}
+                                        <li>Liczba lat
+                                            kierowania: {{ passenger.drivingYears }}</li>
+                                    {% endif %}
+                                    {% if passenger.fault is not empty %}
+                                        <li><strong>{{ ('participant.fault.' ~ passenger.fault)|trans }}</strong></li>
+                                    {% endif %}
+                                    {% if passenger.penalty is not empty %}
+                                        <li>Kara: {{ ('participant.penalty.' ~ passenger.penalty)|trans }}</li>
+                                    {% endif %}
+                                    <li>Pod wpływem: {{ ('participant.influence.' ~ passenger.influence)|trans }}</li>
+                                    {% if passenger.injury is not empty %}
+                                        <li>Obrażenia:
+                                            <strong>{{ ('participant.injury.' ~ passenger.injury)|trans }}</strong></li>
+                                    {% endif %}
+                                    {% if passenger.missingUse is not empty %}
+                                        <li>{{ ('participant.missingUse.' ~ passenger.missingUse)|trans }}</li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% else %}
+                <li>Brak pojazdów.</li>
+            {% endfor %}
+        </ol>
+        <ol>
+            {% for pedestrian in accident.pedestrians %}
+                <li><strong>{{ ('participant.role.' ~ pedestrian.role)|trans }}</strong>
+                    <ul>
+                        <li>Data urodzenia: {{ pedestrian.dateOfBirth|date("Y-m-d") }}</li>
+                        <li>{{ ('participant.gender.' ~ pedestrian.gender)|trans }}</li>
+                        {% if pedestrian.pedestrianFault is not empty %}
+                            <li>{{ ('participant.pedestrianFault.' ~ pedestrian.pedestrianFault)|trans }}</li>
+                        {% endif %}
+                        {% if pedestrian.penalty is not empty %}
+                            <li>Kara: {{ ('participant.penalty.' ~ pedestrian.penalty)|trans }}</li>
+                        {% endif %}
+                        <li>{{ ('participant.influence.' ~ pedestrian.influence)|trans }}</li>
+                        {% if pedestrian.injury is not empty %}
+                            <li>Obrażenia: <strong>{{ ('participant.injury.' ~ pedestrian.injury)|trans }}</strong></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock %}

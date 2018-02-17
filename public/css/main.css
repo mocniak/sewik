@@ -143,6 +143,7 @@ table th {
     text-align: center;
     background-color: #CCCCCC;
 }
+
 table tr td:first-child {
     text-align: left;
 }
@@ -173,4 +174,25 @@ table tr td:first-child {
 
 #form textarea {
     height: 300px;
+}
+
+#accident-page {
+    padding: 10px;
+}
+
+#accident-page ul {
+    text-decoration: none;
+}
+
+#accident-page ul li {
+    list-style: none;
+    padding: 3px;
+}
+
+#accident-page ol li {
+    padding: 3px;
+}
+
+#accident-page h3 {
+    text-align: left;
 }

@@ -1,0 +1,291 @@
+accident:
+  light:
+    '01': Światło dzienne
+    '02': Zmrok, świt
+    '03': Noc - droga oświetlona
+    '04': Noc - droga niedostatecznie oświetlona
+    '05': Noc - droga nieoświetlona
+  roadGeometry:
+    '01': 'Odcinek prosty'
+    '02': 'Zakręt, łuk'
+    '03': 'Spadek'
+    'A1': 'Wzniesienie'
+    '04': 'Wierzchołek wzn.'
+    '': Brak
+  pavement:
+    '01': Twarda
+    '02': Gruntowa
+  surfaceMarking:
+    'A1': Jest
+    'A2': Nie ma
+  roadType:
+    '01': 'Autostrada'
+    '02': 'Ekspresowa'
+    '03': 'Dwie jezdnie jednokierunkowe'
+    '04': 'Jednokierunkowa'
+    '05': 'Jednojezdniowa dwukierunkowa'
+  builtUpArea:
+    1: Obszar zabudowany
+    0: Obszar niezabudowany
+  accidentType:
+    '01': 'Zderzenie pojazdów czołowe'
+    '02': 'Zderzenie pojazdów boczne'
+    '03': 'Zderzenie pojazdów tylne'
+    '04': 'Najechanie na pieszego'
+    '05': 'Najechanie na pojazd unieruchomiony'
+    '06': 'Najechanie na drzewo, słup, inny obiekt drogowy'
+    'A1': 'Najechanie na drzewo'
+    'A2': 'Najechanie na słup, znak'
+    '07': 'Najechanie na zapore kolejową'
+    '08': 'Najechanie na dziurę, wybój, garb'
+    '09': 'Najechanie na zwierzę'
+    'A3': 'Najechanie na barierę ochronną'
+    '10': 'Wywrócenie się pojazdu'
+    '11': 'Wypadek z pasażerem'
+    '12': 'Inne'
+  trafficLights:
+    '01': 'Jest, działa'
+    '02': 'Jest, nie działa'
+    '03': 'Brak'
+  surfaceCondition:
+    '01': 'Sucha'
+    '02': 'Mokra'
+    '03': 'Kałuże, rozlewiska'
+    '04': 'Oblodzona, zaśnieżona'
+    '05': 'Zanieczyszczona'
+    '06': 'Inny'
+    'A1': 'Koleiny, garby'
+    'A2': 'Dziury, wyboje'
+  siteCharacteristic:
+    'A1': 'Jezdnia'
+    '12': 'Pas dzielący jezdnie'
+    '11': 'Pobocze'
+    'A2': 'Skarpa, rów'
+    '10': 'Chodnik, droga dla pieszych'
+    'A3': 'Droga dla rowerzystów'
+    '01': 'Przejście dla pieszych'
+    '02': 'Przystanek komunikacji publicznej'
+    '03': 'Przystanek tramwajowy'
+    '04': 'Torowisko tramwajowe wydzielone'
+    '05': 'Torowisko tramwajowe w jezdni'
+    'A4': 'Przejazd tramwajowy, torowisko'
+    '06': 'Przejazd kolejowy strzeżony'
+    '07': 'Przejazd kolejowy niestrzeżony'
+    '08': 'Most, wiadukt, estakada'
+    '09': 'Tunel'
+    'A5': 'Most, wiadukt, łącznica, tunel'
+    '13': 'Przewiązka na drodze dwujezdniowej'
+    'A6': 'Parking, plac'
+    '14': 'Wjazd, wyjazd z posesji, pola'
+    '15': 'Inne'
+    'A7': 'Roboty drogowe, oznakowanie tymczasowe'
+    'A3_2015': 'Droga, pas ruchu, śluza dla rowerów'
+    'B1': 'Przejazd dla rowerzystów'
+    'A6_2015': 'Parking, plac, MOP'
+    '': Brak opisu miejsca zdarzenia
+  otherCause:
+    '01': 'Pożar pojazdu'
+    '02': 'Niezawiniona niesprawność techniczna pojazdu'
+    '03': 'Niewłaściwy stan jezdni'
+    '04': 'Nieprawidłowa organizacja ruchu'
+    '05': 'Nieprawidłowo zabezp. roboty drogowe'
+    '06': 'Nieprawidłowo działająca sygn. świetlna'
+    '07': 'Nieprawidłowo działająca zapora, rogatka'
+    '08': 'Obiekty, zwierzęta na drodze'
+    '09': 'Nagłe zasłabnięcie kierującego'
+    '10': 'Oślepienie przez inny pojazd lub słońce'
+    'A1': 'Z winy pasażera: wyskak. z pojazdu w ruchu'
+    'A2': 'Z winy pasażera: wypadnięcie'
+    'A3': 'Z winy pasażera'
+    'A4': 'Nieustalone'
+    '11': 'Inne, nieustalone'
+    'A5': 'Inne'
+    '02_2015': 'Niesprawność techniczna pojazdu'
+    '09_2015': 'Utrata przytomności, śmierć kierującego'
+    '': Brak
+  weather:
+    '01': 'Dobre warunki atmosferyczne'
+    '04': 'Pochmurno'
+    '02': 'Oślepiające słońce'
+    '03': 'Silny wiatr'
+    '05': 'Opady deszczu'
+    '06': 'Opady śniegu, gradu'
+    '07': 'Mgła, dym'
+  intersectionType:
+    '05': 'Rejon skrzyżowania'
+    '06': 'Równorzędne'
+    '07': 'Z drogą z pierwsz.'
+    '08': 'O ruchu okrężnym'
+    '': Brak
+
+participant:
+  reason:
+    '01': 'Niedostosowanie prędkości do warunków ruchu'
+    '02': 'Nieudzielenie pierwszeństwa przejazdu'
+    'A1': 'Nieudzielenie pierwszeństwa pieszemu'
+    '03': 'Nieprawidłowe: wyprzedzanie'
+    '04': 'Nieprawidłowe: omijanie'
+    '05': 'Nieprawidłowe: wymijanie'
+    '06': 'Nieprawidłowe: przejeżdżanie przejścia dla pieszych'
+    'A2': 'Nieprawidłowe: przejeżdżanie przejścia dla rowerów'
+    '07': 'Nieprawidłowe: skręcanie'
+    'A3': 'Nieprawidłowe: zmienianie pasa ruchu'
+    'A4': 'Nieprawidłowe: Zawracanie'
+    '08': 'Nieprawidłowe: zatrzymywanie, postój'
+    '09': 'Nieprawidłowe: cofanie'
+    '10': 'Jazda po niewłaściwej stronie drogi'
+    '11': 'Wjazd przy czerwonym świetle'
+    '12': 'Nieprzestrzeganie innych sygnałów'
+    '13': 'Niezachowanie bezp. odl. między pojazdami'
+    '14': 'Gwałtowne hamowanie'
+    '15': 'Jazda bez wymaganego oświetlenia'
+    '16': 'Zmęczenie, zaśnięcie'
+    '17': 'Ograniczenie sprawności psychomotorycznej'
+    '18': 'Inne'
+    'A1_2015': 'Nieustąpienie pierwszeństwa pieszemu na przejściu dla pieszych'
+    'A11_201': 'Nieustąpienie pierwszeństwa pieszemu przy skręcaniu w drogę poprzeczną'
+    'A12_201': 'Wyprzedzanie pojazdu przed przejściem dla pieszych'
+    '06_2015': 'Omijanie pojazdu przed przejściem dla pieszych'
+    'A2_2015': 'Nieprawidłowe przejeżdżanie przejazdu dla rowerzystów'
+    'B1': 'Nieustąpienie pierwszeństwa pieszemu w innych okolicznościach'
+    'B3': 'Niestosowanie się do sygnalizacji świetlnej'
+    'B2': 'Inne przyczyny'
+  role:
+    'I': Pieszy
+    'K': Kierujący
+    'P': Pasażer
+  drivingLicence:
+    P:	Posiada
+    N:	Nie posiada
+    B:	Nie wymagane
+  gender:
+    M: Mężczyzna
+    K: Kobieta
+    N: Nie ustalono
+  fault:
+    '01': 'Niedostosowanie prędkości do warunków ruchu'
+    '02': 'Nieudzielenie pierwszeństwa przejazdu'
+    'A1': 'Nieudzielenie pierwszeństwa pieszemu'
+    '03': 'Nieprawidłowe: wyprzedzanie'
+    '04': 'Nieprawidłowe: omijanie'
+    '05': 'Nieprawidłowe: wymijanie'
+    '06': 'Nieprawidłowe: przejeżdżanie przejścia dla pieszych'
+    'A2': 'Nieprawidłowe: przejeżdżanie przejścia dla rowerów'
+    '07': 'Nieprawidłowe: skręcanie'
+    'A3': 'Nieprawidłowe: zmienianie pasa ruchu'
+    'A4': 'Nieprawidłowe: Zawracanie'
+    '08': 'Nieprawidłowe: zatrzymywanie, postój'
+    '09': 'Nieprawidłowe: cofanie'
+    '10': 'Jazda po niewłaściwej stronie drogi'
+    '11': 'Wjazd przy czerwonym świetle'
+    '12': 'Nieprzestrzeganie innych sygnałów'
+    '13': 'Niezachowanie bezp. odl. między pojazdami'
+    '14': 'Gwałtowne hamowanie'
+    '15': 'Jazda bez wymaganego oświetlenia'
+    '16': 'Zmęczenie, zaśnięcie'
+    '17': 'Ograniczenie sprawności psychomotorycznej'
+    '18': 'Inne'
+    'A1_2015': 'Nieustąpienie pierwszeństwa pieszemu na przejściu dla pieszych'
+    'A11_201': 'Nieustąpienie pierwszeństwa pieszemu przy skręcaniu w drogę poprzeczną'
+    'A12_201': 'Wyprzedzanie pojazdu przed przejściem dla pieszych'
+    '06_2015': 'Omijanie pojazdu przed przejściem dla pieszych'
+    'A2_2015': 'Nieprawidłowe przejeżdżanie przejazdu dla rowerzystów'
+    'B1': 'Nieustąpienie pierwszeństwa pieszemu w innych okolicznościach'
+    'B3': 'Niestosowanie się do sygnalizacji świetlnej'
+    'B2': 'Inne przyczyny'
+  pedestrianFault:
+    '01': 'Stanie na jezdni, leżenie'
+    '02': 'Chodzenie nieprawidłową stroną drogi'
+    '03': 'Wejście na jezdnię przy czerwonym świetle'
+    '04': 'Nieostrożne wejście na jezdnię: przed jadącym pojazdem'
+    '05': 'Nieostrożne wejście na jezdnię: zza pojazdu, przeszkody'
+    '06': 'Zatrzymanie, cofnięcie się'
+    '07': 'Przebieganie przez jezdnię'
+    '08': 'Przekraczanie jezdni w miejscu niedozwolonym'
+    '09': 'Chodzenie po torowisku'
+    '10': 'Wskakiwanie do pojazdu w ruchu'
+    '11': 'Dzieci do lat 7: zabawa na jezdni'
+    '12': 'Dzieci do lat 7: wtargnięcie na jezdnię'
+    '13': 'Inne'
+    'B1': 'Inne przyczyny'
+  penalty:
+    'D': 'Dochodzenie'
+    'W': 'Wniosek o ukaranie'
+    'M': 'Mandat karny'
+    'P': 'Pouczenie'
+    'I': 'Inny organ'
+    'IZ': 'Inny sposób zakończenia'
+  influence:
+    'A': Alkoholu
+    'I': Innego środka
+    'N': Nie badano
+    '': Trzeźwy
+  injury:
+    'ZC': Śmierć w ciągu 30 dni
+    'ZM': Smierć na miejscu
+    'RL': Ranny lekko
+    'RC': Ranny ciężko
+    '': Brak obrażeń
+  missingUse:
+    'F': Fotelika
+    'H': Hełmu
+    'P': Pasów
+    'PH': Pasów, hełmu
+
+vehicle:
+  type:
+    'IS01': 'Rower'
+    'IS02': 'Motorower'
+    'IS03': 'Motocykl'
+    'IS04': 'Samochód osobowy z przyczepą'
+    'IS05': 'Samochód osobowy bez przyczepy'
+    'IS06': 'Samochód osobowy TAXI'
+    'IS07': 'Autobus komunikacji publicznej'
+    'IS08': 'Autobus inny'
+    'IS09': 'Samochód ciężarowy do przewozu ładunków z przyczepą'
+    'IS10': 'Samochód ciężarowy do przewozu ładunków bez przyczepy'
+    'IS11': 'Samochód ciężarowy do przewozu osób'
+    'IS12': 'Ciągnik rolniczy z przyczepą'
+    'IS13': 'Ciągnik rolniczy bez przyczepy'
+    'IS14': 'Pojazd wolnobieżny'
+    'IS15': 'Tramwaj'
+    'IS16': 'Trolejbus'
+    'IS17': 'Pojazd zaprzęgowy'
+    'IS18': 'Pociąg'
+    'IS19': 'Pojazd uprzywilejowany'
+    'IS20': 'Inny pojazd'
+    'IS21': 'Samochód osobowy'
+    'IS22': 'Ciągnik rolniczy'
+    'IS23': 'Tramwaj, trolejbus'
+    'IS25': 'Nieustalony'
+    'IS26': 'Pojazd przewożący materiały niebezpieczne'
+    'IS27': 'Motocykl o poj. do 125 cm3 ( do 11 kw/0,1 KW/kg) (od 11.2015)'
+    'IS28': 'Motocykl inny (od 11.2015)'
+    'IS29': 'Czterokołowiec lekki (od 11.2015)'
+    'IS30': 'Czterokołowiec (od 11.2015)'
+    'IS31': 'Samochód ciężarowy do 3,5 T (od 11.2015)'
+    'IS32': 'Samochód ciężarowy Powyżej 3,5 T (od 11.2015)'
+    'IS101': 'Rower'
+    'IS102': 'Motorower'
+    'IS107': 'Autobus komunikacji publicznej'
+    'IS108': 'Autobus inny'
+    'IS118': 'Pociąg'
+    'IS120': 'Inny'
+    'IS121': 'Samochód osobowy'
+    'IS122': 'Ciągnik rolniczy'
+    'IS123': 'Tramwaj, trolejbus'
+    'IS125': 'Pojazd nieustalony'
+    'IS127': 'Motocykl o poj. do 125 cm3 ( do 11 kw/0,1 KW/kg)'
+    'IS128': 'Motocykl inny'
+    'IS129': 'Czterokołowiec lekki'
+    'IS130': 'Czterokołowiec'
+    'IS131': 'Samochód ciężarowy DMC do 3,5 T'
+    'IS132': 'Samochód ciężarowy DMC powyżej 3,5 T'
+  specialType:
+    'A1': Pojazd przewożący towar niebezpieczny
+    'A2': Pojazd uprzywilejowany
+    'B3': Pojazd z kierownicą po prawej stronie
+    'A2_2015': Pojazd uprzywilejowany Policja
+    'B1': Pojazd uprzywilejowany inny
+    '': Pojazd bez cech szczególnych
+

@@ -28,7 +28,7 @@ class Accident
     /**
      * @var string
      */
-    private $address;
+    private $street;
     /**
      * @var \DateTimeImmutable
      */
@@ -44,7 +44,7 @@ class Accident
     /**
      * @var string
      */
-    private $type;
+    private $siteCharacteristic;
     /**
      * @var string
      */
@@ -76,7 +76,35 @@ class Accident
     /**
      * @var string
      */
-    private $roadPart;
+    private $otherCause;
+    /**
+     * @var null|string
+     */
+    private $surfaceCondition;
+    /**
+     * @var null|string
+     */
+    private $accidentType;
+    /**
+     * @var string
+     */
+    private $roadGeometry;
+    /**
+     * @var null|string
+     */
+    private $intersectionStreet;
+    /**
+     * @var string
+     */
+    private $houseNumber;
+    /**
+     * @var array
+     */
+    private $vehicles;
+    /**
+     * @var array
+     */
+    private $pedestrians;
 
     public function __construct(
         int $id,
@@ -84,11 +112,13 @@ class Accident
         string $county,
         string $commune,
         string $locality,
-        string $address,
+        string $street,
+        string $houseNumber,
+        ?string $intersectionStreet,
         \DateTimeImmutable $time,
         ?string $light,
         ?string $weather,
-        ?string $type,
+        ?string $siteCharacteristic,
         ?string $speedLimit,
         ?string $pavement,
         ?string $roadType,
@@ -96,7 +126,12 @@ class Accident
         ?string $surfaceMarking,
         ?string $intersectionType,
         ?bool $builtUpArea,
-        ?string $roadPart
+        ?string $otherCause,
+        ?string $surfaceCondition,
+        ?string $accidentType,
+        string $roadGeometry,
+        array $vehicles,
+        array $pedestrians
     )
     {
         $this->id = $id;
@@ -104,11 +139,11 @@ class Accident
         $this->county = $county;
         $this->commune = $commune;
         $this->locality = $locality;
-        $this->address = $address;
+        $this->street = $street;
         $this->time = $time;
         $this->light = $light;
         $this->weather = $weather;
-        $this->type = $type;
+        $this->siteCharacteristic = $siteCharacteristic;
         $this->speedLimit = $speedLimit;
         $this->pavement = $pavement;
         $this->roadType = $roadType;
@@ -116,7 +151,54 @@ class Accident
         $this->surfaceMarking = $surfaceMarking;
         $this->intersectionType = $intersectionType;
         $this->builtUpArea = $builtUpArea;
-        $this->roadPart = $roadPart;
+        $this->otherCause = $otherCause;
+        $this->surfaceCondition = $surfaceCondition;
+        $this->accidentType = $accidentType;
+        $this->roadGeometry = $roadGeometry;
+        $this->intersectionStreet = $intersectionStreet;
+        $this->houseNumber = $houseNumber;
+        $this->vehicles = $vehicles;
+        $this->pedestrians = $pedestrians;
+    }
+
+    /**
+     * @return array
+     */
+    public function getVehicles(): array
+    {
+        return $this->vehicles;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPedestrians(): array
+    {
+        return $this->pedestrians;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHouseNumber(): string
+    {
+        return $this->houseNumber;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getIntersectionStreet(): ?string
+    {
+        return $this->intersectionStreet;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getRoadGeometry(): ?string
+    {
+        return $this->roadGeometry;
     }
 
     /**
@@ -162,9 +244,9 @@ class Accident
     /**
      * @return string
      */
-    public function getAddress(): string
+    public function getStreet(): string
     {
-        return $this->address;
+        return $this->street;
     }
 
     /**
@@ -194,9 +276,9 @@ class Accident
     /**
      * @return string
      */
-    public function getType(): string
+    public function getSiteCharacteristic(): string
     {
-        return $this->type;
+        return $this->siteCharacteristic;
     }
 
     /**
@@ -258,8 +340,24 @@ class Accident
     /**
      * @return string
      */
-    public function getRoadPart(): string
+    public function getOtherCause(): string
     {
-        return $this->roadPart;
+        return $this->otherCause;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getSurfaceCondition(): ?string
+    {
+        return $this->surfaceCondition;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getAccidentType(): ?string
+    {
+        return $this->accidentType;
     }
 }

@@ -22,7 +22,7 @@ doctrine:
     naming_strategy: doctrine.orm.naming_strategy.underscore
     auto_mapping: true
     mappings:
-      Propaganda:
+      Sewik:
         type: yml
         dir: '%kernel.project_dir%/config/doctrine'
         is_bundle: false

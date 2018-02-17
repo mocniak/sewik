@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Ramsey\Uuid\Uuid;
 use Sewik\Domain\AccidentsFilterDto;
+use Sewik\Domain\AccidentsRepositoryInterface;
 use Sewik\Domain\ListAccidentsRequest;
 use Sewik\Domain\SewikService;
 use Sewik\Domain\ShowAllReportsRequest;
@@ -62,5 +63,18 @@ class DefaultController extends Controller
             ]);
         }
         return new Response('invalid filter');
+    }
+
+    public function showAccident(int $id)
+    {
+        /** @var AccidentsRepositoryInterface $accidentRepository */
+        $accidentRepository = $this->get('sewik.accident_repository');
+        $accident = $accidentRepository->getAccident($id);
+
+        if ($accident === null) return new Response('', 404);
+
+        return $this->render('accidentPage.html.twig', [
+            'accident' => $accident,
+        ]);
     }
 }
