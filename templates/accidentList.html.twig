@@ -17,7 +17,7 @@
             <tr>
                 <td>{{ accident.id }}</td>
                 <td>{{ accident.county }}</td>
-                <td style="text-align: left">{{ accident.locality }} {{ accident.address }}</td>
+                <td style="text-align: left">{{ accident.locality }} {{ accident.street }}</td>
                 <td>{{ accident.time|date("Y-m-d H:i") }}</td>
             </tr>
         {% else %}
