@@ -46,7 +46,7 @@
         <h3>Pojazdy i uczestnicy</h3>
         <ol>
             {% for vehicle in accident.vehicles %}
-                <li>{{ ('vehicle.type.' ~ vehicle.type)|trans }}
+                <li><strong>{{ ('vehicle.type.' ~ vehicle.type)|trans }}</strong>
                     <ul>
                         <li>{{ vehicle.brand }}</li>
                         {% if vehicle.issues is not empty %}
@@ -66,7 +66,7 @@
                                     {% endif %}
                                     {% if passenger.drivingYears is not empty %}
                                         <li>Liczba lat
-                                            kierowania: {{ ('participant.drivingYears.' ~ passenger.drivingYears)|trans }}</li>
+                                            kierowania: {{ passenger.drivingYears }}</li>
                                     {% endif %}
                                     {% if passenger.fault is not empty %}
                                         <li><strong>{{ ('participant.fault.' ~ passenger.fault)|trans }}</strong></li>
