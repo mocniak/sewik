@@ -111,9 +111,9 @@ class Accident
         string $voivodeship,
         string $county,
         string $commune,
-        string $locality,
-        string $street,
-        string $houseNumber,
+        ?string $locality,
+        ?string $street,
+        ?string $houseNumber,
         ?string $intersectionStreet,
         \DateTimeImmutable $time,
         ?string $light,
@@ -129,7 +129,7 @@ class Accident
         ?string $otherCause,
         ?string $surfaceCondition,
         ?string $accidentType,
-        string $roadGeometry,
+        ?string $roadGeometry,
         array $vehicles,
         array $pedestrians
     )
@@ -180,7 +180,7 @@ class Accident
     /**
      * @return string
      */
-    public function getHouseNumber(): string
+    public function getHouseNumber(): ?string
     {
         return $this->houseNumber;
     }
@@ -236,7 +236,7 @@ class Accident
     /**
      * @return string
      */
-    public function getLocality(): string
+    public function getLocality(): ?string
     {
         return $this->locality;
     }
@@ -244,7 +244,7 @@ class Accident
     /**
      * @return string
      */
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
         return $this->street;
     }
