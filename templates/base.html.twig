@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}System Ewidencji Wypadków i Kolizji{% endblock %}</title>
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet"/>
 </head>
 <body>
 
 <div id="container">
-    <h1><a href="index.php">SEWIK / Wyszukiwarka</a></h1>
+    <h1><a href="{{ path('search') }}">SEWIK / Wyszukiwarka</a></h1>
     <div id="menu">
         <ul>
-            <li><a href="?id=pomoc">pomoc</a></li>
-            <li><a href="?id=kontakt">kontakt</a></li>
+            <li><a href="{{ path('contact_page') }}">kontakt</a></li>
         </ul>
     </div>
     <div id="czywiesz">
-        <!-- <img src="img/czywiesz.png"> -->
-        <!-- <img src="img/fenomen_sewik.png" style="margin: 0 10px;" alt="logo fundacji fenomen"> -->
     </div>
-    {% block body %}{% endblock %}
+    <div id="content">
+        {% block body %}{% endblock %}
+    </div>
 </div>
-<div id="footer">Karol Mocniak &copy; 2018</div>
+<div id="footer">Wyszukiwarka Systemu Ewidencji Wypadków i Kolizji &copy; 2018</div>
 
 <script type="text/javascript">
 

@@ -61,7 +61,7 @@ FROM
   (SELECT
      YEAR(DATA_ZDARZ) AS rok,
      count(*)         AS zdarzenia
-   FROM zdarzenie
+   FROM zdarzenie %zdarzenie_filter%
    GROUP BY rok) AS r
   LEFT JOIN
   (SELECT
@@ -71,8 +71,8 @@ FROM
      (SELECT
         ZSZD_ID,
         STUC_KOD
-      FROM uczestnicy
-      WHERE STUC_KOD IN (''ZM'', ''ZC'')) AS u
+      FROM uczestnicy %uczestnicy_filter%
+      AND STUC_KOD IN (''ZM'', ''ZC'')) AS u
      LEFT JOIN
      (SELECT
         id,
@@ -90,8 +90,8 @@ FROM
      (SELECT
         ZSZD_ID,
         STUC_KOD
-      FROM uczestnicy
-      WHERE STUC_KOD = ''RC'') AS u
+      FROM uczestnicy %uczestnicy_filter%
+      AND STUC_KOD = ''RC'') AS u
      LEFT JOIN
      (SELECT
         id,
@@ -109,8 +109,8 @@ FROM
      (SELECT
         ZSZD_ID,
         STUC_KOD
-      FROM uczestnicy
-      WHERE STUC_KOD = ''RL'') AS u
+      FROM uczestnicy %uczestnicy_filter%
+      AND STUC_KOD = ''RL'') AS u
      LEFT JOIN
      (SELECT
         id,

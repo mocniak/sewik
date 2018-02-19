@@ -77,4 +77,8 @@ class DefaultController extends Controller
             'accident' => $accident,
         ]);
     }
+
+    public function contactPage() {
+        return $this->render('contactPage.html.twig');
+    }
 }

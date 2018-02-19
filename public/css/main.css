@@ -9,10 +9,10 @@ html {
 }
 
 body {
+    position: relative;
     color: #000;
     margin: 0;
-    padding: 4px 0;
-    text-align: center;
+    padding: 4px 0 60px;
     background-color: #EEEEEE;
 }
 
@@ -68,6 +68,7 @@ ul, ol {
 #container {
     width: 950px;
     margin: 0 auto;
+    padding: 0 0 10px;
     background-color: white;
 }
 
@@ -119,12 +120,14 @@ ul, ol {
 }
 
 #footer {
-    clear: both;
-    width: 100%;
-    background-color: silver;
-    padding: 5px 0;
-    margin: 3px 0 0 0;
-}
+     position: absolute;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     padding: 1rem;
+     background-color: #dddddd;
+     text-align: center;
+ }
 
 table {
     font-size: 13px;
@@ -176,7 +179,7 @@ table tr td:first-child {
     height: 300px;
 }
 
-#accident-page {
+#content {
     padding: 10px;
 }
 
