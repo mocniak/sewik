@@ -154,25 +154,35 @@ table tr td:first-child {
 #form {
     padding-left: 60px;
     text-align: left;
+    height: 300px;
 }
 
 #form div {
-    width: 800px;
-    clear: both;
+    width: 400px;
     padding: 5px;
+    height: 28px;
+    clear: right;
 }
 
 #form label {
     display: block;
-    width: 250px;
+    width: 30%;
     margin: 3px;
+    padding: 2px;
     float: left;
+    height: 20px;
 }
 
 #form input, #form textarea, #form select {
     float: right;
     display: block;
-    width: 500px;
+    width: 60%;
+    height: 18px;
+}
+
+#form select {
+    height: 23px;
+    width: calc(60% + 4px);
 }
 
 #form textarea {

@@ -9,6 +9,28 @@ class AccidentsFilterDto
     private $street;
     private $fromDate;
     private $toDate;
+    private $injury;
+    private $vehicleType;
+
+    public function getInjury(): ?string
+    {
+        return $this->injury;
+    }
+
+    public function setInjury(?string $injury)
+    {
+        $this->injury = $injury;
+    }
+
+    public function getVehicleType(): ?string
+    {
+        return $this->vehicleType;
+    }
+
+    public function setVehicleType(?string $vehicleType)
+    {
+        $this->vehicleType = $vehicleType;
+    }
 
     public function setVoivodeship(?string $voivodeship)
     {

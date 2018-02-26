@@ -2,7 +2,24 @@
 {% block body %}
     <div id="form">
         {{ form_start(form) }}
-        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+
+        <div style="float: left; height: 230px;">
+            <p>Zdarzenia</p>
+            {{ form_row(form.voivodeship) }}
+            {{ form_row(form.locality) }}
+            {{ form_row(form.street) }}
+            {{ form_row(form.fromDate) }}
+            {{ form_row(form.toDate) }}
+        </div>
+
+        <div style="float:right; height: 230px">
+            <p>Pojazdy</p>
+            {{ form_row(form.vehicleType) }}
+            <p>Uczestnicy</p>
+            {{ form_row(form.injury) }}
+        </div>
+
         {{ form_end(form) }}
     </div>
 {% endblock body %}
