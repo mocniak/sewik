@@ -7,6 +7,7 @@ class QueryFactory
     public function createQuery(Filter $filter, QueryTemplate $template): Query
     {
         $query = $template->getSqlQuery();
+        $query = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $query); //delete multiple spaces, newlines, etc.
 
         if (empty($filter->getAccidentsFilterSql())) {
             $query = str_replace(Filter::PARTICIPANTS_PLACEHOLDER . ' AND ', 'WHERE ', $query);

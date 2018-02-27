@@ -1,4 +1,5 @@
 <?php
+
 namespace Sewik\Tests\Domain;
 
 use PHPUnit\Framework\TestCase;
@@ -63,6 +64,11 @@ class QueryFactoryTest extends TestCase
                 "SELECT COUNT(*) AS pojazdy FROM pojazdy"
             ],
             [
+                [],
+                'SELECT COUNT(*) AS pojazdy FROM pojazdy %pojazdy_filter% AND STUC_KOD = \'RC\'',
+                "SELECT COUNT(*) AS pojazdy FROM pojazdy WHERE STUC_KOD = 'RC'"
+            ],
+            [
                 ["miejscowosc = 'Warszawa'"],
                 'SELECT COUNT(*) AS uczestnicy FROM uczestnicy %uczestnicy_filter%',
                 "SELECT COUNT(*) AS uczestnicy FROM uczestnicy WHERE uczestnicy.zszd_id IN (SELECT id FROM zdarzenie WHERE miejscowosc = 'Warszawa')"
@@ -71,6 +77,17 @@ class QueryFactoryTest extends TestCase
                 [],
                 'SELECT COUNT(*) AS uczestnicy FROM uczestnicy %uczestnicy_filter%',
                 "SELECT COUNT(*) AS uczestnicy FROM uczestnicy"
+            ],
+            [
+                [],
+                'SELECT COUNT(*) AS uczestnicy FROM uczestnicy %pojazdy_filter% AND STUC_KOD = \'RC\'',
+                "SELECT COUNT(*) AS uczestnicy FROM uczestnicy WHERE STUC_KOD = 'RC'"
+            ],
+            [
+                [],
+                'SELECT COUNT(*) AS uczestnicy FROM uczestnicy %pojazdy_filter% 
+AND STUC_KOD = \'RC\'',
+                "SELECT COUNT(*) AS uczestnicy FROM uczestnicy WHERE STUC_KOD = 'RC'"
             ],
 
         ];
