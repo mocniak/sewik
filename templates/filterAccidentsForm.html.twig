@@ -4,22 +4,35 @@
         {{ form_start(form) }}
         {{ form_errors(form) }}
 
-        <div style="float: left; height: 230px;">
+        <div>
             <p>Zdarzenia</p>
             {{ form_row(form.voivodeship) }}
+            {{ form_row(form.county) }}
             {{ form_row(form.locality) }}
             {{ form_row(form.street) }}
             {{ form_row(form.fromDate) }}
             {{ form_row(form.toDate) }}
+            <hr class="clearfix">
         </div>
 
-        <div style="float:right; height: 230px">
+        <div>
             <p>Pojazdy</p>
+            <div class="form-checkbox">
             {{ form_row(form.vehicleType) }}
+            </div>
+            <hr class="clearfix">
+        </div>
+        <div>
             <p>Uczestnicy</p>
             {{ form_row(form.injury) }}
+            <hr class="clearfix">
         </div>
-
+        <div>
+            {{ form_row(form.accidents) }}
+            {{ form_row(form.reports) }}
+            <hr class="clearfix">
+        </div>
         {{ form_end(form) }}
+        <hr class="clearfix">
     </div>
 {% endblock body %}

@@ -5,6 +5,7 @@ namespace Sewik\Domain;
 class AccidentsFilterDto
 {
     private $voivodeship;
+    private $county;
     private $locality;
     private $street;
     private $fromDate;
@@ -80,5 +81,15 @@ class AccidentsFilterDto
     public function getToDate(): ?\DateTimeImmutable
     {
         return $this->toDate;
+    }
+
+    public function getCounty():?string
+    {
+        return $this->county;
+    }
+
+    public function setCounty(?string $county)
+    {
+        $this->county = $county;
     }
 }

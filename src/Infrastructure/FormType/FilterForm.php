@@ -6,6 +6,7 @@ use Sewik\Domain\AccidentsFilterDto;
 use Sewik\Domain\Filter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -22,6 +23,11 @@ class FilterForm extends AbstractType
                 'required' => false,
                 'label' => 'Województwo',
                 'choices' => Filter::VOIVODESHIPS
+            ])
+            ->add('county', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Powiat',
+                'choices' => Filter::COUNTIES
             ])
             ->add('locality', TextType::class, ['required' => false, 'label' => 'Miejscowość'])
             ->add('street', TextType::class, ['required' => false, 'label' => 'Ulica'])
@@ -47,6 +53,8 @@ class FilterForm extends AbstractType
             ->add('vehicleType', ChoiceType::class, [
                 'required' => false,
                 'label' => 'Rodzaje pojazdów',
+                'expanded' => true,
+                'multiple' => true,
                 'choices' => Filter::VEHICLE_TYPES
             ])
             ->add('accidents', SubmitType::class, array('label' => 'Wyświetl zdarzenia'))
