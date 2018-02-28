@@ -1,34 +1,4 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
-
-    <div id="form">
-        <div style="grid-row: 1;grid-column: 1 / 2;">
-            <p>Zdarzenia</p>
-            {{ form_row(form.voivodeship) }}
-            {{ form_row(form.county) }}
-            {{ form_row(form.locality) }}
-            {{ form_row(form.street) }}
-            {{ form_row(form.fromDate) }}
-            {{ form_row(form.toDate) }}
-            {{ form_row(form.accidentType) }}
-        </div>
-
-        <div style="grid-row: 1;grid-column: 2 / 3;">
-            <p>Pojazdy</p>
-            <div class="form-checkbox">
-                {{ form_row(form.vehicleType) }}
-            </div>
-        </div>
-        <div style="grid-row: 1;grid-column: 3 / 4;">
-            <p>Uczestnicy</p>
-            {{ form_row(form.injury) }}
-        </div>
-        <div style="grid-row: 2;grid-column: 1 / 4;">
-            {{ form_row(form.accidents) }}
-            {{ form_row(form.reports) }}
-        </div>
-    </div>
-    {{ form_end(form) }}
+{% include 'form/filterForm.html.twig' %}
 {% endblock body %}
