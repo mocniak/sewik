@@ -45,6 +45,11 @@ class FilterForm extends AbstractType
                 'html5' => false,
                 'attr' => ['placeholder' => 'yyyy-mm-dd']
             ])
+            ->add('accidentType', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Rodzaj wypadku',
+                'choices' => Filter::ACCIDENT_TYPES
+            ])
             ->add('injury', ChoiceType::class, [
                 'required' => false,
                 'label' => 'Obrażenia ofiar',

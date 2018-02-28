@@ -152,21 +152,20 @@ table tr td:first-child {
 }
 
 #form {
-    padding: 10px;
+    display: grid;
+    grid-template-columns: 32% 30% 32%;
+    grid-gap: 2em;
     text-align: left;
 }
 
 #form p {
     display: block;
-    float: left;
     font-weight: bold;
     width: 100%;
 }
 
 #form form > div {
-    width: 400px;
-    padding: 10px;
-    float: left;
+    padding: 15px;
 }
 
 #form label {
@@ -180,31 +179,39 @@ table tr td:first-child {
 }
 
 #form input, #form textarea, #form select {
-    float: right;
     display: block;
-    width: 55%;
-    height: 18px;
+    width: 50%;
+    height: 15px;
     padding: 3px;
+    float: right;
 }
 
 #form select, #form button {
     height: 25px;
-    width: calc(55% + 10px);
+    width: calc(50% + 10px);
 }
 
-#form input[type=checkbox] {
-    float: left;
-    width: 20px;
-    margin: 4px 0 8px 10px;
-}
 
 #form .form-checkbox div label {
     width: 100%;
 }
+
+#form input[type=checkbox] {
+    width: 18px;
+    margin: 4px 5px 4px 10px;
+    display: inline-block;
+    float: none;
+}
+
 #form .form-checkbox div div label {
-    float: right;
-    width: 88%;
-    clear: right;
+    width: 80%;
+    margin: 0 2px;
+    display: inline-block;
+    float: none;
+    height: auto;
+    padding: 0;
+    top: -4px;
+    position: relative;
 }
 
 #form textarea {

@@ -12,6 +12,7 @@ class AccidentsFilterDto
     private $toDate;
     private $injury;
     private $vehicleType;
+    private $accidentType;
 
     public function getInjury(): ?string
     {
@@ -23,12 +24,12 @@ class AccidentsFilterDto
         $this->injury = $injury;
     }
 
-    public function getVehicleType(): ?string
+    public function getVehicleType(): ?array
     {
         return $this->vehicleType;
     }
 
-    public function setVehicleType(?string $vehicleType)
+    public function setVehicleType(?array $vehicleType)
     {
         $this->vehicleType = $vehicleType;
     }
@@ -91,5 +92,15 @@ class AccidentsFilterDto
     public function setCounty(?string $county)
     {
         $this->county = $county;
+    }
+
+    public function getAccidentType()
+    {
+        return $this->accidentType;
+    }
+
+    public function setAccidentType($accidentType)
+    {
+        $this->accidentType = $accidentType;
     }
 }
