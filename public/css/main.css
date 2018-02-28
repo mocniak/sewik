@@ -242,3 +242,43 @@ table tr td:first-child {
 .clearfix {
     width: 100%;
 }
+
+#admin_form {
+    height: 400px;
+}
+
+
+#admin_form label {
+    display: block;
+    width: 40%;
+    margin: 3px;
+    padding: 2px;
+    float: left;
+    clear: left;
+    height: 20px;
+}
+
+#admin_form input, #admin_form textarea, #admin_form select {
+    display: block;
+    width: 50%;
+    height: 15px;
+    padding: 3px;
+    float: right;
+    margin: 3px;
+}
+
+#admin_form button {
+    clear: both;
+    margin: 3px;
+    float: right;
+}
+
+#admin_form select, #admin_form button {
+    height: 25px;
+    width: calc(50% + 10px);
+}
+
+#admin_form textarea {
+    height: 300px;
+    margin: 3px;
+}
