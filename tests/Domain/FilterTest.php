@@ -30,7 +30,11 @@ class FilterTest extends TestCase
             [
                 ["miejscowosc = 'Warszawa'", "data_zdarz >= '2011-11-01"],
                 "miejscowosc = 'Warszawa' AND data_zdarz >= '2011-11-01"
-            ]
+            ],
+            [
+                ["miejscowosc = 'Warszawa'", "data_zdarz >= '2011-11-01", "id IN (SELECT zszd_id FROM pojazdy WHERE rodzaj_pojazdu IN ('IS01'))"],
+                "miejscowosc = 'Warszawa' AND data_zdarz >= '2011-11-01 AND id IN (SELECT zszd_id FROM pojazdy WHERE rodzaj_pojazdu IN ('IS01'))"
+            ],
         ];
     }
 }
