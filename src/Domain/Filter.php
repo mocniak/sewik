@@ -603,7 +603,20 @@ class Filter
         'Brak' => '03',
 
     ];
+    const ACCIDENT_INTERSECTION_TYPE = [
+        'Rejon skrzyżowania' => '05',
+        'Równorzędne' => '06',
+        'Z drogą z pierwsz.' => '07',
+        'O ruchu okrężnym' => '08',
+    ];
+    const ACCIDENT_ROAD_TYPE = [
+        'Autostrada' => '01',
+        'Ekspresowa' => '02',
+        'Dwie jezdnie jednokierunkowe' => '03',
+        'Jednokierunkowa' => '04',
+        'Jednojezdniowa dwukierunkowa' => '05',
 
+    ];
     private $accidentsFilter;
 
     public function __construct(array $accidentsFilter)

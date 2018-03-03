@@ -54,6 +54,11 @@ class FilterForm extends AbstractType
                 'label' => 'Miejsce zdarzenia',
                 'choices' => Filter::ACCIDENT_SITE
             ])
+            ->add('roadType', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Rodzaj drogi',
+                'choices' => Filter::ACCIDENT_ROAD_TYPE
+            ])
             ->add('light', ChoiceType::class, [
                 'required' => false,
                 'label' => 'Warunki oświetleniowe',
@@ -63,6 +68,11 @@ class FilterForm extends AbstractType
                 'required' => false,
                 'label' => 'Sygnalizacja świetlna',
                 'choices' => Filter::ACCIDENT_TRAFFIC_LIGHT
+            ])
+            ->add('intersectionType', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Rodzaj skrzyżowania',
+                'choices' => Filter::ACCIDENT_INTERSECTION_TYPE
             ])
             ->add('injury', ChoiceType::class, [
                 'required' => false,

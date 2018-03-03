@@ -28,16 +28,16 @@ class FilterFactory
             $filters[] = " = '" . $filterDto->pavement . "'";
         }
         if (null !== $filterDto->roadType) {
-            $filters[] = " = '" . $filterDto->roadType . "'";
+            $filters[] = "rodr_kod = '" . $filterDto->roadType . "'";
         }
         if (null !== $filterDto->trafficLights) {
             $filters[] = "sysw_kod = '" . $filterDto->trafficLights . "'";
         }
         if (null !== $filterDto->surfaceMarking) {
-            $filters[] = " = '" . $filterDto->surfaceMarking . "'";
+            $filters[] = "ozpo_kod = '" . $filterDto->surfaceMarking . "'";
         }
         if (null !== $filterDto->intersectionType) {
-            $filters[] = " = '" . $filterDto->intersectionType . "'";
+            $filters[] = "skrz_kod = '" . $filterDto->intersectionType . "'";
         }
         if (null !== $filterDto->builtUpArea) {
             $filters[] = " = '" . $filterDto->builtUpArea . "'";
@@ -49,7 +49,7 @@ class FilterFactory
             $filters[] = "stna_kod = '" . $filterDto->surfaceCondition . "'";
         }
         if (null !== $filterDto->roadGeometry) {
-            $filters[] = " = '" . $filterDto->roadGeometry . "'";
+            $filters[] = "geod_kod = '" . $filterDto->roadGeometry . "'";
         }
 
         if (null !== $filterDto->street) {
