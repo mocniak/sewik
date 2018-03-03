@@ -15,6 +15,7 @@ class AccidentsFilterDto
     private $accidentType;
     private $driversCause;
     private $pedestriansCause;
+    private $pedestriansPresence;
 
     public function getPedestriansCause()
     {
@@ -124,5 +125,15 @@ class AccidentsFilterDto
     public function setAccidentType($accidentType)
     {
         $this->accidentType = $accidentType;
+    }
+
+    public function getPedestriansPresence(): ?bool
+    {
+        return $this->pedestriansPresence;
+    }
+
+    public function setPedestriansPresence(?bool $pedestriansPresence)
+    {
+        $this->pedestriansPresence = $pedestriansPresence;
     }
 }

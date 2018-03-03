@@ -45,15 +45,22 @@ class FilterFactory
             foreach ($injuries as $injury) {
                 $injuriesInBraces[] = "'" . $injury . "'";
             }
-            $filters[] = "id IN (SELECT zszd_id FROM uczestnicy WHERE stuc_kod IN (". implode(",", $injuriesInBraces) . "))";
+            $filters[] = "id IN (SELECT zszd_id FROM uczestnicy WHERE stuc_kod IN (" . implode(",", $injuriesInBraces) . "))";
         }
 
         if (null !== $filterDto->getDriversCause()) {
-            $filters[] = "id IN (SELECT zszd_id FROM uczestnicy WHERE spsz_kod IN ('".$filterDto->getDriversCause()."'))";
+            $filters[] = "id IN (SELECT zszd_id FROM uczestnicy WHERE spsz_kod IN ('" . $filterDto->getDriversCause() . "'))";
         }
 
         if (null !== $filterDto->getPedestriansCause()) {
-            $filters[] = "id IN (SELECT zszd_id FROM uczestnicy WHERE sppi_kod IN ('".$filterDto->getPedestriansCause()."'))";
+            $filters[] = "id IN (SELECT zszd_id FROM uczestnicy WHERE sppi_kod IN ('" . $filterDto->getPedestriansCause() . "'))";
+        }
+        if (null !== $filterDto->getPedestriansPresence()) {
+            if ($filterDto->getPedestriansPresence()) {
+                $filters[] = "id IN (SELECT zszd_id FROM uczestnicy WHERE zspo_id IS NULL)";
+            } else {
+                $filters[] = "id IN (SELECT zszd_id FROM uczestnicy WHERE zspo_id IS NOT NULL)";
+            }
         }
 
         return new Filter($filters);

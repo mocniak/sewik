@@ -52,22 +52,27 @@ class FilterForm extends AbstractType
             ])
             ->add('injury', ChoiceType::class, [
                 'required' => false,
-                'label' => 'Zdarzenia w których ofiary odniosły obrażenia',
+                'label' => 'W których ofiary odniosły obrażenia',
                 'choices' => Filter::PARTICIPANT_INJURIES
             ])
             ->add('driversCause', ChoiceType::class, [
                 'required' => false,
-                'label' => 'Zdarzenia z winy kierujących',
+                'label' => 'Z winy kierujących',
                 'choices' => Filter::DRIVERS_CAUSES
             ])
             ->add('pedestriansCause', ChoiceType::class, [
                 'required' => false,
-                'label' => 'Zdarzenia z winy pieszych',
+                'label' => 'Z winy pieszych',
                 'choices' => Filter::PEDESTRIAN_CAUSES
+            ])
+            ->add('pedestriansPresence', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Z udziałem pieszych',
+                'choices' => ['tak' => true, 'nie' => 'false']
             ])
             ->add('vehicleType', ChoiceType::class, [
                 'required' => false,
-                'label' => 'Zdarzenia w których brał udział pojazd typu',
+                'label' => 'Zdarzenia z pojazdami typu',
                 'expanded' => true,
                 'multiple' => true,
                 'choices' => Filter::VEHICLE_TYPES
