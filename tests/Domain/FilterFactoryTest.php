@@ -20,7 +20,7 @@ class FilterFactoryTest extends TestCase
     public function testFactoryCreatesFilterWithLocality()
     {
         $accidentsFilter = new AccidentsFilterDto();
-        $accidentsFilter->setLocality('Warszawa');
+        $accidentsFilter->locality = 'Warszawa';
         $filter = $this->factory->createFromDto($accidentsFilter);
         $expectedFilter = new Filter([Filter::COLUMN_LOCALITY . ' = \'Warszawa\'']);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
@@ -29,7 +29,7 @@ class FilterFactoryTest extends TestCase
     public function testFactoryCreatesFilterWithCounty()
     {
         $accidentsFilter = new AccidentsFilterDto();
-        $accidentsFilter->setCounty('POWIAT TORUŃ');
+        $accidentsFilter->county = 'POWIAT TORUŃ';
         $filter = $this->factory->createFromDto($accidentsFilter);
         $expectedFilter = new Filter(['POWIAT = \'POWIAT TORUŃ\'']);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
@@ -38,7 +38,7 @@ class FilterFactoryTest extends TestCase
     public function testFactoryCreatesFilterWithAccidentSite()
     {
         $accidentsFilter = new AccidentsFilterDto();
-        $accidentsFilter->setAccidentSite('A1');
+        $accidentsFilter->accidentSite = 'A1';
         $filter = $this->factory->createFromDto($accidentsFilter);
         $expectedFilter = new Filter(['chmz_kod = \'A1\'']);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
@@ -47,7 +47,7 @@ class FilterFactoryTest extends TestCase
     public function testFactoryCreatesFilterWithVehicles()
     {
         $accidentsFilter = new AccidentsFilterDto();
-        $accidentsFilter->setVehicleType(['IS01']);
+        $accidentsFilter->vehicleType = ['IS01'];
         $filter = $this->factory->createFromDto($accidentsFilter);
         $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM pojazdy WHERE rodzaj_pojazdu IN ('IS01'))"]);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
@@ -56,7 +56,7 @@ class FilterFactoryTest extends TestCase
     public function testFactoryCreatesFilterWithMultiple()
     {
         $accidentsFilter = new AccidentsFilterDto();
-        $accidentsFilter->setVehicleType(['IS01,IS101', 'IS121']);
+        $accidentsFilter->vehicleType = ['IS01,IS101', 'IS121'];
         $filter = $this->factory->createFromDto($accidentsFilter);
         $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM pojazdy WHERE rodzaj_pojazdu IN ('IS01','IS101','IS121'))"]);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
@@ -65,7 +65,7 @@ class FilterFactoryTest extends TestCase
     public function testFactoryCreatesFilterWithInjuredPeople()
     {
         $accidentsFilter = new AccidentsFilterDto();
-        $accidentsFilter->setInjury('ZM');
+        $accidentsFilter->injury = 'ZM';
         $filter = $this->factory->createFromDto($accidentsFilter);
         $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM uczestnicy WHERE stuc_kod IN ('ZM'))"]);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
@@ -74,7 +74,7 @@ class FilterFactoryTest extends TestCase
     public function testFactoryCreatesFilterWithManyInjuredPeople()
     {
         $accidentsFilter = new AccidentsFilterDto();
-        $accidentsFilter->setInjury('ZM,ZC');
+        $accidentsFilter->injury = 'ZM,ZC';
         $filter = $this->factory->createFromDto($accidentsFilter);
         $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM uczestnicy WHERE stuc_kod IN ('ZM','ZC'))"]);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
@@ -83,7 +83,7 @@ class FilterFactoryTest extends TestCase
     public function testFactoryCreatesFilterWithAccidentsCausedByDrivers()
     {
         $accidentsFilter = new AccidentsFilterDto();
-        $accidentsFilter->setDriversCause('A1_2015');
+        $accidentsFilter->driversCause = 'A1_2015';
         $filter = $this->factory->createFromDto($accidentsFilter);
         $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM uczestnicy WHERE spsz_kod IN ('A1_2015'))"]);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
@@ -92,7 +92,7 @@ class FilterFactoryTest extends TestCase
     public function testFactoryCreatesFilterWithAccidentsCausedByPedestrians()
     {
         $accidentsFilter = new AccidentsFilterDto();
-        $accidentsFilter->setPedestriansCause('07');
+        $accidentsFilter->pedestriansCause = '07';
         $filter = $this->factory->createFromDto($accidentsFilter);
         $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM uczestnicy WHERE sppi_kod IN ('07'))"]);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
@@ -101,7 +101,7 @@ class FilterFactoryTest extends TestCase
     public function testFactoryCreatesFilterWithAccidentsWithPedestrians()
     {
         $accidentsFilter = new AccidentsFilterDto();
-        $accidentsFilter->setPedestriansPresence(true);
+        $accidentsFilter->pedestriansPresence = true;
         $filter = $this->factory->createFromDto($accidentsFilter);
         $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM uczestnicy WHERE zspo_id IS NULL)"]);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
@@ -110,7 +110,7 @@ class FilterFactoryTest extends TestCase
     public function testFactoryCreatesFilterWithAccidentsWithoutPedestrians()
     {
         $accidentsFilter = new AccidentsFilterDto();
-        $accidentsFilter->setPedestriansPresence(false);
+        $accidentsFilter->pedestriansPresence = false;
         $filter = $this->factory->createFromDto($accidentsFilter);
         $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM uczestnicy WHERE zspo_id IS NOT NULL)"]);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
