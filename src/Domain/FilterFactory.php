@@ -15,6 +15,9 @@ class FilterFactory
         if (null !== $filterDto->getCounty()) {
             $filters[] = 'POWIAT = \'' . $filterDto->getCounty() . '\'';
         }
+        if (null !== $filterDto->getAccidentSite()) {
+            $filters[] = 'chmz_kod = \'' . $filterDto->getAccidentSite() . '\'';
+        }
         if (null !== $filterDto->getStreet()) {
             $filters[] = Filter::COLUMN_STREET . ' = \'' . $filterDto->getStreet() . '\'';
         }

@@ -16,6 +16,7 @@ class AccidentsFilterDto
     private $driversCause;
     private $pedestriansCause;
     private $pedestriansPresence;
+    private $accidentSite;
 
     public function getPedestriansCause()
     {
@@ -135,5 +136,15 @@ class AccidentsFilterDto
     public function setPedestriansPresence(?bool $pedestriansPresence)
     {
         $this->pedestriansPresence = $pedestriansPresence;
+    }
+
+    public function getAccidentSite()
+    {
+        return $this->accidentSite;
+    }
+
+    public function setAccidentSite($accidentSite)
+    {
+        $this->accidentSite = $accidentSite;
     }
 }

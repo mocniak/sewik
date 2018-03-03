@@ -35,6 +35,15 @@ class FilterFactoryTest extends TestCase
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
     }
 
+    public function testFactoryCreatesFilterWithAccidentSite()
+    {
+        $accidentsFilter = new AccidentsFilterDto();
+        $accidentsFilter->setAccidentSite('A1');
+        $filter = $this->factory->createFromDto($accidentsFilter);
+        $expectedFilter = new Filter(['chmz_kod = \'A1\'']);
+        $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
+    }
+
     public function testFactoryCreatesFilterWithVehicles()
     {
         $accidentsFilter = new AccidentsFilterDto();

@@ -50,6 +50,11 @@ class FilterForm extends AbstractType
                 'label' => 'Rodzaj wypadku',
                 'choices' => Filter::ACCIDENT_TYPES
             ])
+            ->add('accidentSite', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Miejsce wypadku',
+                'choices' => Filter::ACCIDENT_SITE
+            ])
             ->add('injury', ChoiceType::class, [
                 'required' => false,
                 'label' => 'W których ofiary odniosły obrażenia',
