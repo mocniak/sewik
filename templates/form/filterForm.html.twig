@@ -12,6 +12,8 @@
         {{ form_row(form.toDate) }}
         {{ form_row(form.accidentType) }}
         {{ form_row(form.accidentSite) }}
+        {{ form_row(form.light) }}
+        {{ form_row(form.trafficLights) }}
     </div>
 
     <div style="grid-row: 1;grid-column: 2 / 3;">
@@ -20,9 +22,10 @@
         </div>
     </div>
     <div style="grid-row: 1;grid-column: 3 / 4;">
+        {{ form_row(form.pedestriansPresence) }}
         {{ form_row(form.driversCause) }}
         {{ form_row(form.pedestriansCause) }}
-        {{ form_row(form.pedestriansPresence) }}
+        {{ form_row(form.otherCause) }}
         {{ form_row(form.injury) }}
     </div>
     <div style="grid-row: 2;grid-column: 1 / 4;">

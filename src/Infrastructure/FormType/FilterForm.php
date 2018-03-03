@@ -6,7 +6,6 @@ use Sewik\Domain\AccidentsFilterDto;
 use Sewik\Domain\Filter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -55,6 +54,16 @@ class FilterForm extends AbstractType
                 'label' => 'Miejsce zdarzenia',
                 'choices' => Filter::ACCIDENT_SITE
             ])
+            ->add('light', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Warunki oświetleniowe',
+                'choices' => Filter::ACCIDENT_LIGHT
+            ])
+            ->add('trafficLights', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Sygnalizacja świetlna',
+                'choices' => Filter::ACCIDENT_TRAFFIC_LIGHT
+            ])
             ->add('injury', ChoiceType::class, [
                 'required' => false,
                 'label' => 'W których ofiary odniosły obrażenia',
@@ -69,6 +78,11 @@ class FilterForm extends AbstractType
                 'required' => false,
                 'label' => 'Z winy pieszych',
                 'choices' => Filter::PEDESTRIAN_CAUSES
+            ])
+            ->add('otherCause', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Z innych przyczyn',
+                'choices' => Filter::ACCIDENT_OTHER_CAUSES
             ])
             ->add('pedestriansPresence', ChoiceType::class, [
                 'required' => false,

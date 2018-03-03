@@ -569,6 +569,41 @@ class Filter
         'Parking, plac, MOP' => 'A6_2015',
     ];
 
+    const ACCIDENT_LIGHT = [
+        'Światło dzienne' => '01',
+        'Zmrok, świt' => '02',
+        'Noc - droga oświetlona' => '03',
+        'Noc - droga niedostatecznie oświetlona' => '04',
+        'Noc - droga nieoświetlona' => '05',
+    ];
+
+    const ACCIDENT_OTHER_CAUSES = [
+        'Pożar pojazdu' => '01',
+        'Niezawiniona niesprawność techniczna pojazdu' => '02',
+        'Niewłaściwy stan jezdni' => '03',
+        'Nieprawidłowa organizacja ruchu' => '04',
+        'Nieprawidłowo zabezp. roboty drogowe' => '05',
+        'Nieprawidłowo działająca sygn. świetlna' => '06',
+        'Nieprawidłowo działająca zapora, rogatka' => '07',
+        'Obiekty, zwierzęta na drodze' => '08',
+        'Nagłe zasłabnięcie kierującego' => '09',
+        'Oślepienie przez inny pojazd lub słońce' => '10',
+        'Z winy pasażera: wyskak. z pojazdu w ruchu' => 'A1',
+        'Z winy pasażera: wypadnięcie' => 'A2',
+        'Z winy pasażera' => 'A3',
+        'Nieustalone' => 'A4',
+        'Inne, nieustalone' => '11',
+        'Inne' => 'A5',
+        'Niesprawność techniczna pojazdu' => '02_2015',
+        'Utrata przytomności, śmierć kierującego' => '09_2015',
+    ];
+    const ACCIDENT_TRAFFIC_LIGHT = [
+        'Jest, działa' => '01',
+        'Jest, nie działa' => '02',
+        'Brak' => '03',
+
+    ];
+
     private $accidentsFilter;
 
     public function __construct(array $accidentsFilter)

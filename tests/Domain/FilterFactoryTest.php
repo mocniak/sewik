@@ -5,7 +5,6 @@ use Sewik\Domain\AccidentsFilterDto;
 use Sewik\Domain\Filter;
 use Sewik\Domain\FilterFactory;
 use PHPUnit\Framework\TestCase;
-use Sewik\Domain\ShowAllReportsRequest;
 
 class FilterFactoryTest extends TestCase
 {

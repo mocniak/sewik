@@ -18,6 +18,40 @@ class FilterFactory
         if (null !== $filterDto->accidentSite) {
             $filters[] = 'chmz_kod = \'' . $filterDto->accidentSite . '\'';
         }
+        if (null !== $filterDto->light) {
+            $filters[] = 'szos_kod = \'' . $filterDto->light . '\'';
+        }
+        if (null !== $filterDto->weather) {
+            $filters[] = "sswa_kod = '" . $filterDto->weather . "'";
+        }
+        if (null !== $filterDto->pavement) {
+            $filters[] = " = '" . $filterDto->pavement . "'";
+        }
+        if (null !== $filterDto->roadType) {
+            $filters[] = " = '" . $filterDto->roadType . "'";
+        }
+        if (null !== $filterDto->trafficLights) {
+            $filters[] = "sysw_kod = '" . $filterDto->trafficLights . "'";
+        }
+        if (null !== $filterDto->surfaceMarking) {
+            $filters[] = " = '" . $filterDto->surfaceMarking . "'";
+        }
+        if (null !== $filterDto->intersectionType) {
+            $filters[] = " = '" . $filterDto->intersectionType . "'";
+        }
+        if (null !== $filterDto->builtUpArea) {
+            $filters[] = " = '" . $filterDto->builtUpArea . "'";
+        }
+        if (null !== $filterDto->otherCause) {
+            $filters[] = "spip_kod = '" . $filterDto->otherCause . "'";
+        }
+        if (null !== $filterDto->surfaceCondition) {
+            $filters[] = "stna_kod = '" . $filterDto->surfaceCondition . "'";
+        }
+        if (null !== $filterDto->roadGeometry) {
+            $filters[] = " = '" . $filterDto->roadGeometry . "'";
+        }
+
         if (null !== $filterDto->street) {
             $filters[] = Filter::COLUMN_STREET . ' = \'' . $filterDto->street . '\'';
         }
