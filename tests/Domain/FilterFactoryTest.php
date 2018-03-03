@@ -26,6 +26,15 @@ class FilterFactoryTest extends TestCase
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
     }
 
+    public function testFactoryCreatesFilterWithCounty()
+    {
+        $accidentsFilter = new AccidentsFilterDto();
+        $accidentsFilter->setCounty('POWIAT TORUŃ');
+        $filter = $this->factory->createFromDto($accidentsFilter);
+        $expectedFilter = new Filter(['POWIAT = \'POWIAT TORUŃ\'']);
+        $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
+    }
+
     public function testFactoryCreatesFilterWithVehicles()
     {
         $accidentsFilter = new AccidentsFilterDto();

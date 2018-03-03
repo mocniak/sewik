@@ -12,6 +12,9 @@ class FilterFactory
         if (null !== $filterDto->getLocality()) {
             $filters[] = Filter::COLUMN_LOCALITY . ' = \'' . $filterDto->getLocality() . '\'';
         }
+        if (null !== $filterDto->getCounty()) {
+            $filters[] = 'POWIAT = \'' . $filterDto->getCounty() . '\'';
+        }
         if (null !== $filterDto->getStreet()) {
             $filters[] = Filter::COLUMN_STREET . ' = \'' . $filterDto->getStreet() . '\'';
         }
