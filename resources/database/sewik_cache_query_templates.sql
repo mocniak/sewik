@@ -119,7 +119,8 @@ FROM
        ON z.ID = u.ZSZD_ID
    GROUP BY ROK
   ) AS rl
-    ON r.rok = rl.rok;', 'time');
+    ON r.rok = rl.rok
+ORDER BY r.rok;', 'time');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('59d266b1-ca93-44b3-befd-c71e33db967f', 'Przyczyny kierujących pojazdami', 'SELECT
   opis AS przyczyna_zdarzenia,
   ilosc

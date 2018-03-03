@@ -23,6 +23,11 @@ class FilterForm extends AbstractType
                 'label' => 'Województwo',
                 'choices' => Filter::VOIVODESHIPS
             ])
+            ->add('county', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Powiat',
+                'choices' => Filter::COUNTIES
+            ])
             ->add('locality', TextType::class, ['required' => false, 'label' => 'Miejscowość'])
             ->add('street', TextType::class, ['required' => false, 'label' => 'Ulica'])
             ->add('fromDate', DateType::class, [
@@ -38,6 +43,68 @@ class FilterForm extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => ['placeholder' => 'yyyy-mm-dd']
+            ])
+            ->add('accidentType', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Rodzaj zdarzenia',
+                'choices' => Filter::ACCIDENT_TYPES
+            ])
+            ->add('accidentSite', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Miejsce zdarzenia',
+                'choices' => Filter::ACCIDENT_SITE
+            ])
+            ->add('roadType', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Rodzaj drogi',
+                'choices' => Filter::ACCIDENT_ROAD_TYPE
+            ])
+            ->add('light', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Warunki oświetleniowe',
+                'choices' => Filter::ACCIDENT_LIGHT
+            ])
+            ->add('trafficLights', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Sygnalizacja świetlna',
+                'choices' => Filter::ACCIDENT_TRAFFIC_LIGHT
+            ])
+            ->add('intersectionType', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Rodzaj skrzyżowania',
+                'choices' => Filter::ACCIDENT_INTERSECTION_TYPE
+            ])
+            ->add('injury', ChoiceType::class, [
+                'required' => false,
+                'label' => 'W których ofiary odniosły obrażenia',
+                'choices' => Filter::PARTICIPANT_INJURIES
+            ])
+            ->add('driversCause', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Z winy kierujących',
+                'choices' => Filter::DRIVERS_CAUSES
+            ])
+            ->add('pedestriansCause', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Z winy pieszych',
+                'choices' => Filter::PEDESTRIAN_CAUSES
+            ])
+            ->add('otherCause', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Z innych przyczyn',
+                'choices' => Filter::ACCIDENT_OTHER_CAUSES
+            ])
+            ->add('pedestriansPresence', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Z udziałem pieszych',
+                'choices' => ['tak' => true, 'nie' => 'false']
+            ])
+            ->add('vehicleType', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Zdarzenia z pojazdami typu',
+                'expanded' => true,
+                'multiple' => true,
+                'choices' => Filter::VEHICLE_TYPES
             ])
             ->add('accidents', SubmitType::class, array('label' => 'Wyświetl zdarzenia'))
             ->add('reports', SubmitType::class, array('label' => 'Wyświetl raporty'));

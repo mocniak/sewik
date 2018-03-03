@@ -120,14 +120,14 @@ ul, ol {
 }
 
 #footer {
-     position: absolute;
-     right: 0;
-     bottom: 0;
-     left: 0;
-     padding: 1rem;
-     background-color: #dddddd;
-     text-align: center;
- }
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #dddddd;
+    text-align: center;
+}
 
 table {
     font-size: 13px;
@@ -152,27 +152,67 @@ table tr td:first-child {
 }
 
 #form {
-    padding-left: 60px;
+    display: grid;
+    grid-template-columns: 48% 44%;
+    grid-gap: 2em;
     text-align: left;
 }
 
-#form div {
-    width: 800px;
-    clear: both;
-    padding: 5px;
+#form p {
+    display: block;
+    float: left;
+    font-weight: bold;
+    width: 100%;
+}
+
+#form form > div {
+    padding: 15px;
 }
 
 #form label {
     display: block;
-    width: 250px;
+    width: 40%;
     margin: 3px;
+    padding: 2px;
     float: left;
+    clear: left;
+    height: 20px;
 }
 
 #form input, #form textarea, #form select {
-    float: right;
     display: block;
-    width: 500px;
+    width: 50%;
+    height: 15px;
+    padding: 3px;
+    float: right;
+}
+
+#form select, #form button {
+    height: 25px;
+    width: calc(50% + 10px);
+}
+
+
+#form .form-checkbox div label {
+    width: 100%;
+}
+
+#form input[type=checkbox] {
+    width: 18px;
+    margin: 4px 5px 4px 10px;
+    display: inline-block;
+    float: none;
+}
+
+#form .form-checkbox div div label {
+    width: 85%;
+    margin: 0 2px;
+    display: inline-block;
+    float: none;
+    height: auto;
+    padding: 0;
+    top: -4px;
+    position: relative;
 }
 
 #form textarea {
@@ -198,4 +238,48 @@ table tr td:first-child {
 
 #accident-page h3 {
     text-align: left;
+}
+
+.clearfix {
+    width: 100%;
+}
+
+#admin_form {
+    height: 400px;
+}
+
+
+#admin_form label {
+    display: block;
+    width: 40%;
+    margin: 3px;
+    padding: 2px;
+    float: left;
+    clear: left;
+    height: 20px;
+}
+
+#admin_form input, #admin_form textarea, #admin_form select {
+    display: block;
+    width: 50%;
+    height: 15px;
+    padding: 3px;
+    float: right;
+    margin: 3px;
+}
+
+#admin_form button {
+    clear: both;
+    margin: 3px;
+    float: right;
+}
+
+#admin_form select, #admin_form button {
+    height: 25px;
+    width: calc(50% + 10px);
+}
+
+#admin_form textarea {
+    height: 300px;
+    margin: 3px;
 }

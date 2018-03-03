@@ -4,59 +4,28 @@ namespace Sewik\Domain;
 
 class AccidentsFilterDto
 {
-    private $voivodeship;
-    private $locality;
-    private $street;
-    private $fromDate;
-    private $toDate;
-
-    public function setVoivodeship(?string $voivodeship)
-    {
-        $this->voivodeship = $voivodeship;
-    }
-
-    public function setLocality(?string $locality)
-    {
-        $this->locality = $locality;
-    }
-
-    public function setStreet(?string $street)
-    {
-        $this->street = $street;
-    }
-
-    public function setFromDate(?\DateTimeImmutable $fromDate)
-    {
-        $this->fromDate = $fromDate;
-    }
-
-    public function setToDate(?\DateTimeImmutable $toDate)
-    {
-        $this->toDate = $toDate;
-    }
-
-    public function getVoivodeship(): ?string
-    {
-        return $this->voivodeship;
-    }
-
-    public function getLocality(): ?string
-    {
-        return $this->locality;
-    }
-
-    public function getStreet(): ?string
-    {
-        return $this->street;
-    }
-
-    public function getFromDate(): ?\DateTimeImmutable
-    {
-        return $this->fromDate;
-    }
-
-    public function getToDate(): ?\DateTimeImmutable
-    {
-        return $this->toDate;
-    }
+    public $voivodeship;
+    public $county;
+    public $locality;
+    public $street;
+    public $fromDate;
+    public $toDate;
+    public $injury;
+    public $vehicleType;
+    public $accidentType;
+    public $driversCause;
+    public $pedestriansCause;
+    public $pedestriansPresence;
+    public $accidentSite;
+    public $light;
+    public $weather;
+    public $pavement;
+    public $roadType;
+    public $trafficLights;
+    public $surfaceMarking;
+    public $intersectionType;
+    public $builtUpArea;
+    public $otherCause;
+    public $surfaceCondition;
+    public $roadGeometry;
 }

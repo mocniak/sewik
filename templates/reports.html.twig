@@ -39,11 +39,7 @@
 } %}
 
 {% block body %}
-    <div id="form">
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
-    </div>
+    {% include 'form/filterForm.html.twig' %}
     {% for categoryName, queries in categories %}
         <h2 style="text-align: center">{{ categoryName }}</h2>
         {% for queryId in queries %}
