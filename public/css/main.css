@@ -153,13 +153,14 @@ table tr td:first-child {
 
 #form {
     display: grid;
-    grid-template-columns: 32% 27% 35%;
+    grid-template-columns: 48% 44%;
     grid-gap: 2em;
     text-align: left;
 }
 
 #form p {
     display: block;
+    float: left;
     font-weight: bold;
     width: 100%;
 }
@@ -204,7 +205,7 @@ table tr td:first-child {
 }
 
 #form .form-checkbox div div label {
-    width: 80%;
+    width: 85%;
     margin: 0 2px;
     display: inline-block;
     float: none;
