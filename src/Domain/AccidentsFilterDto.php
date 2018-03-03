@@ -14,6 +14,17 @@ class AccidentsFilterDto
     private $vehicleType;
     private $accidentType;
     private $driversCause;
+    private $pedestriansCause;
+
+    public function getPedestriansCause()
+    {
+        return $this->pedestriansCause;
+    }
+
+    public function setPedestriansCause($pedestriansCause)
+    {
+        $this->pedestriansCause = $pedestriansCause;
+    }
 
     public function getDriversCause()
     {

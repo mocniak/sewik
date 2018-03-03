@@ -60,6 +60,11 @@ class FilterForm extends AbstractType
                 'label' => 'Zdarzenia z winy kierujących',
                 'choices' => Filter::DRIVERS_CAUSES
             ])
+            ->add('pedestriansCause', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Zdarzenia z winy pieszych',
+                'choices' => Filter::PEDESTRIAN_CAUSES
+            ])
             ->add('vehicleType', ChoiceType::class, [
                 'required' => false,
                 'label' => 'Zdarzenia w których brał udział pojazd typu',

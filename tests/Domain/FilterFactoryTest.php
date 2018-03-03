@@ -43,6 +43,7 @@ class FilterFactoryTest extends TestCase
         $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM pojazdy WHERE rodzaj_pojazdu IN ('IS01','IS101','IS121'))"]);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
     }
+
     public function testFactoryCreatesFilterWithInjuredPeople()
     {
         $accidentsFilter = new AccidentsFilterDto();
@@ -51,6 +52,7 @@ class FilterFactoryTest extends TestCase
         $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM uczestnicy WHERE stuc_kod IN ('ZM'))"]);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
     }
+
     public function testFactoryCreatesFilterWithManyInjuredPeople()
     {
         $accidentsFilter = new AccidentsFilterDto();
@@ -59,12 +61,22 @@ class FilterFactoryTest extends TestCase
         $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM uczestnicy WHERE stuc_kod IN ('ZM','ZC'))"]);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
     }
+
     public function testFactoryCreatesFilterWithAccidentsCausedByDrivers()
     {
         $accidentsFilter = new AccidentsFilterDto();
         $accidentsFilter->setDriversCause('A1_2015');
         $filter = $this->factory->createFromDto($accidentsFilter);
         $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM uczestnicy WHERE spsz_kod IN ('A1_2015'))"]);
+        $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
+    }
+
+    public function testFactoryCreatesFilterWithAccidentsCausedByPedestrians()
+    {
+        $accidentsFilter = new AccidentsFilterDto();
+        $accidentsFilter->setPedestriansCause('07');
+        $filter = $this->factory->createFromDto($accidentsFilter);
+        $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM uczestnicy WHERE sppi_kod IN ('07'))"]);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
     }
 }
