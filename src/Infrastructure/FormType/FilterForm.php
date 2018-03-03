@@ -57,7 +57,7 @@ class FilterForm extends AbstractType
             ])
             ->add('vehicleType', ChoiceType::class, [
                 'required' => false,
-                'label' => 'Rodzaje pojazdów',
+                'label' => 'Zdarzenia w których brał udział typ pojazdu',
                 'expanded' => true,
                 'multiple' => true,
                 'choices' => Filter::VEHICLE_TYPES

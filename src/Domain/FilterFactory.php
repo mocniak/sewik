@@ -34,6 +34,16 @@ class FilterFactory
             }
             $filters[] = "id IN (SELECT zszd_id FROM pojazdy WHERE rodzaj_pojazdu IN (" . implode(",", $vehiclesInBraces) . "))";
         }
+        if (!empty($filterDto->getInjury())) {
+            //this is to fix multiple value checkbox on frontend. need to be fixed in symfony form in the future
+            $injuries = explode(',', $filterDto->getInjury());
+
+            $injuriesInBraces = [];
+            foreach ($injuries as $injury) {
+                $injuriesInBraces[] = "'" . $injury . "'";
+            }
+            $filters[] = "id IN (SELECT zszd_id FROM uczestnicy WHERE stuc_kod IN (". implode(",", $injuriesInBraces) . "))";
+        }
 
         return new Filter($filters);
     }

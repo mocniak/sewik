@@ -57,7 +57,7 @@ class Filter
 
     const PARTICIPANT_INJURY_SERIOUS = 'RC';
     const PARTICIPANT_INJURY_MINOR = 'RL';
-    const PARTICIPANT_INJURY_DEATH = 'ZM';
+    const PARTICIPANT_INJURY_DEATH = 'ZM,ZC';
 
     const PARTICIPANT_INJURIES = [
         'Ciężko ranny' => self::PARTICIPANT_INJURY_SERIOUS,
@@ -94,7 +94,7 @@ class Filter
         'Pojazd wolnobieżny' => self::VEHICLE_TYPE_SLOW_MOVING,
         'Pociąg' => self::VEHICLE_TYPE_TRAIN,
         'Pojazd uprzewilejowany' => self::VEHICLE_TYPE_EMERGENCY,
-        'Pojazd przewożący materiały niebezpieczne' => self::VEHICLE_TYPE_DANGER,
+        'Przewożący mat. niebezpieczne' => self::VEHICLE_TYPE_DANGER,
         'Inny' => self::VEHICLE_TYPE_OTHER,
         'Nieznany' => self::VEHICLE_TYPE_UNKNOWN,
     ];
