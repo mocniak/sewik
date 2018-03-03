@@ -59,4 +59,12 @@ class FilterFactoryTest extends TestCase
         $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM uczestnicy WHERE stuc_kod IN ('ZM','ZC'))"]);
         $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
     }
+    public function testFactoryCreatesFilterWithAccidentsCausedByDrivers()
+    {
+        $accidentsFilter = new AccidentsFilterDto();
+        $accidentsFilter->setDriversCause('A1_2015');
+        $filter = $this->factory->createFromDto($accidentsFilter);
+        $expectedFilter = new Filter(["id IN (SELECT zszd_id FROM uczestnicy WHERE spsz_kod IN ('A1_2015'))"]);
+        $this->assertEquals($expectedFilter->getAccidentsFilterSql(), $filter->getAccidentsFilterSql());
+    }
 }

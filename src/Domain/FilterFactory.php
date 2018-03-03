@@ -45,6 +45,10 @@ class FilterFactory
             $filters[] = "id IN (SELECT zszd_id FROM uczestnicy WHERE stuc_kod IN (". implode(",", $injuriesInBraces) . "))";
         }
 
+        if (null !== $filterDto->getDriversCause()) {
+            $filters[] = "id IN (SELECT zszd_id FROM uczestnicy WHERE spsz_kod IN ('".$filterDto->getDriversCause()."'))";
+        }
+
         return new Filter($filters);
     }
 }

@@ -491,6 +491,39 @@ class Filter
         'Inne' => '12',
     ];
 
+    const DRIVERS_CAUSES = [
+        'Niedostosowanie prędkości do warunków ruchu' => '01',
+        'Nieudzielenie pierwszeństwa przejazdu' => '02',
+        'Nieudzielenie pierwszeństwa pieszemu' => 'A1',
+        'Nieprawidłowe: wyprzedzanie' => '03',
+        'Nieprawidłowe: omijanie' => '04',
+        'Nieprawidłowe: wymijanie' => '05',
+        'Nieprawidłowe: przejeżdżanie przejścia dla pieszych' => '06',
+        'Nieprawidłowe: przejeżdżanie przejścia dla rowerów' => 'A2',
+        'Nieprawidłowe: skręcanie' => '07',
+        'Nieprawidłowe: zmienianie pasa ruchu' => 'A3',
+        'Nieprawidłowe: Zawracanie' => 'A4',
+        'Nieprawidłowe: zatrzymywanie, postój' => '08',
+        'Nieprawidłowe: cofanie' => '09',
+        'Jazda po niewłaściwej stronie drogi' => '10',
+        'Wjazd przy czerwonym świetle' => '11',
+        'Nieprzestrzeganie innych sygnałów' => '12',
+        'Niezachowanie bezp. odl. między pojazdami' => '13',
+        'Gwałtowne hamowanie' => '14',
+        'Jazda bez wymaganego oświetlenia' => '15',
+        'Zmęczenie, zaśnięcie' => '16',
+        'Ograniczenie sprawności psychomotorycznej' => '17',
+        'Nieustąpienie pierwszeństwa pieszemu na przejściu dla pieszych' => 'A1_2015',
+        'Nieustąpienie pierwszeństwa pieszemu przy skręcaniu w drogę poprzeczną' => 'A11_2015',
+        'Wyprzedzanie pojazdu przed przejściem dla pieszych' => 'A12_2015',
+        'Omijanie pojazdu przed przejściem dla pieszych' => '06_2015',
+        'Nieprawidłowe przejeżdżanie przejazdu dla rowerzystów' => 'A2_2015',
+        'Nieustąpienie pierwszeństwa pieszemu w innych okolicznościach' => 'B1',
+        'Niestosowanie się do sygnalizacji świetlnej' => 'B3',
+        'Inne przyczyny' => 'B2',
+        'Inne' => '18',
+    ];
+
     private $accidentsFilter;
 
     public function __construct(array $accidentsFilter)

@@ -13,6 +13,17 @@ class AccidentsFilterDto
     private $injury;
     private $vehicleType;
     private $accidentType;
+    private $driversCause;
+
+    public function getDriversCause()
+    {
+        return $this->driversCause;
+    }
+
+    public function setDriversCause($driversCause)
+    {
+        $this->driversCause = $driversCause;
+    }
 
     public function getInjury(): ?string
     {
