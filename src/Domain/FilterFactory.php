@@ -18,6 +18,9 @@ class FilterFactory
         if (null !== $filterDto->accidentSite) {
             $filters[] = 'chmz_kod = \'' . $filterDto->accidentSite . '\'';
         }
+        if (null !== $filterDto->accidentType) {
+            $filters[] = 'szrd_kod = \'' . $filterDto->accidentType . '\'';
+        }
         if (null !== $filterDto->light) {
             $filters[] = 'szos_kod = \'' . $filterDto->light . '\'';
         }
