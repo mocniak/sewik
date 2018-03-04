@@ -30,6 +30,7 @@ FROM zdarzenie  %zdarzenie_filter% AND ulica_skrzyz != ''''
 GROUP BY ulica1, ulica2
 ORDER BY zdarzenia DESC LIMIT 50', 'location');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('3a16412c-e1bf-4039-afec-1a54596a7a9f', 'Nowy Raport', 'SELECT COUNT(*) FROM zdarzenie %zdarzenie_filter%;', 'other');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('3e3faec8-32cc-46ce-8ad2-2a4e0876ba50', 'Nowy Raport', 'SELECT COUNT(*) FROM zdarzenie %zdarzenie_filter%;', 'other');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('431f604b-ee44-4ce8-ab38-993ae843bea7', 'Przyczyny pieszych', 'SELECT
   sppi.opis AS przyczyna_zdarzenia,
   wynik     AS zdarzenia
@@ -176,6 +177,11 @@ INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES (
 UNION ALL
 SELECT ulica_skrzyz AS ulica_adres FROM zdarzenie %zdarzenie_filter%) AS zdarzenie
 WHERE ulica_adres IS NOT NULL AND ulica_adres != '''' GROUP BY ulica_adres ORDER BY zdarzenia DESC LIMIT 50', 'location');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('a52c24b9-f694-4e69-add4-9e6775343297', 'Zdarzenia z winy rowerzystów wg powiatów', 'SELECT z.POWIAT, ROUND((r.z_winy_rowerzystow/z.wszystkie_zdarzenia)*100) as z_winy_rowerzystow_procent ,z.wszystkie_zdarzenia FROM
+(SELECT POWIAT, COUNT(*) z_winy_rowerzystow FROM zdarzenie %zdarzenie_filter% AND id IN (SELECT ZSZD_ID FROM uczestnicy WHERE SPSZ_KOD IS NOT NULL AND zspo_id IN (SELECT id FROM pojazdy WHERE RODZAJ_POJAZDU=''IS101'')) GROUP BY POWIAT) as r
+LEFT JOIN
+(SELECT POWIAT, COUNT(*) wszystkie_zdarzenia FROM zdarzenie %zdarzenie_filter% AND id IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = ''IS101'') GROUP BY POWIAT) as z
+on r.POWIAT = z.POWIAT ORDER BY z_winy_rowerzystow_procent DESC;', 'other');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('a8c1989b-5a67-491f-a154-2e25d874b967', 'Oświetlenie', 'SELECT szos.opis AS oswietlenie, zdarzenia FROM (
     SELECT
       szos_kod, count(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter%
@@ -188,3 +194,25 @@ INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES (
   INNER JOIN zabu ON zabu.kod=zdarzenie.zabu_kod ORDER BY zdarzenia DESC', 'site');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('b23d6540-0587-4bc8-9310-6616fd981b1d', 'Miejscowość', 'SELECT miejscowosc, COUNT(*) zdarzenia FROM zdarzenie %zdarzenie_filter%  GROUP BY miejscowosc ORDER BY zdarzenia DESC LIMIT 30', 'location');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('bd0cc201-73b9-4927-a27c-8f8bd235ca3e', 'Województwo', 'SELECT woj, COUNT(*) zdarzenia FROM zdarzenie %zdarzenie_filter%  GROUP BY woj ORDER BY zdarzenia DESC LIMIT 30', 'location');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('cc3ee6e8-3cd8-498c-b97e-0b8c7bf8c906', 'Zdarzenia z winy rowerzystów wg lat', 'SELECT
+  z.rok as rok,
+  ROUND((r.z_winy_rowerzystow / z.wszystkie_zdarzenia) * 100) AS z_winy_rowerzystow_procent,
+  z.wszystkie_zdarzenia
+FROM (SELECT
+        YEAR(DATA_ZDARZ) as rok,
+        COUNT(*) z_winy_rowerzystow
+      FROM zdarzenie
+      %zdarzenie_filter% AND id IN (SELECT ZSZD_ID
+                   FROM uczestnicy
+                   WHERE SPSZ_KOD IS NOT NULL AND zspo_id IN (SELECT id
+                                                              FROM pojazdy
+                                                              WHERE RODZAJ_POJAZDU = ''IS101''))
+      GROUP BY rok) AS r LEFT JOIN (SELECT
+                                         YEAR(DATA_ZDARZ) as rok,
+                                         COUNT(*) wszystkie_zdarzenia
+                                       FROM zdarzenie
+                                       %zdarzenie_filter% AND id IN (SELECT ZSZD_ID
+                                                    FROM pojazdy
+                                                    WHERE RODZAJ_POJAZDU = ''IS101'')
+                                       GROUP BY rok) AS z ON r.rok = z.rok
+ORDER BY rok ASC;', 'other');
