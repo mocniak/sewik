@@ -7,7 +7,6 @@ use Sewik\Domain\AccidentsFilterDto;
 use Sewik\Domain\AccidentsRepositoryInterface;
 use Sewik\Domain\ListAccidentsRequest;
 use Sewik\Domain\SewikService;
-use Sewik\Domain\ShowAllReportsRequest;
 use Sewik\Infrastructure\FormType\FilterForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +16,7 @@ class DefaultController extends Controller
 {
     public function index()
     {
-        return new Response('index');
+        return $this->render('homepage.html.twig');
     }
 
     public function searchPage(Request $request)
