@@ -1,4 +1,4 @@
-INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('06e8a29a-44b7-47d0-bc7c-b2bfac91a916', 'Gmina', 'SELECT gmina, COUNT(*) ilosc FROM zdarzenie %zdarzenie_filter%  GROUP BY gmina ORDER BY ilosc DESC LIMIT 30', 'location');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('06e8a29a-44b7-47d0-bc7c-b2bfac91a916', 'Gmina', 'SELECT gmina, COUNT(*) zdarzenia FROM zdarzenie %zdarzenie_filter%  GROUP BY gmina ORDER BY zdarzenia DESC LIMIT 30', 'location');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('0fe6048a-4ebe-4a9f-adf0-09c879d5cc1c', 'Geometria drogi', 'SELECT geod.opis AS geometria, zdarzenia FROM
   (SELECT geod_KOD, COUNT(*) AS zdarzenia FROM zdarzenie  %zdarzenie_filter%  GROUP BY geod_KOD) AS zdarzenie
   INNER JOIN geod ON geod.kod=zdarzenie.geod_kod ORDER BY zdarzenia DESC', 'site');
@@ -17,22 +17,22 @@ INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES (
 
 		ON wynik.rodzaj_pojazdu=skar.kod)
 		ORDER BY pojazdy DESC', 'vehicles');
-INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('19a27d27-9aa5-409b-ab36-40e5ba468460', 'Powiat', 'SELECT powiat, COUNT(*) ilosc FROM zdarzenie %zdarzenie_filter%  GROUP BY powiat ORDER BY ilosc DESC LIMIT 30', 'location');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('19a27d27-9aa5-409b-ab36-40e5ba468460', 'Powiat', 'SELECT powiat, COUNT(*) zdarzenia FROM zdarzenie %zdarzenie_filter%  GROUP BY powiat ORDER BY zdarzenia DESC LIMIT 30', 'location');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('210ff851-09e9-4155-a9fa-588af3af7417', 'Sygnalizacja Świetlna', 'SELECT sysw.opis AS obecnosc_sygnalizacji, zdarzenia FROM
   (SELECT sysw_KOD, COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% GROUP BY sysw_KOD) AS zdarzenie
   INNER JOIN sysw ON sysw.kod=zdarzenie.sysw_kod ORDER BY zdarzenia DESC;', 'site');
-INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('2fc230c9-fa1f-4a04-b495-0ec13bcf12cb', 'Najniebezpieczniejsze skrzyżowania', 'SELECT CONCAT_WS('' / '', ulica1, ulica2) AS skrzyzowanie, count(*) AS ilosc FROM
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('2fc230c9-fa1f-4a04-b495-0ec13bcf12cb', 'Najniebezpieczniejsze skrzyżowania', 'SELECT CONCAT_WS('' / '', ulica1, ulica2) AS skrzyzowanie, count(*) AS zdarzenia FROM
 (SELECT
 CASE WHEN ULICA_ADRES < ULICA_SKRZYZ THEN ULICA_ADRES ELSE ULICA_SKRZYZ END ulica1,
 CASE WHEN ULICA_ADRES < ULICA_SKRZYZ THEN ULICA_SKRZYZ ELSE ULICA_ADRES END ulica2
 FROM zdarzenie  %zdarzenie_filter% AND ulica_skrzyz != ''''
 ) AS tablica
 GROUP BY ulica1, ulica2
-ORDER BY ilosc DESC LIMIT 50', 'location');
+ORDER BY zdarzenia DESC LIMIT 50', 'location');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('3a16412c-e1bf-4039-afec-1a54596a7a9f', 'Nowy Raport', 'SELECT COUNT(*) FROM zdarzenie %zdarzenie_filter%;', 'other');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('431f604b-ee44-4ce8-ab38-993ae843bea7', 'Przyczyny pieszych', 'SELECT
   sppi.opis AS przyczyna_zdarzenia,
-  wynik     AS ilosc
+  wynik     AS zdarzenia
 FROM (
        SELECT
          sppi_kod,
@@ -47,7 +47,7 @@ FROM (
 
     ON sppi.kod = uczestnicy.sppi_kod
 
-ORDER BY ilosc DESC', 'participants');
+ORDER BY zdarzenia DESC', 'participants');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('4355ee95-561c-4fbc-9082-666bb6e22fae', 'Warunki atmosferyczne', 'SELECT sswa.opis AS warunki, zdarzenia FROM (
     SELECT SSWA_KOD, count(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter%  GROUP BY SSWA_KOD) AS zdarzenie
 LEFT JOIN sswa ON sswa.kod=zdarzenie.sswa_kod ORDER BY zdarzenia DESC', 'other');
@@ -123,13 +123,13 @@ FROM
 ORDER BY r.rok;', 'time');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('59d266b1-ca93-44b3-befd-c71e33db967f', 'Przyczyny kierujących pojazdami', 'SELECT
   opis AS przyczyna_zdarzenia,
-  ilosc
+  zdarzenia
 FROM
   spsz
   INNER JOIN (
                SELECT
                  uczestnicy.spsz_kod        AS przyczyna,
-                 COUNT(uczestnicy.spsz_kod) AS ilosc
+                 COUNT(uczestnicy.spsz_kod) AS zdarzenia
                FROM uczestnicy
                  INNER JOIN
                  pojazdy
@@ -138,7 +138,7 @@ FROM
                GROUP BY uczestnicy.spsz_kod
              ) AS wynik
     ON wynik.przyczyna = spsz.kod
-ORDER BY ilosc DESC', 'participants');
+ORDER BY zdarzenia DESC', 'participants');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('5d947d4e-0f0c-40f0-9c8e-7cffcc046efc', 'Inne przyczyny zdarzeń', 'SELECT
   spip.opis as inne_przyczyny,
   zdarzenia
@@ -151,7 +151,7 @@ FROM
   INNER JOIN
   spip ON spip.kod = z.spip_kod
 ORDER BY zdarzenia DESC;', 'other');
-INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('6a0359a2-9bde-446e-ace1-cd67964fb90e', 'Prędkość dopuszczalna', 'SELECT predkosc_dopuszczalna, COUNT(*) ilosc FROM zdarzenie %zdarzenie_filter%  GROUP BY predkosc_dopuszczalna ORDER BY ilosc DESC LIMIT 15', 'site');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('6a0359a2-9bde-446e-ace1-cd67964fb90e', 'Prędkość dopuszczalna', 'SELECT predkosc_dopuszczalna, COUNT(*) zdarzenia FROM zdarzenie %zdarzenie_filter%  GROUP BY predkosc_dopuszczalna ORDER BY zdarzenia DESC LIMIT 15', 'site');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('6e33bdbf-a4de-434c-a8de-748373225407', 'Rodzaj skrzyżowania', 'SELECT skrz.opis AS skrzyżowanie, zdarzenia FROM
   (SELECT skrz_KOD, COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% GROUP BY SKRZ_KOD) AS zdarzenie
   INNER JOIN skrz ON skrz.kod=zdarzenie.skrz_kod ORDER BY zdarzenia DESC;', 'site');
@@ -186,4 +186,5 @@ INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES (
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('abb94a11-844d-4767-83ec-d0d2378fbcbf', 'Teren zabudowany', 'SELECT zabu.opis AS obszar, zdarzenia FROM
   (SELECT ZABU_KOD, COUNT(*) AS zdarzenia FROM zdarzenie  %zdarzenie_filter% GROUP BY ZABU_KOD) AS zdarzenie
   INNER JOIN zabu ON zabu.kod=zdarzenie.zabu_kod ORDER BY zdarzenia DESC', 'site');
-INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('b23d6540-0587-4bc8-9310-6616fd981b1d', 'Miejscowość', 'SELECT miejscowosc, COUNT(*) ilosc FROM zdarzenie %zdarzenie_filter%  GROUP BY miejscowosc ORDER BY ilosc DESC LIMIT 30', 'location');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('b23d6540-0587-4bc8-9310-6616fd981b1d', 'Miejscowość', 'SELECT miejscowosc, COUNT(*) zdarzenia FROM zdarzenie %zdarzenie_filter%  GROUP BY miejscowosc ORDER BY zdarzenia DESC LIMIT 30', 'location');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('bd0cc201-73b9-4927-a27c-8f8bd235ca3e', 'Województwo', 'SELECT woj, COUNT(*) zdarzenia FROM zdarzenie %zdarzenie_filter%  GROUP BY woj ORDER BY zdarzenia DESC LIMIT 30', 'location');
