@@ -11,8 +11,8 @@ services:
     class: Sewik\Infrastructure\MysqlDatabase
     arguments:
       - 'localhost'
-      - 'root'
-      - 'dupa.8'
+      - 'sewik'
+      - 'password'
       - 'sewik'
 
   sewik.accident_repository:
