@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'form/filterForm.html.twig' %}
+    <h3 style="text-align: center">{{ report.title }}</h3>
+    <table>
+        <tr>
+            {% for header in report.tableHeaders %}
+                <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in report.table %}
+            <tr>
+                {% for cell in row %}
+                    <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+        {% else %}
+            <tr>
+                <td>Brak wyników</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -106,7 +106,6 @@ class FilterForm extends AbstractType
                 'multiple' => true,
                 'choices' => Filter::VEHICLE_TYPES
             ])
-            ->add('accidents', SubmitType::class, array('label' => 'Wyświetl zdarzenia'))
             ->add('reports', SubmitType::class, array('label' => 'Wyświetl raporty'));
 
         $callbackTransformer = new CallbackTransformer(

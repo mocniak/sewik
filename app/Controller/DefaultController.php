@@ -9,6 +9,8 @@ use Sewik\Domain\ListAccidentsRequest;
 use Sewik\Domain\SewikService;
 use Sewik\Infrastructure\FormType\FilterForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,6 +25,8 @@ class DefaultController extends Controller
     {
         $filterDto = new AccidentsFilterDto();
         $form = $this->createForm(FilterForm::class, $filterDto);
+        $form->add('accidents', SubmitType::class, array('label' => 'Wyświetl zdarzenia'));
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -77,7 +81,22 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function contactPage() {
+    public function singleReportPage(Request $request, string $id)
+    {
+        $filterDto = new AccidentsFilterDto();
+        $form = $this->createForm(FilterForm::class, $filterDto);
+        $form->add('accidents', HiddenType::class, ['mapped'=>false]);
+        $form->handleRequest($request);
+        $sewikService = $this->container->get('sewik.service');
+        $report = $sewikService->showReport(Uuid::fromString($id), $filterDto);
+        return $this->render('singleReportPage.html.twig', [
+            'report' => $report,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    public function contactPage()
+    {
         return $this->render('contactPage.html.twig');
     }
 }

@@ -14,6 +14,10 @@ accident_page:
     path: /accident/{id}
     controller: App\Controller\DefaultController::showAccident
 
+report_page:
+    path: /report/{id}
+    controller: App\Controller\DefaultController::singleReportPage
+
 dashboard:
     path: /admin
     controller: App\Controller\AdminController::dashboard
