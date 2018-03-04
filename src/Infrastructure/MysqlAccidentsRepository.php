@@ -29,9 +29,9 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
     {
         $accidents = [];
         if (empty($filter->getAccidentsFilterSql())) {
-            $stmt = $this->link->prepare("SELECT * FROM zdarzenie ORDER BY id ASC LIMIT 100");
+            $stmt = $this->link->prepare("SELECT * FROM zdarzenie ORDER BY id ASC LIMIT 1000");
         } else {
-            $stmt = $this->link->prepare("SELECT * FROM zdarzenie WHERE " . $filter->getAccidentsFilterSql() . " ORDER BY id ASC LIMIT 50");
+            $stmt = $this->link->prepare("SELECT * FROM zdarzenie WHERE " . $filter->getAccidentsFilterSql() . " ORDER BY id ASC LIMIT 1000");
         }
 
         $stmt->execute();
