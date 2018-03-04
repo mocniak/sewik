@@ -58,3 +58,7 @@ services:
     class: Sewik\Domain\QueryTemplateService
     arguments:
       - '@sewik.template_repository'
+  form.type.datalist_type:
+    class: Sewik\Infrastructure\FormType\DatalistType
+    tags:
+      -  { name: form.type, alias: datalist }

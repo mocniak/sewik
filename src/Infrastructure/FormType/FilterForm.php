@@ -23,7 +23,7 @@ class FilterForm extends AbstractType
                 'label' => 'Województwo',
                 'choices' => Filter::VOIVODESHIPS
             ])
-            ->add('county', ChoiceType::class, [
+            ->add('county', DatalistType::class, [
                 'required' => false,
                 'label' => 'Powiat',
                 'choices' => Filter::COUNTIES
