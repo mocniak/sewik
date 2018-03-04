@@ -2,18 +2,13 @@
     font-family: Tahoma, Arial, Helvetica, sans-serif;
 }
 
-html {
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-}
-
 body {
     position: relative;
     color: #000;
     margin: 0;
     padding: 4px 0 60px;
     background-color: #EEEEEE;
+    font-size: 14px;
 }
 
 a {
@@ -76,8 +71,8 @@ ul, ol {
     width: 950px;
     height: 200px;
     clear: both;
-    background-image: url(../images/tlo_czy.jpg);
-    text-align: left;
+    background-size: cover;
+    background: url(../images/pieszy_jerozolimskie.jpg) center;
 }
 
 #menu {
