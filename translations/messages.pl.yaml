@@ -275,7 +275,7 @@ vehicle:
     'IS122': 'Ciągnik rolniczy'
     'IS123': 'Tramwaj, trolejbus'
     'IS125': 'Pojazd nieustalony'
-    'IS127': 'Motocykl o poj. do 125 cm3 ( do 11 kw/0,1 KW/kg)'
+    'IS127': 'Motocykl o poj. do 125 cm3 (do 11 kw/0,1 KW/kg)'
     'IS128': 'Motocykl inny'
     'IS129': 'Czterokołowiec lekki'
     'IS130': 'Czterokołowiec'

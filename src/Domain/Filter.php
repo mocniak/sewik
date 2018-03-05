@@ -85,7 +85,7 @@ class Filter
         'Rower' => self::VEHICLE_TYPE_BICYCLE,
         'Skuter' => self::VEHICLE_TYPE_MOPED,
         'Motocykl' => self::VEHICLE_TYPE_MOTORBIKE,
-        'Quad' => self::VEHICLE_TYPE_QUAD,
+        'Quad (od 11.2015)' => self::VEHICLE_TYPE_QUAD,
         'Samochód osobowy' => self::VEHICLE_TYPE_CAR,
         'Samochód ciężarowy' => self::VEHICLE_TYPE_TRUCK,
         'Autobus' => self::VEHICLE_TYPE_BUS,
