@@ -308,7 +308,7 @@ class Accident
     /**
      * @return string
      */
-    public function getTrafficLights(): string
+    public function getTrafficLights(): ?string
     {
         return $this->trafficLights;
     }
@@ -316,7 +316,7 @@ class Accident
     /**
      * @return string
      */
-    public function getSurfaceMarking(): string
+    public function getSurfaceMarking(): ?string
     {
         return $this->surfaceMarking;
     }
@@ -340,7 +340,7 @@ class Accident
     /**
      * @return string
      */
-    public function getOtherCause(): string
+    public function getOtherCause(): ?string
     {
         return $this->otherCause;
     }
