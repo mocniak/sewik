@@ -37,9 +37,9 @@ class Vehicle
         int $id,
         int $accidentId,
         string $type,
-        string $brand,
-        string $issues,
-        string $specialType,
+        ?string $brand,
+        ?string $issues,
+        ?string $specialType,
         array $passengers
     )
     {
@@ -88,7 +88,7 @@ class Vehicle
     /**
      * @return string
      */
-    public function getBrand(): string
+    public function getBrand(): ?string
     {
         return $this->brand;
     }
@@ -96,7 +96,7 @@ class Vehicle
     /**
      * @return string
      */
-    public function getIssues(): string
+    public function getIssues(): ?string
     {
         return $this->issues;
     }
@@ -104,7 +104,7 @@ class Vehicle
     /**
      * @return string
      */
-    public function getSpecialType(): string
+    public function getSpecialType(): ?string
     {
         return $this->specialType;
     }
