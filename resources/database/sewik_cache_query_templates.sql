@@ -29,8 +29,84 @@ FROM zdarzenie  %zdarzenie_filter% AND ulica_skrzyz != ''''
 ) AS tablica
 GROUP BY ulica1, ulica2
 ORDER BY zdarzenia DESC LIMIT 50', 'location');
-INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('3a16412c-e1bf-4039-afec-1a54596a7a9f', 'Nowy Raport', 'SELECT COUNT(*) FROM zdarzenie %zdarzenie_filter%;', 'other');
-INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('3e3faec8-32cc-46ce-8ad2-2a4e0876ba50', 'Nowy Raport', 'SELECT COUNT(*) FROM zdarzenie %zdarzenie_filter%;', 'other');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('3a16412c-e1bf-4039-afec-1a54596a7a9f', 'Ofiary zdarzeń wg grup', 'SELECT COALESCE(skar.opis, ''Pieszy'') as ''grupa uczestników'', ofiary_smiertelne, ranni_ciezko, ranni_lekko, razem
+FROM (SELECT
+        COALESCE(RODZAJ_POJAZDU, ''Pieszy'') AS uczestnik,
+        COUNT(*) AS razem
+      FROM (SELECT
+              ZSPO_ID,
+              STUC_KOD
+            FROM uczestnicy
+            %uczestnicy_filter% AND STUC_KOD IS NOT NULL
+           ) AS u LEFT JOIN (SELECT
+                id,
+                rodzaj_pojazdu
+              FROM pojazdy) AS p ON p.id = u.ZSPO_ID
+      GROUP BY uczestnik) AS w
+  LEFT JOIN
+     (SELECT
+        COALESCE(RODZAJ_POJAZDU, ''Pieszy'') AS uczestnik,
+        COUNT(*) AS ofiary_smiertelne
+      FROM (SELECT
+              ZSPO_ID,
+              STUC_KOD
+            FROM uczestnicy
+            %uczestnicy_filter% AND STUC_KOD IN (''ZM'', ''ZC'')
+            ) AS u LEFT JOIN (SELECT
+                                        id,
+                                        rodzaj_pojazdu
+                                      FROM pojazdy) AS p ON p.id = u.ZSPO_ID
+      GROUP BY uczestnik) AS s ON w.uczestnik = s.uczestnik
+  LEFT JOIN
+     (SELECT
+        COALESCE(RODZAJ_POJAZDU, ''Pieszy'') AS uczestnik,
+        COUNT(*) AS ranni_ciezko
+     FROM (SELECT
+       ZSPO_ID,
+       STUC_KOD
+     FROM uczestnicy
+     %uczestnicy_filter% AND STUC_KOD = ''RC''
+     ) AS u LEFT JOIN (SELECT
+       id,
+       rodzaj_pojazdu
+     FROM pojazdy) AS p ON p.id = u.ZSPO_ID
+     GROUP BY RODZAJ_POJAZDU) AS rc
+  on rc.uczestnik = w.uczestnik
+  LEFT JOIN
+     (SELECT
+        COALESCE(RODZAJ_POJAZDU, ''Pieszy'') AS uczestnik,
+     COUNT(*) AS ranni_lekko
+     FROM (SELECT
+       ZSPO_ID,
+       STUC_KOD
+     FROM uczestnicy
+     %uczestnicy_filter% AND STUC_KOD = ''RL''
+     ) AS u LEFT JOIN (SELECT
+       id,
+       rodzaj_pojazdu
+     FROM pojazdy) AS p ON p.id = u.ZSPO_ID
+     GROUP BY RODZAJ_POJAZDU) AS rl
+  on rl.uczestnik = w.uczestnik
+LEFT JOIN
+  skar on skar.kod = w.uczestnik
+ORDER BY ofiary_smiertelne DESC;', 'participants');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('3e3faec8-32cc-46ce-8ad2-2a4e0876ba50', 'Zdarzenia z winy rowerzystów wg powiatów i województw', 'SELECT
+  z.powiat,
+  ROUND((r.z_winy_rowerzystow / z.zdarzenia) * 100) AS z_winy_rowerzystow
+FROM
+  (SELECT
+     CONCAT_WS(" / ",WOJ, POWIAT) as powiat,
+     COUNT(*) z_winy_rowerzystow
+   FROM
+     zdarzenie %zdarzenie_filter% AND id IN ( SELECT ZSZD_ID FROM uczestnicy WHERE SPSZ_KOD IS NOT NULL AND zspo_id IN ( SELECT id FROM pojazdy WHERE RODZAJ_POJAZDU=''IS101'')) GROUP BY POWIAT, WOJ) AS r
+  LEFT JOIN
+  (SELECT
+     CONCAT_WS(" / ",WOJ, POWIAT) as powiat,
+     COUNT(*) zdarzenia
+   FROM
+     zdarzenie %zdarzenie_filter% AND id IN ( SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = ''IS101'') GROUP BY POWIAT, WOJ) AS z
+    ON r.POWIAT = z.POWIAT
+ORDER BY z_winy_rowerzystow DESC;', 'other');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('431f604b-ee44-4ce8-ab38-993ae843bea7', 'Przyczyny pieszych', 'SELECT
   sppi.opis AS przyczyna_zdarzenia,
   wynik     AS zdarzenia
@@ -178,10 +254,10 @@ UNION ALL
 SELECT ulica_skrzyz AS ulica_adres FROM zdarzenie %zdarzenie_filter%) AS zdarzenie
 WHERE ulica_adres IS NOT NULL AND ulica_adres != '''' GROUP BY ulica_adres ORDER BY zdarzenia DESC LIMIT 50', 'location');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('a52c24b9-f694-4e69-add4-9e6775343297', 'Zdarzenia z winy rowerzystów wg powiatów', 'SELECT z.POWIAT, ROUND((r.z_winy_rowerzystow/z.wszystkie_zdarzenia)*100) as z_winy_rowerzystow_procent ,z.wszystkie_zdarzenia FROM
-(SELECT POWIAT, COUNT(*) z_winy_rowerzystow FROM zdarzenie %zdarzenie_filter% AND id IN (SELECT ZSZD_ID FROM uczestnicy WHERE SPSZ_KOD IS NOT NULL AND zspo_id IN (SELECT id FROM pojazdy WHERE RODZAJ_POJAZDU=''IS101'')) GROUP BY POWIAT) as r
-LEFT JOIN
-(SELECT POWIAT, COUNT(*) wszystkie_zdarzenia FROM zdarzenie %zdarzenie_filter% AND id IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = ''IS101'') GROUP BY POWIAT) as z
-on r.POWIAT = z.POWIAT ORDER BY z_winy_rowerzystow_procent DESC;', 'other');
+  (SELECT POWIAT, COUNT(*) z_winy_rowerzystow FROM zdarzenie %zdarzenie_filter% AND id IN (SELECT ZSZD_ID FROM uczestnicy WHERE SPSZ_KOD IS NOT NULL AND zspo_id IN (SELECT id FROM pojazdy WHERE RODZAJ_POJAZDU=''IS101'')) GROUP BY POWIAT) as r
+  LEFT JOIN
+  (SELECT POWIAT, COUNT(*) wszystkie_zdarzenia FROM zdarzenie %zdarzenie_filter% AND id IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = ''IS101'') GROUP BY POWIAT) as z
+    on r.POWIAT = z.POWIAT ORDER BY z_winy_rowerzystow_procent DESC;', 'other');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('a8c1989b-5a67-491f-a154-2e25d874b967', 'Oświetlenie', 'SELECT szos.opis AS oswietlenie, zdarzenia FROM (
     SELECT
       szos_kod, count(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter%
