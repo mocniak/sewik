@@ -58,7 +58,7 @@ class Participant
         int $id,
         int $accidentId,
         string $role,
-        \DateTimeImmutable $dateOfBirth,
+        ?\DateTimeImmutable $dateOfBirth,
         string $gender,
         ?string $drivingLicence,
         ?int $drivingYears,
@@ -109,7 +109,7 @@ class Participant
         return $this->role;
     }
 
-    public function getDateOfBirth(): \DateTimeImmutable
+    public function getDateOfBirth(): ?\DateTimeImmutable
     {
         return $this->dateOfBirth;
     }

@@ -131,7 +131,7 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
             $passengerRow['ID'],
             $passengerRow['ZSZD_ID'],
             $passengerRow['SSRU_KOD'],
-            new \DateTimeImmutable($passengerRow['DATA_UR']),
+            (null == $passengerRow['DATA_UR']) ? null : new \DateTimeImmutable($passengerRow['DATA_UR']),
             $passengerRow['PLEC'],
             $passengerRow['SUSU_KOD'],
             $passengerRow['LICZBA_LAT_KIEROWANIA'],
