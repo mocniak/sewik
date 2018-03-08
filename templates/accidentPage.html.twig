@@ -58,7 +58,13 @@
                         {% for passenger in vehicle.passengers %}
                             <li><strong>{{ ('participant.role.' ~ passenger.role)|trans }}</strong>
                                 <ul>
-                                    <li>Data urodzenia: {{ passenger.dateOfBirth|date("Y-m-d") }}</li>
+                                    <li>Data urodzenia:
+                                        {% if passenger.dateOfBirth is null %}
+                                            Nieustalona
+                                        {% else %}
+                                            {{ passenger.dateOfBirth|date("Y-m-d") }}
+                                        {% endif %}
+                                    </li>
                                     <li>{{ ('participant.gender.' ~ passenger.gender)|trans }}</li>
                                     {% if passenger.drivingLicence is not empty %}
                                         <li>Uprawnienia do prowadzenia
@@ -95,7 +101,13 @@
             {% for pedestrian in accident.pedestrians %}
                 <li><strong>{{ ('participant.role.' ~ pedestrian.role)|trans }}</strong>
                     <ul>
-                        <li>Data urodzenia: {{ pedestrian.dateOfBirth|date("Y-m-d") }}</li>
+                        <li>Data urodzenia:
+                            {% if pedestrian.dateOfBirth is null %}
+                                Nieustalona
+                            {% else %}
+                                {{ pedestrian.dateOfBirth|date("Y-m-d") }}
+                            {% endif %}
+                        </li>
                         <li>{{ ('participant.gender.' ~ pedestrian.gender)|trans }}</li>
                         {% if pedestrian.pedestrianFault is not empty %}
                             <li>{{ ('participant.pedestrianFault.' ~ pedestrian.pedestrianFault)|trans }}</li>
