@@ -125,7 +125,7 @@ class Participant
     /**
      * @return string
      */
-    public function getDrivingLicence(): string
+    public function getDrivingLicence(): ?string
     {
         return $this->drivingLicence;
     }
