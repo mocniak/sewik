@@ -54,9 +54,8 @@ class FilterFactory
         if (null !== $filterDto->roadGeometry) {
             $filters[] = "geod_kod = '" . $filterDto->roadGeometry . "'";
         }
-
         if (null !== $filterDto->street) {
-            $filters[] = Filter::COLUMN_STREET . ' = \'' . $filterDto->street . '\'';
+            $filters[] = "(ulica_adres = '$filterDto->street' OR ulica_skrzyz = '$filterDto->street')";
         }
         if (null !== $filterDto->fromDate) {
             $filters[] = Filter::COLUMN_DATE . ' >= \'' . $filterDto->fromDate->format('Y-m-d') . '\'';
