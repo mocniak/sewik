@@ -17,7 +17,7 @@ INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES (
 
 		ON wynik.rodzaj_pojazdu=skar.kod)
 		ORDER BY pojazdy DESC', 'vehicles');
-INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('19a27d27-9aa5-409b-ab36-40e5ba468460', 'Powiat', 'SELECT powiat, COUNT(*) zdarzenia FROM zdarzenie %zdarzenie_filter%  GROUP BY powiat ORDER BY zdarzenia DESC LIMIT 30', 'location');
+INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('19a27d27-9aa5-409b-ab36-40e5ba468460', 'Powiat', 'SELECT CONCAT_WS(" / ", WOJ, POWIAT) as powiat, COUNT(*) zdarzenia FROM zdarzenie %zdarzenie_filter%  GROUP BY powiat, woj ORDER BY zdarzenia DESC LIMIT 30', 'location');
 INSERT INTO sewik_cache.query_templates (id, name, sql_query, category) VALUES ('210ff851-09e9-4155-a9fa-588af3af7417', 'Sygnalizacja Świetlna', 'SELECT sysw.opis AS obecnosc_sygnalizacji, zdarzenia FROM
   (SELECT sysw_KOD, COUNT(*) AS zdarzenia FROM zdarzenie %zdarzenie_filter% GROUP BY sysw_KOD) AS zdarzenie
   INNER JOIN sysw ON sysw.kod=zdarzenie.sysw_kod ORDER BY zdarzenia DESC;', 'site');
