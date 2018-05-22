@@ -62,6 +62,9 @@
     "myclabs/deep-copy": {
         "version": "1.7.0"
     },
+    "nikic/php-parser": {
+        "version": "v4.0.1"
+    },
     "ocramius/package-versions": {
         "version": "1.2.0"
     },
@@ -262,6 +265,9 @@
     },
     "symfony/orm-pack": {
         "version": "v1.0.5"
+    },
+    "symfony/polyfill-ctype": {
+        "version": "v1.8.0"
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.6.0"
