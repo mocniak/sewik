@@ -183,10 +183,11 @@ table tr td:first-child {
     width: calc(50% + 10px);
 }
 #form button {
-    margin: 15px;
+    margin: 15px 0;
     height: 27px;
     float: right;
-    width: 390px;
+    width: 410px;
+    font-weight: bold;
 }
 
 #form .form-checkbox div label {

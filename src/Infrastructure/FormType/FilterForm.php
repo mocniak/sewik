@@ -4,6 +4,8 @@ namespace Sewik\Infrastructure\FormType;
 
 use Sewik\Domain\AccidentsFilterDto;
 use Sewik\Domain\Filter;
+use Sewik\Domain\Query;
+use Sewik\Domain\QueryTemplate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -97,7 +99,7 @@ class FilterForm extends AbstractType
             ->add('pedestriansPresence', ChoiceType::class, [
                 'required' => false,
                 'label' => 'Z udziałem pieszych',
-                'choices' => ['tak' => true, 'nie' => 'false']
+                'choices' => ['tak' => true, 'nie' => false]
             ])
             ->add('vehicleType', ChoiceType::class, [
                 'required' => false,

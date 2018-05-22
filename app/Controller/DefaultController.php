@@ -6,9 +6,11 @@ use Ramsey\Uuid\Uuid;
 use Sewik\Domain\AccidentsFilterDto;
 use Sewik\Domain\AccidentsRepositoryInterface;
 use Sewik\Domain\ListAccidentsRequest;
+use Sewik\Domain\QueryTemplate;
 use Sewik\Domain\SewikService;
 use Sewik\Infrastructure\FormType\FilterForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +27,19 @@ class DefaultController extends Controller
     {
         $filterDto = new AccidentsFilterDto();
         $form = $this->createForm(FilterForm::class, $filterDto);
+        $form->add('categories', ChoiceType::class, [
+            'label' => 'Typ statystyk',
+            'choices' => [
+                'Czas zdarzeń' => 'Czas zdarzeń',
+                'Lokalizacja zdarzeń' => 'Lokalizacja zdarzeń',
+                'Rodzaj zdarzeń' => 'Rodzaj zdarzeń',
+                'Miejsce zdarzeń' => 'Miejsce zdarzeń',
+                'Pojazdy' => 'Pojazdy',
+                'Przyczyny zdarzeń' => 'Przyczyny zdarzeń',
+                'Uczestnicy zdarzeń' => 'Uczestnicy zdarzeń',
+            ],
+            'mapped' => false
+        ]);
         $form->add('accidents', SubmitType::class, array('label' => 'Wyświetl zdarzenia'));
 
         $form->handleRequest($request);
@@ -42,6 +57,7 @@ class DefaultController extends Controller
                 ]);
             } else if ($form->get('reports')->isClicked()) {
                 return $this->render('reports.html.twig', [
+                    'category' => $form->get('categories')->getData(),
                     'form' => $form->createView(),
                 ]);
             }
@@ -85,7 +101,7 @@ class DefaultController extends Controller
     {
         $filterDto = new AccidentsFilterDto();
         $form = $this->createForm(FilterForm::class, $filterDto);
-        $form->add('accidents', HiddenType::class, ['mapped'=>false]);
+        $form->add('accidents', HiddenType::class, ['mapped' => false]);
         $form->handleRequest($request);
         $sewikService = $this->container->get('sewik.service');
         $report = $sewikService->showReport(Uuid::fromString($id), $filterDto);
