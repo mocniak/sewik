@@ -98,7 +98,7 @@ class FilterFactory
             if ($filterDto->pedestriansPresence) {
                 $filters[] = "id IN (SELECT zszd_id FROM uczestnicy WHERE zspo_id IS NULL)";
             } else {
-                $filters[] = "id IN (SELECT zszd_id FROM uczestnicy WHERE zspo_id IS NOT NULL)";
+                $filters[] = "id NOT IN (SELECT zszd_id FROM uczestnicy WHERE zspo_id IS NULL)";
             }
         }
 
