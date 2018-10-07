@@ -54,8 +54,17 @@ class FilterFactory
         if (null !== $filterDto->roadGeometry) {
             $filters[] = "geod_kod = '" . $filterDto->roadGeometry . "'";
         }
-        if (null !== $filterDto->street) {
-            $filters[] = "(ulica_adres = '$filterDto->street' OR ulica_skrzyz = '$filterDto->street')";
+        if (!empty($filterDto->streets)) {
+            $streets = array_filter($filterDto->streets, function ($street) {
+                return $street !== null;
+            });
+            if (count($streets) == 1) {
+                $street = $streets[0];
+                $filters[] = "(ulica_adres = '$street' OR ulica_skrzyz = '$street')";
+            } elseif (count($streets) > 1) {
+                $filters[] = "ulica_adres IN ('" . implode("','", $streets) . "')";
+                $filters[] = "ulica_skrzyz IN ('" . implode("','", $streets) . "')";
+            }
         }
         if (null !== $filterDto->fromDate) {
             $filters[] = Filter::COLUMN_DATE . ' >= \'' . $filterDto->fromDate->format('Y-m-d') . '\'';

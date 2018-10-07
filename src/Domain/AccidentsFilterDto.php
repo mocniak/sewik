@@ -7,7 +7,8 @@ class AccidentsFilterDto
     public $voivodeship;
     public $county;
     public $locality;
-    public $street;
+    /** @var array */
+    public $streets;
     public $fromDate;
     public $toDate;
     public $injury;
@@ -28,4 +29,8 @@ class AccidentsFilterDto
     public $otherCause;
     public $surfaceCondition;
     public $roadGeometry;
+    public function __construct()
+    {
+        $this->streets = ['','','',''];
+    }
 }

@@ -9,6 +9,7 @@ use Sewik\Domain\QueryTemplate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -31,7 +32,11 @@ class FilterForm extends AbstractType
                 'choices' => Filter::COUNTIES
             ])
             ->add('locality', TextType::class, ['required' => false, 'label' => 'Miejscowość'])
-            ->add('street', TextType::class, ['required' => false, 'label' => 'Ulica'])
+            ->add('streets', CollectionType::class, [
+                'label' => 'Ulice',
+                'required' => false,
+                'entry_type' => TextType::class
+            ])
             ->add('fromDate', DateType::class, [
                 'required' => false,
                 'label' => 'Od dnia',

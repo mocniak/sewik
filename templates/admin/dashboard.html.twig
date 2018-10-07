@@ -5,7 +5,7 @@
     <ul>
         {% for template in templates %}
             <li>
-                {{ template.name }} |
+                <a href="{{ path('report_page',{'id': template.id}) }}">{{ template.name }}</a> |
                 <a href="{{ path('edit_template', {'id': template.id}) }}">[edytuj]</a> | {{ template.id }}
             </li>
         {% else %}

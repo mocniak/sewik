@@ -101,6 +101,19 @@ class DefaultController extends Controller
     {
         $filterDto = new AccidentsFilterDto();
         $form = $this->createForm(FilterForm::class, $filterDto);
+        $form->add('categories', ChoiceType::class, [
+            'label' => 'Typ statystyk',
+            'choices' => [
+                'Czas zdarzeń' => 'Czas zdarzeń',
+                'Lokalizacja zdarzeń' => 'Lokalizacja zdarzeń',
+                'Rodzaj zdarzeń' => 'Rodzaj zdarzeń',
+                'Miejsce zdarzeń' => 'Miejsce zdarzeń',
+                'Pojazdy' => 'Pojazdy',
+                'Przyczyny zdarzeń' => 'Przyczyny zdarzeń',
+                'Uczestnicy zdarzeń' => 'Uczestnicy zdarzeń',
+            ],
+            'mapped' => false
+        ]);
         $form->add('accidents', HiddenType::class, ['mapped' => false]);
         $form->handleRequest($request);
         $sewikService = $this->container->get('sewik.service');
