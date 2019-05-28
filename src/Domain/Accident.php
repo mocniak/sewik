@@ -257,34 +257,22 @@ class Accident
         return $this->time;
     }
 
-    /**
-     * @return string
-     */
-    public function getLight(): string
+    public function getLight(): ?string
     {
         return $this->light;
     }
 
-    /**
-     * @return string
-     */
-    public function getWeather(): string
+    public function getWeather(): ?string
     {
         return $this->weather;
     }
 
-    /**
-     * @return string
-     */
-    public function getSiteCharacteristic(): string
+    public function getSiteCharacteristic(): ?string
     {
         return $this->siteCharacteristic;
     }
 
-    /**
-     * @return string
-     */
-    public function getSpeedLimit(): string
+    public function getSpeedLimit(): ?string
     {
         return $this->speedLimit;
     }
@@ -321,41 +309,26 @@ class Accident
         return $this->surfaceMarking;
     }
 
-    /**
-     * @return null|string
-     */
     public function getIntersectionType(): ?string
     {
         return $this->intersectionType;
     }
 
-    /**
-     * @return bool
-     */
-    public function isBuiltUpArea(): bool
+    public function isBuiltUpArea(): ?bool
     {
         return $this->builtUpArea;
     }
 
-    /**
-     * @return string
-     */
     public function getOtherCause(): ?string
     {
         return $this->otherCause;
     }
 
-    /**
-     * @return null|string
-     */
     public function getSurfaceCondition(): ?string
     {
         return $this->surfaceCondition;
     }
 
-    /**
-     * @return null|string
-     */
     public function getAccidentType(): ?string
     {
         return $this->accidentType;
