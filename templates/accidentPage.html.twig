@@ -6,7 +6,8 @@
         <ul>
             <li>{{ ('accident.accidentType.' ~ accident.accidentType)|trans }}</li>
         </ul>
-        {% if accident.gpsX is not empty %}
+        {% if accident.decimalGpsX is not empty %}
+        {% if accident.decimalGpsY is not empty %}
             <div id="mapdiv" style="float: right; width: 50%; height: 300px"></div>
             <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
             <script>
@@ -28,6 +29,7 @@
 
                 map.setCenter (lonLat, zoom);
             </script>
+        {% endif %}
         {% endif %}
         <h3>Lokalizacja</h3>
         <ul>
