@@ -108,7 +108,9 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
             $row['SZRD_KOD'],
             $row['GEOD_KOD'],
             $vehicles,
-            $pedestrians
+            $pedestrians,
+            $row['WSP_GPS_X'],
+            $row['WSP_GPS_Y']
         );
     }
 

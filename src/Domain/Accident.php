@@ -2,7 +2,6 @@
 
 namespace Sewik\Domain;
 
-
 class Accident
 {
     /**
@@ -105,6 +104,14 @@ class Accident
      * @var array
      */
     private $pedestrians;
+    /**
+     * @var string|null
+     */
+    private $gpsX;
+    /**
+     * @var string|null
+     */
+    private $gpsY;
 
     public function __construct(
         int $id,
@@ -131,7 +138,9 @@ class Accident
         ?string $accidentType,
         ?string $roadGeometry,
         array $vehicles,
-        array $pedestrians
+        array $pedestrians,
+        ?string $gpsX,
+        ?string $gpsY
     )
     {
         $this->id = $id;
@@ -159,6 +168,8 @@ class Accident
         $this->houseNumber = $houseNumber;
         $this->vehicles = $vehicles;
         $this->pedestrians = $pedestrians;
+        $this->gpsX = $gpsX;
+        $this->gpsY = $gpsY;
     }
 
     /**
@@ -332,5 +343,36 @@ class Accident
     public function getAccidentType(): ?string
     {
         return $this->accidentType;
+    }
+
+    public function getGpsX(): ?string
+    {
+        return $this->gpsX;
+    }
+
+    public function getGpsY(): ?string
+    {
+        return $this->gpsY;
+    }
+
+    public function getDecimalGpsX(): ?float
+    {
+        return $this->gpsX === null ? null : $this->gpsToDec($this->gpsX);
+
+    }
+
+    public function getDecimalGpsY(): ?float
+    {
+        return $this->gpsY=== null ? null : $this->gpsToDec($this->gpsY);
+    }
+
+    private function gpsToDec(string $gpsInDeg): float
+    {
+        $coordinates = preg_split("/(\*|\')/", $gpsInDeg);
+
+        $deg = (int)$coordinates[0];
+        $min = (int)$coordinates[1];
+        $sec = ((int)str_pad($coordinates[2], 3, '0')) / 10;
+        return $deg + ((($min * 60) + ($sec)) / 3600);
     }
 }

@@ -6,7 +6,29 @@
         <ul>
             <li>{{ ('accident.accidentType.' ~ accident.accidentType)|trans }}</li>
         </ul>
+        {% if accident.gpsX is not empty %}
+            <div id="mapdiv" style="float: right; width: 50%; height: 300px"></div>
+            <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+            <script>
+                map = new OpenLayers.Map("mapdiv");
+                map.addLayer(new OpenLayers.Layer.OSM());
 
+                var lonLat = new OpenLayers.LonLat( {{accident.decimalGpsX}} ,{{accident.decimalGpsY}} )
+                    .transform(
+                        new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+                        map.getProjectionObject() // to Spherical Mercator Projection
+                    );
+
+                var zoom=16;
+
+                var markers = new OpenLayers.Layer.Markers( "Markers" );
+                map.addLayer(markers);
+
+                markers.addMarker(new OpenLayers.Marker(lonLat));
+
+                map.setCenter (lonLat, zoom);
+            </script>
+        {% endif %}
         <h3>Lokalizacja</h3>
         <ul>
             <li>{{ accident.voivodeship }}</li>
@@ -17,6 +39,9 @@
                     / {{ accident.intersectionStreet }}
                 {% endif %}
             </li>
+            {% if accident.gpsX is not empty %}
+            <li>Współrzędne geograficzne: {{ accident.gpsX }}, {{ accident.gpsY }} </li>
+            {% endif %}
         </ul>
         <h3>Czas</h3>
         <ul>
