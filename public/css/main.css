@@ -63,6 +63,14 @@ li {
     background-color: white;
 }
 
+#czywiesz {
+    width: 950px;
+    height: 200px;
+    clear: both;
+    background-size: cover;
+    background: url(../images/pieszy_jerozolimskie.jpg) center;
+}
+
 #menu {
     float: right;
     height: 32px;
