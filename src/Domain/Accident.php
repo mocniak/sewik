@@ -363,16 +363,20 @@ class Accident
 
     public function getDecimalGpsY(): ?float
     {
-        return $this->gpsY=== null ? null : $this->gpsToDec($this->gpsY);
+        return $this->gpsY === null ? null : $this->gpsToDec($this->gpsY);
     }
 
-    private function gpsToDec(string $gpsInDeg): float
+    private function gpsToDec(string $gpsInDeg): ?float
     {
-        $coordinates = preg_split("/(\*|\')/", $gpsInDeg);
+        try {
+            $coordinates = preg_split("/(\*|\')/", $gpsInDeg);
+            $deg = (int)$coordinates[0];
+            $min = (int)$coordinates[1];
+            $sec = ((int)str_pad($coordinates[2], 3, '0')) / 10;
+            return $deg + ((($min * 60) + ($sec)) / 3600);
 
-        $deg = (int)$coordinates[0];
-        $min = (int)$coordinates[1];
-        $sec = ((int)str_pad($coordinates[2], 3, '0')) / 10;
-        return $deg + ((($min * 60) + ($sec)) / 3600);
+        } catch (\Exception $exception) {
+            return null;
+        }
     }
 }
