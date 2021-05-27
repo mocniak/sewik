@@ -1820,3 +1820,91 @@ SELECT ID, GMINA, POWIAT, MIEJSCOWOSC, ULICA_ADRES, NUMER_DOMU,  FROM zdarzenie 
 
 
 SELECT count(1) as n_uczestnikow FROM uczestnicy GROUP BY zszd_id ORDER BY n_uczestnikow DESC;
+
+
+create table sewik_2020.pojazdy
+(
+    ID int not null
+        primary key,
+    ZSZD_ID int null,
+    NR_POJAZDU int null,
+    RODZAJ_POJAZDU varchar(7) null,
+    MARKA varchar(80) null,
+    SPSU_KOD varchar(30) null,
+    SPSP_KOD varchar(7) null,
+    SPIC_KOD varchar(7) null,
+    KRAJ_REJ varchar(30) null,
+    KRAJ_UBZ varchar(30) null,
+    ZSPO_ID varchar(30) null
+);
+
+create table sewik_2020.uczestnicy
+(
+    ID int not null
+        primary key,
+    ZSZD_ID int null,
+    ZSPO_ID int null,
+    SSRU_KOD varchar(2) null,
+    DATA_UR date null,
+    SOBY_KOD varchar(4) null,
+    PLEC varchar(1) null,
+    SUSU_KOD varchar(2) null,
+    LICZBA_LAT_KIEROWANIA int null,
+    SPSZ_KOD varchar(8) null,
+    SRUZ_KOD varchar(2) null,
+    SUSW_KOD varchar(2) null,
+    STUC_KOD varchar(2) null,
+    POD_WPLYWEM varchar(10) null,
+    SUSB_KOD varchar(2) null,
+    OBCOKRAJOWIEC varchar(2) null,
+    ZBIEGL_Z_MIEJSCA varchar(2) null,
+    SPPI_KOD varchar(2) null,
+    MIEJSCE_W_POJ varchar(2) null,
+    SUZZ_KOD varchar(2) null,
+    INWALIDA varchar(1) null
+);
+
+create table sewik_2020.zdarzenie
+(
+    ID int not null
+        primary key,
+    JEDNOSTKA_MIEJSCA varchar(100) null,
+    JEDNOSTKA_LIKWIDUJACA varchar(100) null,
+    JEDNOSTKA_OPERATORA varchar(100) null,
+    NR_KW varchar(60) null,
+    WOJ varchar(30) null,
+    GMINA varchar(40) null,
+    POWIAT varchar(30) null,
+    MIEJSCOWOSC varchar(60) null,
+    ULICA_ADRES varchar(60) null,
+    NUMER_DOMU varchar(30) null,
+    DATA_ZDARZENIA varchar(30) null,
+    DATA_ZDARZ date null,
+    GODZINA_ZDARZ varchar(30) null,
+    PREDKOSC_DOPUSZCZALNA int unsigned null,
+    SZOS_KOD varchar(7) null,
+    SZRD_KOD varchar(7) null,
+    DROGA_PUBLICZNA varchar(30) null,
+    NADR_KOD varchar(7) null,
+    STNA_KOD varchar(7) null,
+    RODR_KOD varchar(7) null,
+    SYSW_KOD varchar(7) null,
+    OZPO_KOD varchar(7) null,
+    GEOD_KOD varchar(7) null,
+    ZABU_KOD varchar(7) null,
+    CHMZ_KOD varchar(7) null,
+    SSWA_KOD varchar(7) null,
+    ZSSD_KOD varchar(20) null,
+    ULICA_SKRZYZ varchar(120) null,
+    KM_HM varchar(30) null,
+    ODLEGLOSC_SKRZYZ varchar(30) null,
+    KIERUNEK varchar(120) null,
+    ZSSD_KOD2 varchar(10) null,
+    STREFA_ZAMIESZKALA varchar(30) null,
+    SKRZ_KOD varchar(7) null,
+    WSP_GPS_X varchar(30) null,
+    WSP_GPS_Y varchar(30) null,
+    spip_kod varchar(7) null,
+    SSUP_KOD varchar(7) null
+);
+
