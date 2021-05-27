@@ -1,4 +1,13 @@
 <?php
+/**
+* usuń niewłaściwe znaki utf z plików
+* zrób kopie tabel zdarzenie, uczestnicy, pojazdy w nowej bazie
+* importuj dane z xml do nowej bazy danych
+* zrób zrzut nowego roku do pliku
+* wrzuć nowy rok na serwer do NOWEJ bazy
+* usuń ze starej bazy rekordy które są w kolejnym roku (lokalnie i na serwerze)
+* zaimportuj nowy rok do pełnej bazy
+*/
 $time_start = microtime(true);
 
 function export($child)
