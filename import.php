@@ -103,7 +103,7 @@ function load_db($name, $link)
     return $rekordow;
 }
 
-$link = mysqli_connect("127.0.0.1", "root", "dupa.8", "sewik_2020");
+$link = mysqli_connect("127.0.0.1", "miastadlarowerow", "Dupa.123!@#", "sewik_2021");
 
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());

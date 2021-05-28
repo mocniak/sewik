@@ -1813,7 +1813,7 @@ SELECT * FROM pojazdy WHERE ZSZD_ID IN (
     INTO OUTFILE '/var/lib/mysql-files/pojazdy_uczestnicy.csv' FIELDS TERMINATED BY ','
     ENCLOSED BY '"' LINES TERMINATED BY '\n';
 
-USE sewik_2018;
+USE sewik_2021;
 
 SELECT ID, GMINA, POWIAT, MIEJSCOWOSC, ULICA_ADRES, NUMER_DOMU,  FROM zdarzenie WHERE WOJ='WOJ. ŚLĄSKIE' AND DATA_ZDARZ BETWEEN '2018-01-01' AND '2018-12-31' AND ID IN (SELECT ZSZD_ID FROM uczestnicy WHERE ZSPO_ID IS NULL);
 
@@ -1822,7 +1822,7 @@ SELECT ID, GMINA, POWIAT, MIEJSCOWOSC, ULICA_ADRES, NUMER_DOMU,  FROM zdarzenie 
 SELECT count(1) as n_uczestnikow FROM uczestnicy GROUP BY zszd_id ORDER BY n_uczestnikow DESC;
 
 
-create table sewik_2020.pojazdy
+create table sewik_2021.pojazdy
 (
     ID int not null
         primary key,
@@ -1838,7 +1838,7 @@ create table sewik_2020.pojazdy
     ZSPO_ID varchar(30) null
 );
 
-create table sewik_2020.uczestnicy
+create table sewik_2021.uczestnicy
 (
     ID int not null
         primary key,
@@ -1864,7 +1864,7 @@ create table sewik_2020.uczestnicy
     INWALIDA varchar(1) null
 );
 
-create table sewik_2020.zdarzenie
+create table sewik_2021.zdarzenie
 (
     ID int not null
         primary key,

@@ -149,23 +149,23 @@ FROM (SELECT z.ULICA_ADRES, COUNT(1) as zmarli
 
 DELETE
 from sewik.zdarzenie
-WHERE ID IN (SELECT id FROM sewik_2020.zdarzenie);
+WHERE ID IN (SELECT id FROM sewik_2021.zdarzenie);
 DELETE
 from sewik.pojazdy
-WHERE ZSZD_ID IN (SELECT id FROM sewik_2020.zdarzenie);
+WHERE ZSZD_ID IN (SELECT id FROM sewik_2021.zdarzenie);
 DELETE
 from sewik.uczestnicy
-WHERE ZSZD_ID IN (SELECT id FROM sewik_2020.zdarzenie);
+WHERE ZSZD_ID IN (SELECT id FROM sewik_2021.zdarzenie);
 
 INSERT INTO sewik.zdarzenie
 SELECT *
-FROM sewik_2020.zdarzenie;
+FROM sewik_2021.zdarzenie;
 INSERT INTO sewik.pojazdy
 SELECT *
-FROM sewik_2020.pojazdy;
+FROM sewik_2021.pojazdy;
 INSERT INTO sewik.uczestnicy
 SELECT *
-FROM sewik_2020.uczestnicy;
+FROM sewik_2021.uczestnicy;
 
 
 SELECT COUNT(*)
