@@ -1,12 +1,12 @@
 DELETE
 FROM sewik.pojazdy
-WHERE ZSZD_ID IN (SELECT id FROM sewik.zdarzenie WHERE DATA_ZDARZ >= '2020-01-01');
+WHERE ZSZD_ID IN (SELECT id FROM sewik.zdarzenie WHERE DATA_ZDARZ >= '2021-01-01');
 DELETE
 FROM sewik.uczestnicy
-WHERE ZSZD_ID IN (SELECT id FROM sewik.zdarzenie WHERE DATA_ZDARZ >= '2020-01-01');
+WHERE ZSZD_ID IN (SELECT id FROM sewik.zdarzenie WHERE DATA_ZDARZ >= '2021-01-01');
 DELETE
 from sewik.zdarzenie
-WHERE DATA_ZDARZ >= '2020-01-01';
+WHERE DATA_ZDARZ >= '2021-01-01';
 
 
 create index PLEC
@@ -59,7 +59,7 @@ create index rodzaj_pojazdu
 
 
 
-USE sewik_2020;
+USE sewik_2021;
 
 UPDATE uczestnicy
 SET POD_WPLYWEM = NULL
@@ -100,16 +100,16 @@ GROUP BY year;
 SELECT YEAR(DATA_ZDARZ) as year, count(1)
 FROM zdarzenie
 WHERE ID IN (SELECT ZSZD_ID
-    FROM uczestnicy
-    WHERE ZSPO_ID IN (SELECT ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101'))
+             FROM uczestnicy
+             WHERE ZSPO_ID IN (SELECT ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101'))
 GROUP BY year;
 
 SELECT YEAR(DATA_ZDARZ) as year, count(1)
 FROM zdarzenie
 WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
   AND ID NOT IN (SELECT ZSZD_ID
-    FROM uczestnicy
-    WHERE ZSPO_ID IN (SELECT ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101'))
+                 FROM uczestnicy
+                 WHERE ZSPO_ID IN (SELECT ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101'))
 GROUP BY year;
 
 SELECT ID
@@ -174,6 +174,64 @@ FROM sewik.zdarzenie;
 SELECT *
 FROM (SElECT id, SPSZ_KOD, ZSZD_ID, ZSPO_ID FROM uczestnicy WHERE DATA_UR = '1988-08-20') as u
          LEFT JOIN
-     (SELECT ID, MARKA, RODZAJ_POJAZDU FROM pojazdy) as p ON p.ID = u.ZSPO_ID
+         (SELECT ID, MARKA, RODZAJ_POJAZDU FROM pojazdy) as p ON p.ID = u.ZSPO_ID
          LEFT JOIN (SELECT ID, POWIAT, ULICA_ADRES, ULICA_SKRZYZ, DATA_ZDARZ FROM zdarzenie) as z on u.ZSZD_ID = z.ID
 WHERE RODZAJ_POJAZDU = 'IS101';
+
+
+SELECT suma.rok                  as rok,
+       auta_osobowa.liczba_ofiar as w_autach_osobowych,
+       piesi.liczba_ofiar        as piesi,
+       rowerzysci.liczba_ofiar   as rowerzysci,
+       suma.liczba_ofiar         as suma
+FROM (
+         SELECT YEAR(z.DATA_ZDARZ) as rok, COUNT(1) as liczba_ofiar
+         FROM (SELECT ZSZD_ID, STUC_KOD FROM uczestnicy WHERE STUC_KOD IN ('ZM', 'ZC')) as u
+                  LEFT JOIN (SELECT ID, DATA_ZDARZ, POWIAT, WOJ FROM zdarzenie) as z on (z.ID = u.ZSZD_ID)
+         WHERE z.POWIAT IN ('POWIAT WOŁOMIŃSKI')
+           AND z.WOJ = 'WOJ. MAZOWIECKIE'
+         GROUP BY rok) AS suma
+         LEFT JOIN (
+    SELECT YEAR(z.DATA_ZDARZ) as rok, COUNT(1) as liczba_ofiar
+    FROM (SELECT ZSZD_ID, STUC_KOD, ZSPO_ID FROM uczestnicy WHERE STUC_KOD IN ('ZM', 'ZC') AND ZSPO_ID IS NULL) as u
+             LEFT JOIN (SELECT ID, DATA_ZDARZ, POWIAT, WOJ FROM zdarzenie) as z on (z.ID = u.ZSZD_ID)
+    WHERE z.POWIAT IN ('POWIAT WOŁOMIŃSKI')
+      AND z.WOJ = 'WOJ. MAZOWIECKIE'
+    GROUP BY rok) AS piesi on suma.rok = piesi.rok
+         LEFT JOIN (
+    SELECT YEAR(z.DATA_ZDARZ) as rok, COUNT(1) as liczba_ofiar
+    FROM (SELECT ZSZD_ID, STUC_KOD, ZSPO_ID
+          FROM uczestnicy
+          WHERE STUC_KOD IN ('ZM', 'ZC')
+            AND ZSPO_ID IN (SELECT ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')) as u
+             LEFT JOIN (SELECT ID, DATA_ZDARZ, POWIAT, WOJ FROM zdarzenie) as z on (z.ID = u.ZSZD_ID)
+    WHERE z.POWIAT IN ('POWIAT WOŁOMIŃSKI')
+      AND z.WOJ = 'WOJ. MAZOWIECKIE'
+    GROUP BY rok) AS rowerzysci on suma.rok = rowerzysci.rok
+         LEFT JOIN (
+    SELECT YEAR(z.DATA_ZDARZ) as rok, COUNT(1) as liczba_ofiar
+    FROM (SELECT ZSZD_ID, STUC_KOD, ZSPO_ID
+          FROM uczestnicy
+          WHERE STUC_KOD IN ('ZM', 'ZC')
+            AND ZSPO_ID IN (SELECT ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS121')) as u
+             LEFT JOIN (SELECT ID, DATA_ZDARZ, POWIAT, WOJ FROM zdarzenie) as z on (z.ID = u.ZSZD_ID)
+    WHERE z.POWIAT IN ('POWIAT WOŁOMIŃSKI')
+      AND z.WOJ = 'WOJ. MAZOWIECKIE'
+    GROUP BY rok) AS auta_osobowa on suma.rok = auta_osobowa.rok
+ORDER BY rok ASC;
+
+SELECT YEAR(data_zdarz) as rok, count(1)
+FROM zdarzenie
+WHERE POWIAT NOT IN ('POWIAT GRODZISKI', 'POWIAT LEGIONOWSKI', 'POWIAT MIŃSKI', 'POWIAT NOWODWORSKI', 'POWIAT OTWOCKI',
+                 'POWIAT PIASECZYŃSKI', 'POWIAT PRUSZKOWSKI', 'POWIAT WARSZAWSKI ZACHODNI', 'POWIAT WOŁOMIŃSKI')
+  AND WOJ = 'WOJ. MAZOWIECKIE'
+  AND ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
+  AND ID NOT IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU != 'IS101')
+  AND ID IN (SELECT ZSZD_ID FROM uczestnicy WHERE ZSPO_ID IS NULL)
+  AND ID IN (SELECT ZSZD_ID FROM uczestnicy WHERE STUC_KOD IS NOT NULL)
+GROUP BY rok
+ORDER BY rok;
+
+#
+# WHERE z.POWIAT IN ('POWIAT GRODZISKI', 'POWIAT LEGIONOWSKI', 'POWIAT MIŃSKI', 'POWIAT NOWODWORSKI', 'POWIAT OTWOCKI',
+#                    'POWIAT PIASECZYŃSKI', 'POWIAT PRUSZKOWSKI', 'POWIAT WARSZAWSKI ZACHODNI', 'POWIAT WOŁOWOŁOMIŃSKI')
