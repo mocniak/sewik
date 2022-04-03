@@ -1,12 +1,12 @@
 DELETE
 FROM sewik.pojazdy
-WHERE ZSZD_ID IN (SELECT id FROM sewik.zdarzenie WHERE DATA_ZDARZ >= '2021-07-01');
+WHERE ZSZD_ID IN (SELECT id FROM sewik.zdarzenie WHERE DATA_ZDARZ >= '2021-01-01');
 DELETE
 FROM sewik.uczestnicy
-WHERE ZSZD_ID IN (SELECT id FROM sewik.zdarzenie WHERE DATA_ZDARZ >= '2021-07-01');
+WHERE ZSZD_ID IN (SELECT id FROM sewik.zdarzenie WHERE DATA_ZDARZ >= '2021-01-01');
 DELETE
 from sewik.zdarzenie
-WHERE DATA_ZDARZ >= '2021-07-01';
+WHERE DATA_ZDARZ >= '2021-01-01';
 
 
 create index PLEC
@@ -146,7 +146,6 @@ FROM (SELECT z.ULICA_ADRES, COUNT(1) as zmarli
       GROUP BY ULICA_SKRZYZ
       ORDER BY zmarli DESC) as skrzyzowania on ulice.ULICA_ADRES = skrzyzowania.ULICA_SKRZYZ;
 
-
 DELETE
 from sewik.zdarzenie
 WHERE ID IN (SELECT id FROM sewik_2021.zdarzenie);
@@ -235,4 +234,14 @@ ORDER BY rok;
 #
 # WHERE z.POWIAT IN ('POWIAT GRODZISKI', 'POWIAT LEGIONOWSKI', 'POWIAT MIŃSKI', 'POWIAT NOWODWORSKI', 'POWIAT OTWOCKI',
 #                    'POWIAT PIASECZYŃSKI', 'POWIAT PRUSZKOWSKI', 'POWIAT WARSZAWSKI ZACHODNI', 'POWIAT WOŁOWOŁOMIŃSKI')
-
+USE sewik;
+SELECT YEAR(DATA_ZDARZ) as rok, count(1) as liczba FROM
+(SELECT id, ZSZD_ID FROM uczestnicy WHERE
+    stuc_kod IN ('rl','rc')
+    AND ZSZD_ID IN (SELECT ZSZD_ID FROM uczestnicy WHERE SPSZ_KOD IS NOT NULL
+        AND ZSPO_ID IN (SELECT ID FROM pojazdy WHERE RODZAJ_POJAZDU='IS101'))
+    ) as zm
+LEFT JOIN
+(SELECT ID, DATA_ZDARZ, POWIAT FROM zdarzenie) as z on z.id = zm.ZSZD_ID
+WHERE POWIAT = "POWIAT WARSZAWA"
+GROUP BY rok;
