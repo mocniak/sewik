@@ -2,11 +2,11 @@
 
 namespace Sewik\Infrastructure;
 
-use Sewik\Domain\Accident;
 use Sewik\Domain\AccidentsRepositoryInterface;
+use Sewik\Domain\Entity\Accident;
+use Sewik\Domain\Entity\Participant;
+use Sewik\Domain\Entity\Vehicle;
 use Sewik\Domain\Filter;
-use Sewik\Domain\Participant;
-use Sewik\Domain\Vehicle;
 
 class MysqlAccidentsRepository implements AccidentsRepositoryInterface
 {

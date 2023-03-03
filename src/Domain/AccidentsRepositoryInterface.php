@@ -2,6 +2,8 @@
 
 namespace Sewik\Domain;
 
+use Sewik\Domain\Entity\Accident;
+
 interface AccidentsRepositoryInterface
 {
     /**
