@@ -10,18 +10,15 @@ services:
   sewik.database:
     class: Sewik\Infrastructure\MysqlDatabase
     arguments:
-      - 'localhost'
-      - 'sewik'
-      - 'password'
-      - 'sewik'
+      - 'mysql:host=localhost;dbname=sewik_2022'
 
   sewik.accident_repository:
     class: Sewik\Infrastructure\MysqlAccidentsRepository
     arguments:
       - 'localhost'
       - 'root'
-      - 'dupa.8'
-      - 'sewik'
+      - 'very_secure89'
+      - 'sewik_2022'
 
   sewik.report_cache:
     class: Sewik\Infrastructure\DoctrineQueryResultCache
