@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Controller;
+namespace Sewik\Infrastructure\Controller;
 
 use Ramsey\Uuid\Uuid;
 use Sewik\Domain\AccidentsFilterDto;
 use Sewik\Domain\AccidentsRepositoryInterface;
 use Sewik\Domain\ListAccidentsRequest;
-use Sewik\Domain\QueryTemplate;
 use Sewik\Domain\SewikService;
 use Sewik\Infrastructure\FormType\FilterForm;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
     public function index()
     {

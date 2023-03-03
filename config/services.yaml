@@ -7,6 +7,13 @@ services:
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
     public: true       # Allows optimizing the container by removing unused services; this also means
 
+  Sewik\Infrastructure\Controller\:
+    resource: '../src/Infrastructure/Controller'
+    tags:
+      - 'controller.service_arguments'
+    calls:
+      - [ setContainer, [ "@service_container" ] ]
+
   sewik.database:
     class: Sewik\Infrastructure\MysqlDatabase
     arguments:

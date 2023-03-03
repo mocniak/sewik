@@ -1,31 +1,31 @@
 index:
     path: /
-    controller: App\Controller\DefaultController::index
+    controller: Sewik\Infrastructure\Controller\DefaultController::index
 
 contact_page:
     path: /contact
-    controller: App\Controller\DefaultController::contactPage
+    controller: Sewik\Infrastructure\Controller\DefaultController::contactPage
 
 search:
     path: /search
-    controller: App\Controller\DefaultController::searchPage
+    controller: Sewik\Infrastructure\Controller\DefaultController::searchPage
 
 accident_page:
     path: /accident/{id}
-    controller: App\Controller\DefaultController::showAccident
+    controller: Sewik\Infrastructure\Controller\DefaultController::showAccident
 
 report_page:
     path: /report/{id}
-    controller: App\Controller\DefaultController::singleReportPage
+    controller: Sewik\Infrastructure\Controller\DefaultController::singleReportPage
 
 dashboard:
     path: /admin
-    controller: App\Controller\AdminController::dashboard
+    controller: Sewik\Infrastructure\Controller\AdminController::dashboard
 
 create_template:
     path: /admin/createTemplate
-    controller: App\Controller\AdminController::createTemplate
+    controller: Sewik\Infrastructure\Controller\AdminController::createTemplate
 
 edit_template:
     path: /admin/editTemplate/{id}
-    controller: App\Controller\AdminController::editTemplate
+    controller: Sewik\Infrastructure\Controller\AdminController::editTemplate

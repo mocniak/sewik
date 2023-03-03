@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Controller;
+namespace Sewik\Infrastructure\Controller;
 
 use Ramsey\Uuid\Uuid;
 use Sewik\Domain\EditTemplateRequest;
 use Sewik\Domain\QueryTemplateService;
 use Sewik\Domain\TemplateRepositoryInterface;
 use Sewik\Infrastructure\FormType\TemplateForm;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-class AdminController extends Controller
+class AdminController extends AbstractController
 {
     public function dashboard()
     {
