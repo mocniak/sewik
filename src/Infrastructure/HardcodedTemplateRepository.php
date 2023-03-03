@@ -58,5 +58,6 @@ class HardcodedTemplateRepository implements TemplateRepositoryInterface
     public function get(UuidInterface $templateId): QueryTemplate
     {
         // TODO: Implement get() method.
+        return new QueryTemplate('','','');
     }
 }
