@@ -64,7 +64,7 @@ class SewikService
         $filter = $this->filterFactory->createFromDto($filterDto);
         $query = $this->queryFactory->createQuery($filter, $template);
         $queryResult = $this->database->executeQuery($query);
-        return $reports[] = new Report(
+        return new Report(
             $template->getName(),
             $queryResult->getTable(),
             $queryResult->getTableHeaders(),

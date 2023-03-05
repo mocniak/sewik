@@ -1,6 +1,8 @@
 <?php
 namespace Sewik\Domain;
 
+use Sewik\Domain\Entity\Accident;
+
 class ListAccidentsResponse
 {
     /**

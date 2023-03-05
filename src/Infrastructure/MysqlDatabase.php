@@ -28,8 +28,13 @@ class MysqlDatabase implements DatabaseInterface
         } catch (\Throwable $throwable) {
             throw new InvalidQueryException('Query Failed: ' . $throwable->getMessage() . '. Query: ' . $query->getSqlQuery(), 0, $throwable);
         }
-        $result = $statement->fetchAll();
-        var_dump($result);
-        return new QueryResult($result, $result, microtime(true) - $time);
+        $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        if(count($result)>0) {
+            $headerRow = array_keys($result[0]);
+        } else {
+            $headerRow = [];
+        }
+
+        return new QueryResult($result, $headerRow, microtime(true) - $time);
     }
 }
