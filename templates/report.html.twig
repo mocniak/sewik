@@ -17,4 +17,4 @@
         </tr>
     {% endfor %}
 </table>
-<p>Czas generowania raportu: {{ (report.timeCost * 1000) | round }} milisekund.</p>
+<p>Czas generowania raportu: {{ (report.timeCost) | round(2) }} sekund.</p>

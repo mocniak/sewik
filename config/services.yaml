@@ -17,15 +17,18 @@ services:
   sewik.database:
     class: Sewik\Infrastructure\MysqlDatabase
     arguments:
-      - 'mysql:host=localhost;dbname=sewik_2022'
+      - '%env(DATABASE_HOST)%'
+      - '%env(DATABASE_USERNAME)%'
+      - '%env(DATABASE_PASSWORD)%'
+      - '%env(DATABASE_SCHEMA)%'
 
   sewik.accident_repository:
     class: Sewik\Infrastructure\MysqlAccidentsRepository
     arguments:
-      - 'localhost'
-      - 'root'
-      - 'very_secure89'
-      - 'sewik_2022'
+      - '%env(DATABASE_HOST)%'
+      - '%env(DATABASE_USERNAME)%'
+      - '%env(DATABASE_PASSWORD)%'
+      - '%env(DATABASE_SCHEMA)%'
 
   sewik.report_cache:
     class: Sewik\Infrastructure\DoctrineQueryResultCache
@@ -52,7 +55,7 @@ services:
   sewik.service:
     class: Sewik\Domain\SewikService
     arguments:
-      - '@sewik.cached_database'
+      - '@sewik.database'
       - '@sewik.template_repository'
       - '@sewik.query_factory'
       - '@sewik.filter_factory'

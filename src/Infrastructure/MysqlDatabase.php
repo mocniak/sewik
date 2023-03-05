@@ -11,10 +11,14 @@ class MysqlDatabase implements DatabaseInterface
 {
     private \PDO $link;
 
-    public function __construct(string $dsn)
+    public function __construct(string $host, string $user, string $password, string $database)
     {
         try {
-            $this->link = new \PDO($dsn, 'root','very_secure89');
+        $this->link = new \PDO(
+            'mysql:dbname=' . $database . ';host=' . $host,
+            $user,
+            $password,
+            [\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"]);
         } catch (\Throwable $e) {
             throw new \RuntimeException("Connection failed: %s\n", 0, $e);
         }
