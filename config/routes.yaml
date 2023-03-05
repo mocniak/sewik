@@ -10,6 +10,10 @@ search:
     path: /search
     controller: Sewik\Infrastructure\Controller\DefaultController::searchPage
 
+test:
+    path: /test
+    controller: Sewik\Infrastructure\Controller\DefaultController::test
+
 accident_page:
     path: /accident/{id}
     controller: Sewik\Infrastructure\Controller\DefaultController::showAccident

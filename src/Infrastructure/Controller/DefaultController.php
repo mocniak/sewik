@@ -6,8 +6,12 @@ use Ramsey\Uuid\Uuid;
 use Sewik\Domain\AccidentsFilterDto;
 use Sewik\Domain\AccidentsRepositoryInterface;
 use Sewik\Domain\ListAccidentsRequest;
+use Sewik\Domain\Query;
+use Sewik\Domain\Report;
 use Sewik\Domain\SewikService;
 use Sewik\Infrastructure\FormType\FilterForm;
+use Sewik\Infrastructure\MysqlReports\AccidentsDeadAndInjuredByYearReport;
+use Sewik\Infrastructure\MysqlReports\OptimizedAccidentsDeadAndInjuredByYearReport;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -126,5 +130,26 @@ class DefaultController extends AbstractController
     public function contactPage()
     {
         return $this->render('contactPage.html.twig');
+    }
+
+    public function test(){
+        $database = $this->container->get('sewik.database');
+        $queries = [
+            new OptimizedAccidentsDeadAndInjuredByYearReport(),
+            new AccidentsDeadAndInjuredByYearReport(),
+        ];
+        $reports = [];
+        foreach ($queries as $query) {
+            $result = $database->executeQuery(new Query($query->getSql()));
+            $reports[] = new Report(
+                get_class($query),
+                $result->getTable(),
+                $result->getTableHeaders(),
+                $result->getTimeCost()
+            );
+        }
+        return $this->render('many_reports.html.twig', [
+            'reports' => $reports,
+        ]);
     }
 }

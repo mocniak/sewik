@@ -53,9 +53,8 @@ class SewikService
     {
         $filter = $this->filterFactory->createFromDto($request->getAccidentsFilter());
         $accidents = $this->accidentsRepository->findFilteredAccidents($filter);
-        $response = new ListAccidentsResponse($accidents);
 
-        return $response;
+        return  new ListAccidentsResponse($accidents);
     }
 
     public function showReport(UuidInterface $queryId, AccidentsFilterDto $filterDto): Report
