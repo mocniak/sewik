@@ -55,7 +55,7 @@ services:
   sewik.service:
     class: Sewik\Domain\SewikService
     arguments:
-      - '@sewik.database'
+      - '@sewik.cached_database'
       - '@sewik.template_repository'
       - '@sewik.query_factory'
       - '@sewik.filter_factory'
