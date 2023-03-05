@@ -2,13 +2,46 @@
 {% block body %}
 
     <div class="box">
+        <h2>Najczęściej zadawane pytania</h2>
+
+        <h3>Czy i kiedy baza zdarzeń będzie zaktualizowana?</h3>
+
+        <p>Zdarzenia na stronie aktualizujemy zwykle na przełomie lutego i marca. Mniej więcej wtedy Komenda Główna Policji może udostępnić dane z całego poprzedniego roku.</p>
+
+        <h3>Czy na stronie można wyszukać liczbę samych kolizji lub samych wypadków?</h3>
+
+        <p>Na ten moment niestety nie.</p>
+
+        <h3>Gdzie znajdę informacje o zdarzeniach sprzed 2007 roku?</h3>
+
+        <p>Prawdopodobnie w wydziale ruchu drogowego przypisanego do rejonu w którym doszło do zdarzenia (wydziały ruchu drogowego są zwykle przypisane do powiatów). Dane z roku 2006 i poprzednich były zbierane w inny sposób i obecna struktura bazy danych nie pozwala na ich (łatwy) import.</p>
+
+        <h3>Mojego wypadku nie ma na stronie. Dlaczego?</h3>
+
+        <p>Do bazy SEWiK trafiają tylko te zdarzenia, które były zgłoszone Policji a i te zgłoszone nie zawsze trafiały do bazy SEWiK (zwłaszcza przed 2010 rokiem).</p>
+
+        <h3>Szukam informacji odnośnie liczby zdarzeń ze zwierzętami dzikimi. Jak je znaleźć?</h3>
+
+        <p>W SEWiK nie są zbierane oddzielne statystyki dla zwierząt dzikich i hodowlanych, wszystkie są zapisywane jako rodzaj zdarzenia „najechanie na zwierzę”.</p>
+
+        <h3>Potrzebuję eksportu większej ilości danych do własnej analizy</h3>
+
+        <p>Obecnie na stronie nie ma możliwości eksportu danych do arkusza kalkulacyjnego czy pliku csv, jeżeli zrzut bazy danych w formacie .sql jest wystarczający – prosimy o kontakt mailowy.</p>
+
+        <h3>Potrzebuję konkretnego raportu na podstawie danych z SEWiK do pracy naukowej / działalności komercyjnej / działalności społecznej</h3>
+
+        <p>Jesteśmy otwarci na wykonanie dodatkowej pracy dla użytkowników strony w przypadku istotnego interesu społecznego lub w zamian za wynagrodzenie - prosimy o kontakt w celu omówienia szczegółów.</p>
+    </div>
+    <div class="box">
+        <a href="{{ path('search') }}" style="background-color: #006699; color: white; text-align: center; display: block; padding: 25px 30px; margin-top: 20px; border: 1px solid #006699; font-size: 1.5em">Wyszukiwarka zdarzeń<br> i raportów »</a>
+
         <h2>O stronie</h2>
 
         <p>Sewik.pl jest niekomercyjnym serwisem umożliwiającym przeszukiwanie kolizji i wypadków drogowych na terenie Polski.</p>
 
         <p>Wyszukiwarka korzysta z danych Systemu Ewidencji Wypadków i Kolizji udostępnionych przez Komendę Główną Policji w Warszawie.</p>
 
-        <p>Zakres dostępnych danych: <strong>od 2007-01-01 do 2021-12-31.</strong></p>
+        <p>Zakres dostępnych danych: <strong>od 2007-01-01 do 2022-12-31.</strong></p>
 
         <h2>Kontakt</h2>
 
@@ -17,8 +50,5 @@
             <li>facebook: <a href="http://www.facebook.com/mocniak">/mocniak</a></li>
             <li>linkedin: <a href="https://www.linkedin.com/in/mocniak/">/in/mocniak</a></li>
         </ul>
-    </div>
-    <div class="box">
-        <a href="{{ path('search') }}" style="background-color: #006699; color: white; text-align: center; display: block; padding: 25px 30px; margin-top: 20px; border: 1px solid #006699; font-size: 1.5em">Wyszukiwarka zdarzeń<br> i raportów »</a>
     </div>
 {% endblock %}
