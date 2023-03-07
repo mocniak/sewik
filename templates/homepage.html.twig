@@ -1,5 +1,24 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+    <div class="box">
+        <a href="{{ path('search') }}" style="background-color: #006699; color: white; text-align: center; display: block; padding: 25px 30px; margin-top: 20px; border: 1px solid #006699; font-size: 1.5em">Wyszukiwarka zdarzeń<br> i raportów »</a>
+
+        <h2>O stronie</h2>
+
+        <p>Sewik.pl jest niekomercyjnym serwisem umożliwiającym przeszukiwanie kolizji i wypadków drogowych na terenie Polski.</p>
+
+        <p>Wyszukiwarka korzysta z danych Systemu Ewidencji Wypadków i Kolizji udostępnionych przez Komendę Główną Policji w Warszawie.</p>
+
+        <p>Zakres dostępnych danych: <strong>od 2007-01-01 do 2022-12-31.</strong></p>
+
+        <h2>Kontakt</h2>
+
+        <ul>
+            <li>email: <a href="mailto:karol@mocniak.pl">karol@mocniak.pl</a></li>
+            <li>facebook: <a href="http://www.facebook.com/mocniak">/mocniak</a></li>
+            <li>linkedin: <a href="https://www.linkedin.com/in/mocniak/">/in/mocniak</a></li>
+        </ul>
+    </div>
 
     <div class="box">
         <h2>Najczęściej zadawane pytania</h2>
@@ -31,24 +50,5 @@
         <h3>Potrzebuję konkretnego raportu na podstawie danych z SEWiK do pracy naukowej / działalności komercyjnej / działalności społecznej</h3>
 
         <p>Jesteśmy otwarci na wykonanie dodatkowej pracy dla użytkowników strony w przypadku istotnego interesu społecznego lub w zamian za wynagrodzenie - prosimy o kontakt w celu omówienia szczegółów.</p>
-    </div>
-    <div class="box">
-        <a href="{{ path('search') }}" style="background-color: #006699; color: white; text-align: center; display: block; padding: 25px 30px; margin-top: 20px; border: 1px solid #006699; font-size: 1.5em">Wyszukiwarka zdarzeń<br> i raportów »</a>
-
-        <h2>O stronie</h2>
-
-        <p>Sewik.pl jest niekomercyjnym serwisem umożliwiającym przeszukiwanie kolizji i wypadków drogowych na terenie Polski.</p>
-
-        <p>Wyszukiwarka korzysta z danych Systemu Ewidencji Wypadków i Kolizji udostępnionych przez Komendę Główną Policji w Warszawie.</p>
-
-        <p>Zakres dostępnych danych: <strong>od 2007-01-01 do 2022-12-31.</strong></p>
-
-        <h2>Kontakt</h2>
-
-        <ul>
-            <li>email: <a href="mailto:karol@mocniak.pl">karol@mocniak.pl</a></li>
-            <li>facebook: <a href="http://www.facebook.com/mocniak">/mocniak</a></li>
-            <li>linkedin: <a href="https://www.linkedin.com/in/mocniak/">/in/mocniak</a></li>
-        </ul>
     </div>
 {% endblock %}

@@ -85,7 +85,7 @@ class Filter
         'Motorower' => self::VEHICLE_TYPE_MOPED,
         'Motocykl' => self::VEHICLE_TYPE_MOTORBIKE,
         'Hulajnoga elektryczna (od 2022)' => self::VEHICLE_TYPE_ELECTRIC_SCOOTER,
-        'Urządzenie transportu osobistego' => self::VEHICLE_TYPE_PERSONAL_TRANSPORT,
+        'Urządzenie transportu osobistego (od 2022)' => self::VEHICLE_TYPE_PERSONAL_TRANSPORT,
         'Czterokołowiec (od 11.2015)' => self::VEHICLE_TYPE_QUAD,
         'Samochód osobowy' => self::VEHICLE_TYPE_CAR,
         'Samochód ciężarowy' => self::VEHICLE_TYPE_TRUCK,
