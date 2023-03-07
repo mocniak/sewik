@@ -113,7 +113,8 @@ class FilterForm extends AbstractType
                 'multiple' => true,
                 'choices' => Filter::VEHICLE_TYPES
             ])
-            ->add('reports', SubmitType::class, array('label' => 'Wyświetl raporty'));
+            ->add('reports', SubmitType::class, array('label' => 'Wyświetl raporty'))
+            ->setMethod('GET');
 
         $callbackTransformer = new CallbackTransformer(
             function (?\DateTimeImmutable $dateTimeImmutable) {
