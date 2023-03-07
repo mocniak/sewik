@@ -24,7 +24,7 @@ class DoctrineTemplateRepository implements TemplateRepositoryInterface
      */
     public function getAll(): array
     {
-        return $this->repository->findAll();
+        return $this->repository->findBy([], ['name' => 'ASC']);
     }
 
     public function save(QueryTemplate $template): void
