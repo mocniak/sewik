@@ -65,36 +65,34 @@ class Filter
         'Śmierć' => self::PARTICIPANT_INJURY_DEATH,
     ];
 
-    const VEHICLE_TYPE_BICYCLE = 'IS101'; //Rower
-    const VEHICLE_TYPE_MOPED = 'IS102'; //Motorower
-    const VEHICLE_TYPE_MOTORBIKE = 'IS03,IS127,IS128'; //Motocykl
-    const VEHICLE_TYPE_CAR = 'IS121'; //Samochód osobowy z przyczepą
-    const VEHICLE_TYPE_BUS = 'IS107,IS108'; //Autobus
-    const VEHICLE_TYPE_TRUCK = 'IS131,IS132'; //Samochód ciężarowy
-    const VEHICLE_TYPE_TRACTOR = 'IS122'; //Ciągnik rolniczy
-    const VEHICLE_TYPE_SLOW_MOVING = 'IS14'; //Pojazd wolnobieżny
-    const VEHICLE_TYPE_TRAIN = 'IS118'; //Pociąg
-    const VEHICLE_TYPE_EMERGENCY = 'IS19'; //Pojazd uprzywilejowany
-    const VEHICLE_TYPE_TRAM_TROLLEY = 'IS123'; //Tramwaj, trolejbus
-    const VEHICLE_TYPE_DANGER = 'IS123'; //Tramwaj, trolejbus
-    const VEHICLE_TYPE_OTHER = 'IS120'; //Inny pojazd
-    const VEHICLE_TYPE_UNKNOWN = 'IS125'; //Nieustalony
-    const VEHICLE_TYPE_QUAD = 'IS129,IS130'; //Czterokołowiec lekki (od 11.2015)
+    const VEHICLE_TYPE_BICYCLE = 'IS201'; //Rower
+    const VEHICLE_TYPE_MOPED = 'IS202'; //Motorower
+    const VEHICLE_TYPE_MOTORBIKE = 'IS227,IS228'; //Motocykl
+    const VEHICLE_TYPE_CAR = 'IS221'; //Samochód osobowy
+    const VEHICLE_TYPE_BUS = 'IS207,IS208'; //Autobus
+    const VEHICLE_TYPE_TRUCK = 'IS231,IS232'; //Samochód ciężarowy
+    const VEHICLE_TYPE_TRACTOR = 'IS222'; //Ciągnik rolniczy
+    const VEHICLE_TYPE_TRAIN = 'IS218'; //Pociąg
+    const VEHICLE_TYPE_TRAM_TROLLEY = 'IS223'; //Tramwaj, trolejbus
+    const VEHICLE_TYPE_OTHER = 'IS220'; //Inny pojazd
+    const VEHICLE_TYPE_UNKNOWN = 'IS225'; //Nieustalony
+    const VEHICLE_TYPE_QUAD = 'IS229,IS230'; //Czterokołowiec
+    const VEHICLE_TYPE_ELECTRIC_SCOOTER = 'IS240'; //hulajnoga elektryczna
+    const VEHICLE_TYPE_PERSONAL_TRANSPORT = 'IS241'; //urządzenie transportu osobistego
 
     const VEHICLE_TYPES = [
         'Rower' => self::VEHICLE_TYPE_BICYCLE,
-        'Skuter' => self::VEHICLE_TYPE_MOPED,
+        'Motorower' => self::VEHICLE_TYPE_MOPED,
         'Motocykl' => self::VEHICLE_TYPE_MOTORBIKE,
-        'Quad (od 11.2015)' => self::VEHICLE_TYPE_QUAD,
+        'Hulajnoga elektryczna (od 2022)' => self::VEHICLE_TYPE_ELECTRIC_SCOOTER,
+        'Urządzenie transportu osobistego' => self::VEHICLE_TYPE_PERSONAL_TRANSPORT,
+        'Czterokołowiec (od 11.2015)' => self::VEHICLE_TYPE_QUAD,
         'Samochód osobowy' => self::VEHICLE_TYPE_CAR,
         'Samochód ciężarowy' => self::VEHICLE_TYPE_TRUCK,
         'Autobus' => self::VEHICLE_TYPE_BUS,
         'Tramwaj, trolejbus' => self::VEHICLE_TYPE_TRAM_TROLLEY,
         'Traktor' => self::VEHICLE_TYPE_TRACTOR,
-        'Pojazd wolnobieżny' => self::VEHICLE_TYPE_SLOW_MOVING,
         'Pociąg' => self::VEHICLE_TYPE_TRAIN,
-        'Pojazd uprzywilejowany' => self::VEHICLE_TYPE_EMERGENCY,
-        'Przewożący mat. niebezpieczne' => self::VEHICLE_TYPE_DANGER,
         'Inny' => self::VEHICLE_TYPE_OTHER,
         'Nieznany' => self::VEHICLE_TYPE_UNKNOWN,
     ];
