@@ -476,6 +476,7 @@ class Filter
         'Zderzenie pojazdów boczne' => '02',
         'Zderzenie pojazdów tylne' => '03',
         'Najechanie na pieszego' => '04',
+        'Zdarzenie z osobą UWR' => '13',
         'Najechanie na pojazd unieruchomiony' => '05',
         'Najechanie na drzewo, słup, inny obiekt drogowy' => '06',
         'Najechanie na drzewo' => 'A1',
