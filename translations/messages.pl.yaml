@@ -43,6 +43,7 @@ accident:
     '10': 'Wywrócenie się pojazdu'
     '11': 'Wypadek z pasażerem'
     '12': 'Inne'
+    '13': 'Zdarzenie z osobą UWR'
   trafficLights:
     '01': 'Jest, działa'
     '02': 'Jest, nie działa'
@@ -154,6 +155,7 @@ participant:
     'I': Pieszy
     'K': Kierujący
     'P': Pasażer
+    'O': Osoba UWR
   drivingLicence:
     P:	Posiada
     N:	Nie posiada

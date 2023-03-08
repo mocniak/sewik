@@ -124,6 +124,8 @@
                 <li>Brak pojazdów.</li>
             {% endfor %}
         </ol>
+        {% if accident.pedestrians is not empty%}
+        <h4>Piesi</h4>
         <ol>
             {% for pedestrian in accident.pedestrians %}
                 <li><strong>{{ ('participant.role.' ~ pedestrian.role)|trans }}</strong>
@@ -135,7 +137,7 @@
                                 {{ pedestrian.dateOfBirth|date("Y-m-d") }}
                             {% endif %}
                         </li>
-                        <li>{{ ('participant.gender.' ~ pedestrian.gender)|trans }}</li>
+                        <li>Płeć: {{ ('participant.gender.' ~ pedestrian.gender)|trans }}</li>
                         {% if pedestrian.pedestrianFault is not empty %}
                             <li>{{ ('participant.pedestrianFault.' ~ pedestrian.pedestrianFault)|trans }}</li>
                         {% endif %}
@@ -150,5 +152,6 @@
                 </li>
             {% endfor %}
         </ol>
+        {% endif %}
     </div>
 {% endblock %}
