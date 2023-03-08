@@ -23,7 +23,7 @@ class DoctrineQueryResultCache implements QueryResultCacheInterface
         /** @var CachedQueryResult $cachedReport */
         $cachedReport = $this->repository->findOneBy(['queryHash' => sha1($query->getSqlQuery())]);
 
-        if (null == $cachedReport) {
+        if (null === $cachedReport) {
             return null;
         }
 
@@ -33,8 +33,10 @@ class DoctrineQueryResultCache implements QueryResultCacheInterface
     public function add(QueryResult $report, Query $query)
     {
         try {
-            $this->entityManager->persist(new CachedQueryResult($report, $query));
-            $this->entityManager->flush();
+            if ($this->findForQuery($query) === null) {
+                $this->entityManager->persist(new CachedQueryResult($report, $query));
+                $this->entityManager->flush();
+            }
         } catch (ORMException $e) {
             throw new \RuntimeException('Cache failed: ' . $e->getMessage());
         }
