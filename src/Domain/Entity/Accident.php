@@ -115,8 +115,8 @@ class Accident
 
     public function __construct(
         int $id,
-        string $voivodeship,
-        string $county,
+        ?string $voivodeship,
+        ?string $county,
         ?string $commune,
         ?string $locality,
         ?string $street,
@@ -223,7 +223,7 @@ class Accident
     /**
      * @return string
      */
-    public function getVoivodeship(): string
+    public function getVoivodeship(): ?string
     {
         return $this->voivodeship;
     }
@@ -231,7 +231,7 @@ class Accident
     /**
      * @return string
      */
-    public function getCounty(): string
+    public function getCounty(): ?string
     {
         return $this->county;
     }
