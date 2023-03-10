@@ -117,12 +117,12 @@ class Accident
         int $id,
         string $voivodeship,
         string $county,
-        string $commune,
+        ?string $commune,
         ?string $locality,
         ?string $street,
         ?string $houseNumber,
         ?string $intersectionStreet,
-        \DateTimeImmutable $time,
+        ?\DateTimeImmutable $time,
         ?string $light,
         ?string $weather,
         ?string $siteCharacteristic,
@@ -239,7 +239,7 @@ class Accident
     /**
      * @return string
      */
-    public function getCommune(): string
+    public function getCommune(): ?string
     {
         return $this->commune;
     }
