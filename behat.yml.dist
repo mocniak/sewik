@@ -1,0 +1,12 @@
+default:
+    suites:
+        default:
+            contexts:
+                - Sewik\Tests\Behat\DemoContext
+
+    extensions:
+        FriendsOfBehat\SymfonyExtension:
+            bootstrap: tests/bootstrap.php
+            kernel:
+                class: Sewik\Kernel
+                path: "src/Kernel.php"
