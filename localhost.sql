@@ -1771,27 +1771,7 @@ UPDATE uczestnicy
 SET DATA_UR = NULL
 WHERE DATA_UR = '0000-00-00';
 
-DELETE
-from sewik.zdarzenie
-WHERE ID IN (SELECT id FROM sewik_2019.zdarzenie);
-DELETE
-from sewik.pojazdy
-WHERE ZSZD_ID IN (SELECT id FROM sewik_2019.zdarzenie);
-DELETE
-from sewik.uczestnicy
-WHERE ZSZD_ID IN (SELECT id FROM sewik_2019.zdarzenie);
 
-INSERT INTO sewik.zdarzenie
-SELECT *
-FROM sewik_2019.zdarzenie;
-INSERT INTO sewik.pojazdy
-SELECT *
-FROM sewik_2019.pojazdy;
-INSERT INTO sewik.uczestnicy
-SELECT *
-FROM sewik_2019.uczestnicy;
-
-USE sewik;
 
 SELECT u.ID, u.ZSZD_ID, u.STUC_KOD, z.POWIAT, z.GMINA, ZSSD_KOD, DATA_ZDARZ FROM (SELECT ID, ZSZD_ID, STUC_KOD FROM uczestnicy WHERE STUC_KOD IS NOT NULL) as u LEFT JOIN (SELECT ID, POWIAT, GMINA, ZSSD_KOD, DATA_ZDARZ FROM zdarzenie) as z on z.ID = u.ZSZD_ID
     INTO OUTFILE '/var/lib/mysql-files/krajowe.csv' FIELDS TERMINATED BY ','
@@ -1813,98 +1793,32 @@ SELECT * FROM pojazdy WHERE ZSZD_ID IN (
     INTO OUTFILE '/var/lib/mysql-files/pojazdy_uczestnicy.csv' FIELDS TERMINATED BY ','
     ENCLOSED BY '"' LINES TERMINATED BY '\n';
 
-USE sewik_2021;
 
-SELECT ID, GMINA, POWIAT, MIEJSCOWOSC, ULICA_ADRES, NUMER_DOMU,  FROM zdarzenie WHERE WOJ='WOJ. ŚLĄSKIE' AND DATA_ZDARZ BETWEEN '2018-01-01' AND '2018-12-31' AND ID IN (SELECT ZSZD_ID FROM uczestnicy WHERE ZSPO_ID IS NULL);
+use sewik_all;
 
+## migrowanie pojazdów do wspolnego standardu
 
+SELECT DISTINCT RODZAJ_POJAZDU from sewik_all.pojazdy;
 
-SELECT count(1) as n_uczestnikow FROM uczestnicy GROUP BY zszd_id ORDER BY n_uczestnikow DESC;
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS201' WHERE RODZAJ_POJAZDU IN ('IS101');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS202' WHERE RODZAJ_POJAZDU IN ('IS102');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS207' WHERE RODZAJ_POJAZDU IN ('IS107');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS208' WHERE RODZAJ_POJAZDU IN ('IS108');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS218' WHERE RODZAJ_POJAZDU IN ('IS118');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS220' WHERE RODZAJ_POJAZDU IN ('IS120','IS14','IS19','IS26');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS221' WHERE RODZAJ_POJAZDU IN ('IS21','IS121');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS222' WHERE RODZAJ_POJAZDU IN ('IS122');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS223' WHERE RODZAJ_POJAZDU IN ('IS123');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS225' WHERE RODZAJ_POJAZDU IN ('IS125');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS227' WHERE RODZAJ_POJAZDU IN ('IS27','IS127');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS228' WHERE RODZAJ_POJAZDU IN ('IS03','IS128');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS229' WHERE RODZAJ_POJAZDU IN ('IS129');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS230' WHERE RODZAJ_POJAZDU IN ('IS130');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS231' WHERE RODZAJ_POJAZDU IN ('IS131');
+UPDATE pojazdy SET RODZAJ_POJAZDU='IS232' WHERE RODZAJ_POJAZDU IN ('IS132');
 
+UPDATE uczestnicy SET DATA_UR = null WHERE DATA_UR < '1900-01-01';
 
-create table sewik_2021.pojazdy
-(
-    ID int not null
-        primary key,
-    ZSZD_ID int null,
-    NR_POJAZDU int null,
-    RODZAJ_POJAZDU varchar(7) null,
-    MARKA varchar(80) null,
-    SPSU_KOD varchar(30) null,
-    SPSP_KOD varchar(7) null,
-    SPIC_KOD varchar(7) null,
-    KRAJ_REJ varchar(30) null,
-    KRAJ_UBZ varchar(30) null,
-    ZSPO_ID varchar(30) null
-);
+SELECT count(1), SSRU_KOD from uczestnicy GROUP BY SSRU_KOD;
 
-create table sewik_2021.uczestnicy
-(
-    ID int not null
-        primary key,
-    ZSZD_ID int null,
-    ZSPO_ID int null,
-    SSRU_KOD varchar(2) null,
-    DATA_UR date null,
-    SOBY_KOD varchar(4) null,
-    PLEC varchar(1) null,
-    SUSU_KOD varchar(2) null,
-    LICZBA_LAT_KIEROWANIA int null,
-    SPSZ_KOD varchar(8) null,
-    SRUZ_KOD varchar(2) null,
-    SUSW_KOD varchar(2) null,
-    STUC_KOD varchar(2) null,
-    POD_WPLYWEM varchar(10) null,
-    SUSB_KOD varchar(2) null,
-    OBCOKRAJOWIEC varchar(2) null,
-    ZBIEGL_Z_MIEJSCA varchar(2) null,
-    SPPI_KOD varchar(2) null,
-    MIEJSCE_W_POJ varchar(2) null,
-    SUZZ_KOD varchar(2) null,
-    INWALIDA varchar(1) null
-);
-
-create table sewik_2021.zdarzenie
-(
-    ID int not null
-        primary key,
-    JEDNOSTKA_MIEJSCA varchar(100) null,
-    JEDNOSTKA_LIKWIDUJACA varchar(100) null,
-    JEDNOSTKA_OPERATORA varchar(100) null,
-    NR_KW varchar(60) null,
-    WOJ varchar(30) null,
-    GMINA varchar(40) null,
-    POWIAT varchar(30) null,
-    MIEJSCOWOSC varchar(60) null,
-    ULICA_ADRES varchar(60) null,
-    NUMER_DOMU varchar(30) null,
-    DATA_ZDARZENIA varchar(30) null,
-    DATA_ZDARZ date null,
-    GODZINA_ZDARZ varchar(30) null,
-    PREDKOSC_DOPUSZCZALNA int unsigned null,
-    SZOS_KOD varchar(7) null,
-    SZRD_KOD varchar(7) null,
-    DROGA_PUBLICZNA varchar(30) null,
-    NADR_KOD varchar(7) null,
-    STNA_KOD varchar(7) null,
-    RODR_KOD varchar(7) null,
-    SYSW_KOD varchar(7) null,
-    OZPO_KOD varchar(7) null,
-    GEOD_KOD varchar(7) null,
-    ZABU_KOD varchar(7) null,
-    CHMZ_KOD varchar(7) null,
-    SSWA_KOD varchar(7) null,
-    ZSSD_KOD varchar(20) null,
-    ULICA_SKRZYZ varchar(120) null,
-    KM_HM varchar(30) null,
-    ODLEGLOSC_SKRZYZ varchar(30) null,
-    KIERUNEK varchar(120) null,
-    ZSSD_KOD2 varchar(10) null,
-    STREFA_ZAMIESZKALA varchar(30) null,
-    SKRZ_KOD varchar(7) null,
-    WSP_GPS_X varchar(30) null,
-    WSP_GPS_Y varchar(30) null,
-    spip_kod varchar(7) null,
-    SSUP_KOD varchar(7) null
-);
-
+SELECT ZSZD_ID FROM uczestnicy WHERE SSRU_KOD = 'O' LIMIT 10;
