@@ -28,10 +28,10 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
     public function findFilteredAccidents(Filter $filter): array
     {
         $accidents = [];
-        if (empty($filter->getAccidentsFilterSql())) {
+        if (empty($filter->getFilterSql())) {
             $stmt = $this->link->prepare("SELECT * FROM zdarzenie ORDER BY id ASC LIMIT 1000");
         } else {
-            $stmt = $this->link->prepare("SELECT * FROM zdarzenie WHERE " . $filter->getAccidentsFilterSql() . " ORDER BY id ASC LIMIT 1000");
+            $stmt = $this->link->prepare("SELECT * FROM zdarzenie WHERE " . $filter->getFilterSql() . " ORDER BY id ASC LIMIT 1000");
         }
 
         $stmt->execute();

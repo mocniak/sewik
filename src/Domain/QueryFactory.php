@@ -13,7 +13,7 @@ class QueryFactory
         $query = $template->getSqlQuery();
         $query = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $query); //delete multiple spaces, newlines, etc.
 
-        if (empty($filter->getAccidentsFilterSql())) {
+        if (empty($filter->getFilterSql())) {
             $query = str_replace(Filter::PARTICIPANTS_PLACEHOLDER . ' AND ', 'WHERE ', $query);
             $query = str_replace(Filter::PARTICIPANTS_PLACEHOLDER, '', $query);
             $query = str_replace(Filter::VEHICLES_PLACEHOLDER . ' AND ', 'WHERE ', $query);
@@ -31,7 +31,7 @@ class QueryFactory
                 'WHERE uczestnicy.zszd_id IN (SELECT id FROM zdarzenie ' . Filter::ACCIDENTS_PLACEHOLDER . ')',
                 $query
             );
-            $query = str_replace(Filter::ACCIDENTS_PLACEHOLDER, 'WHERE ' . $filter->getAccidentsFilterSql(), $query);
+            $query = str_replace(Filter::ACCIDENTS_PLACEHOLDER, 'WHERE ' . $filter->getFilterSql(), $query);
         }
 
         $query = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $query); //delete multiple spaces, newlines, etc.

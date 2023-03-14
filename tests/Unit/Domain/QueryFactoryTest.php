@@ -1,6 +1,6 @@
 <?php
 
-namespace Sewik\Tests\Domain;
+namespace Sewik\Tests\Unit\Domain;
 
 use PHPUnit\Framework\TestCase;
 use Sewik\Domain\Dto\Filter;

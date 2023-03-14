@@ -1,6 +1,6 @@
 <?php
 
-namespace Sewik\Tests\Domain;
+namespace Sewik\Tests\Unit\Domain;
 
 use PHPUnit\Framework\TestCase;
 use Sewik\Domain\Dto\Filter;
@@ -14,7 +14,7 @@ class FilterTest extends TestCase
     {
         $filter = new Filter($constraints);
 
-        $this->assertEquals($expectedSql, $filter->getAccidentsFilterSql());
+        $this->assertEquals($expectedSql, $filter->getFilterSql());
     }
 
     public function sqlProvider()

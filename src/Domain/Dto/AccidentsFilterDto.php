@@ -29,6 +29,7 @@ class AccidentsFilterDto
     public $otherCause;
     public $surfaceCondition;
     public $roadGeometry;
+
     public function __construct()
     {
         $this->streets = ['','','',''];

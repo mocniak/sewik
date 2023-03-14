@@ -616,23 +616,22 @@ class Filter
         'Jednojezdniowa dwukierunkowa' => '05',
 
     ];
-    private $accidentsFilter;
+    private array $criteria;
 
-    public function __construct(array $accidentsFilter)
+    public function __construct(array $criteria)
     {
-        $this->accidentsFilter = $accidentsFilter;
+        $this->criteria = $criteria;
     }
 
-    public function getAccidentsFilterSql(): string
+    public function getFilterSql(): string
     {
-        if (!empty($this->accidentsFilter)) {
-            $query = implode(' AND ', $this->accidentsFilter);
+        if (!empty($this->criteria)) {
+            $query = implode(' AND ', $this->criteria);
         } else {
             $query = '';
         }
         $query = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $query); //delete multiple spaces, newlines, etc.
-        $query = trim($query);
 
-        return $query;
+        return trim($query);
     }
 }

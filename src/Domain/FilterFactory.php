@@ -60,7 +60,7 @@ class FilterFactory
         }
         if (!empty($filterDto->streets)) {
             $streets = array_filter($filterDto->streets, function ($street) {
-                return $street !== null;
+                return $street !== null && $street !== '';
             });
             if (count($streets) == 1) {
                 $street = $streets[0];
