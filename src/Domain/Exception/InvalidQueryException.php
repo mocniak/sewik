@@ -1,5 +1,5 @@
 <?php
-namespace Sewik\Domain;
+namespace Sewik\Domain\Exception;
 
 class InvalidQueryException extends \Exception
 {

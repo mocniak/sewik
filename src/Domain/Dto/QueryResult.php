@@ -1,16 +1,15 @@
 <?php
-namespace Sewik\Domain;
 
-class Report
+namespace Sewik\Domain\Dto;
+
+class QueryResult
 {
-    private $table;
-    private $tableHeaders;
-    private $timeCost;
-    private $title;
+    private array $table;
+    private array $tableHeaders;
+    private float $timeCost;
 
-    public function __construct(string $title, array $table, array $tableHeaders, float $timeCost)
+    public function __construct(array $table, array $tableHeaders, float $timeCost)
     {
-        $this->title = $title;
         $this->table = $table;
         $this->tableHeaders = $tableHeaders;
         $this->timeCost = $timeCost;
@@ -29,10 +28,5 @@ class Report
     public function getTimeCost(): float
     {
         return $this->timeCost;
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
     }
 }

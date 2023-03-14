@@ -2,20 +2,20 @@
 
 namespace Sewik\Domain\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity()]
 class Accident
 {
-    /**
-     * @var int
-     */
-    private $id;
-    /**
-     * @var string
-     */
-    private $voivodeship;
-    /**
-     * @var string
-     */
-    private $county;
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private int $id;
+
+    #[ORM\Column(length: 30, nullable: true, name: 'WOJ')]
+    private string $voivodeship;
+
+    #[ORM\Column(length: 30, nullable: true, name: 'POWIAT')]
+    private string $county;
     /**
      * @var string
      */
@@ -115,32 +115,32 @@ class Accident
 
     public function __construct(
         int $id,
-        ?string $voivodeship,
-        ?string $county,
-        ?string $commune,
-        ?string $locality,
-        ?string $street,
-        ?string $houseNumber,
-        ?string $intersectionStreet,
-        ?\DateTimeImmutable $time,
-        ?string $light,
-        ?string $weather,
-        ?string $siteCharacteristic,
-        ?string $speedLimit,
-        ?string $pavement,
-        ?string $roadType,
-        ?string $trafficLights,
-        ?string $surfaceMarking,
-        ?string $intersectionType,
-        ?bool $builtUpArea,
-        ?string $otherCause,
-        ?string $surfaceCondition,
-        ?string $accidentType,
-        ?string $roadGeometry,
-        array $vehicles,
-        array $pedestrians,
-        ?string $gpsX,
-        ?string $gpsY
+        ?string $voivodeship = null,
+        ?string $county = null,
+        ?string $commune = null,
+        ?string $locality = null,
+        ?string $street = null,
+        ?string $houseNumber = null,
+        ?string $intersectionStreet = null,
+        ?\DateTimeImmutable $time = null,
+        ?string $light = null,
+        ?string $weather = null,
+        ?string $siteCharacteristic = null,
+        ?string $speedLimit = null,
+        ?string $pavement = null,
+        ?string $roadType = null,
+        ?string $trafficLights = null,
+        ?string $surfaceMarking = null,
+        ?string $intersectionType = null,
+        ?bool $builtUpArea = null,
+        ?string $otherCause = null,
+        ?string $surfaceCondition = null,
+        ?string $accidentType = null,
+        ?string $roadGeometry = null,
+        array $vehicles = null,
+        array $pedestrians = null,
+        ?string $gpsX = null,
+        ?string $gpsY = null
     )
     {
         $this->id = $id;
@@ -369,7 +369,7 @@ class Accident
     private function gpsToDec(string $gpsInDeg): ?float
     {
         try {
-            $coordinates = preg_split("/(\*|\')/", $gpsInDeg);
+            $coordinates = preg_split("/([*'])/", $gpsInDeg);
             $deg = (int)$coordinates[0];
             $min = (int)$coordinates[1];
             $sec = ((int)str_pad($coordinates[2], 3, '0')) / 10;

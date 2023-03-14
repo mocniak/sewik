@@ -1,7 +1,10 @@
 <?php
-namespace Sewik\Domain;
 
-class ListAccidentsRequest
+namespace Sewik\Application\Response;
+
+use Sewik\Domain\Dto\AccidentsFilterDto;
+
+class ShowAllReportsRequest
 {
     private $accidentsFilter;
 

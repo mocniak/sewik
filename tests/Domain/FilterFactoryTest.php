@@ -1,8 +1,8 @@
 <?php
 namespace Sewik\Tests\Domain;
 
-use Sewik\Domain\AccidentsFilterDto;
-use Sewik\Domain\Filter;
+use Sewik\Domain\Dto\AccidentsFilterDto;
+use Sewik\Domain\Dto\Filter;
 use Sewik\Domain\FilterFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -11,7 +11,7 @@ class FilterFactoryTest extends TestCase
     /** @var FilterFactory */
     private $factory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->factory = new FilterFactory();
     }

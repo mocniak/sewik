@@ -3,9 +3,9 @@
 namespace Sewik\Infrastructure;
 
 use Sewik\Domain\DatabaseInterface;
-use Sewik\Domain\InvalidQueryException;
-use Sewik\Domain\Query;
-use Sewik\Domain\QueryResult;
+use Sewik\Domain\Dto\Query;
+use Sewik\Domain\Dto\QueryResult;
+use Sewik\Domain\Exception\InvalidQueryException;
 
 class MysqlDatabase implements DatabaseInterface
 {

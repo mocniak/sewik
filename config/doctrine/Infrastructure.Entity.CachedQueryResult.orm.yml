@@ -1,4 +1,4 @@
-Sewik\Infrastructure\CachedQueryResult:
+Sewik\Infrastructure\Entity\CachedQueryResult:
   type: entity
   table: cached_query_results
   id:

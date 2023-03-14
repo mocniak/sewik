@@ -2,8 +2,8 @@
 namespace Sewik\Infrastructure\FormType;
 
 use Ramsey\Uuid\Uuid;
-use Sewik\Domain\EditTemplateRequest;
-use Sewik\Domain\QueryTemplate;
+use Sewik\Application\Request\EditTemplateRequest;
+use Sewik\Domain\Entity\QueryTemplate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

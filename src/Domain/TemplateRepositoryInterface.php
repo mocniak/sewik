@@ -2,6 +2,7 @@
 namespace Sewik\Domain;
 
 use Ramsey\Uuid\UuidInterface;
+use Sewik\Domain\Entity\QueryTemplate;
 
 interface TemplateRepositoryInterface
 {

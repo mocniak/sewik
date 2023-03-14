@@ -3,9 +3,21 @@ parameters:
 
 services:
   _defaults:
-    autowire: false      # Automatically injects dependencies in your services.
-    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-    public: true       # Allows optimizing the container by removing unused services; this also means
+    autowire: true
+    autoconfigure: true
+
+  Sewik\:
+    resource: '../src/'
+    exclude:
+      - '../src/Application/Response/'
+      - '../src/Application/Request/'
+      - '../src/Domain/Dto/'
+      - '../src/Domain/Entity/'
+      - '../src/Domain/Exception/'
+      - '../src/Infrastructure/Entity/'
+      - '../src/Infrastructure/FieldType/'
+      - '../src/Infrastructure/FormType/'
+      - '../src/Kernel.php'
 
   Sewik\Infrastructure\Controller\:
     resource: '../src/Infrastructure/Controller'
@@ -14,58 +26,25 @@ services:
     calls:
       - [ setContainer, [ "@service_container" ] ]
 
-  sewik.database:
-    class: Sewik\Infrastructure\MysqlDatabase
+  Sewik\Infrastructure\MysqlDatabase:
     arguments:
       - '%env(DATABASE_HOST)%'
       - '%env(DATABASE_USERNAME)%'
       - '%env(DATABASE_PASSWORD)%'
       - '%env(DATABASE_SCHEMA)%'
 
-  sewik.accident_repository:
-    class: Sewik\Infrastructure\MysqlAccidentsRepository
+  Sewik\Infrastructure\MysqlAccidentsRepository:
     arguments:
       - '%env(DATABASE_HOST)%'
       - '%env(DATABASE_USERNAME)%'
       - '%env(DATABASE_PASSWORD)%'
       - '%env(DATABASE_SCHEMA)%'
 
-  sewik.report_cache:
-    class: Sewik\Infrastructure\DoctrineQueryResultCache
+  Sewik\Infrastructure\CachedDatabase:
     arguments:
-      - "@doctrine.orm.default_entity_manager"
+      - '@Sewik\Infrastructure\DoctrineQueryResultCache'
+      - '@Sewik\Infrastructure\MysqlDatabase'
 
-  sewik.cached_database:
-    class: Sewik\Infrastructure\CachedDatabase
-    arguments:
-      - '@sewik.report_cache'
-      - '@sewik.database'
-
-  sewik.template_repository:
-    class: Sewik\Infrastructure\DoctrineTemplateRepository
-    arguments:
-      - "@doctrine.orm.default_entity_manager"
-
-  sewik.query_factory:
-    class: Sewik\Domain\QueryFactory
-
-  sewik.filter_factory:
-    class: Sewik\Domain\FilterFactory
-
-  sewik.service:
-    class: Sewik\Domain\SewikService
-    arguments:
-      - '@sewik.cached_database'
-      - '@sewik.template_repository'
-      - '@sewik.query_factory'
-      - '@sewik.filter_factory'
-      - '@sewik.accident_repository'
-
-  sewik.template_service:
-    class: Sewik\Domain\QueryTemplateService
-    arguments:
-      - '@sewik.template_repository'
-  form.type.datalist_type:
-    class: Sewik\Infrastructure\FormType\DatalistType
-    tags:
-      -  { name: form.type, alias: datalist }
+# interfaces
+  Sewik\Domain\DatabaseInterface: '@Sewik\Infrastructure\CachedDatabase'
+  Sewik\Domain\TemplateRepositoryInterface: '@Sewik\Infrastructure\DoctrineTemplateRepository'

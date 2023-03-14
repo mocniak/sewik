@@ -2,17 +2,19 @@
 
 namespace Sewik\Infrastructure;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\ORMException;
-use Sewik\Domain\Query;
-use Sewik\Domain\QueryResult;
+use Sewik\Domain\Dto\Query;
+use Sewik\Domain\Dto\QueryResult;
+use Sewik\Infrastructure\Entity\CachedQueryResult;
 
 class DoctrineQueryResultCache implements QueryResultCacheInterface
 {
-    private $entityManager;
-    private $repository;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly EntityRepository $repository;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
         $this->repository = $this->entityManager->getRepository(CachedQueryResult::class);

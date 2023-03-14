@@ -2,8 +2,8 @@
 
 namespace Sewik\Infrastructure;
 
-use Sewik\Domain\Query;
-use Sewik\Domain\QueryResult;
+use Sewik\Domain\Dto\Query;
+use Sewik\Domain\Dto\QueryResult;
 
 interface QueryResultCacheInterface
 {

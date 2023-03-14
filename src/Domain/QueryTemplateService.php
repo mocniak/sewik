@@ -1,7 +1,12 @@
 <?php
+
 namespace Sewik\Domain;
 
 use Ramsey\Uuid\UuidInterface;
+use Sewik\Application\Request\EditTemplateRequest;
+use Sewik\Application\Response\CreateTemplateResponse;
+use Sewik\Domain\Dto\Filter;
+use Sewik\Domain\Entity\QueryTemplate;
 
 class QueryTemplateService
 {
@@ -30,14 +35,12 @@ class QueryTemplateService
         return $template;
     }
 
-    public function editTemplate(EditTemplateRequest $request): EditTemplateResult
+    public function editTemplate(EditTemplateRequest $request): void
     {
         $template = $this->templateRepository->get($request->templateId);
         $template->setName($request->name);
         $template->setSqlQuery($request->sqlQuery);
         $template->setCategory($request->category);
         $this->templateRepository->save($template);
-
-        return new EditTemplateResult();
     }
 }

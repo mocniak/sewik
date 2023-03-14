@@ -1,5 +1,9 @@
 <?php
+
 namespace Sewik\Domain;
+
+use Sewik\Domain\Dto\AccidentsFilterDto;
+use Sewik\Domain\Dto\Filter;
 
 class FilterFactory
 {

@@ -2,6 +2,10 @@
 
 namespace Sewik\Domain;
 
+use Sewik\Domain\Dto\Filter;
+use Sewik\Domain\Dto\Query;
+use Sewik\Domain\Entity\QueryTemplate;
+
 class QueryFactory
 {
     public function createQuery(Filter $filter, QueryTemplate $template): Query

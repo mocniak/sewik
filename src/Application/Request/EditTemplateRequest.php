@@ -1,7 +1,9 @@
 <?php
-namespace Sewik\Domain;
+
+namespace Sewik\Application\Request;
 
 use Ramsey\Uuid\UuidInterface;
+use Sewik\Domain\Entity\QueryTemplate;
 
 class EditTemplateRequest
 {

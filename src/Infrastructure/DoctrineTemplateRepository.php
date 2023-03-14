@@ -2,18 +2,18 @@
 
 namespace Sewik\Infrastructure;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMException;
 use Ramsey\Uuid\UuidInterface;
-use Sewik\Domain\QueryTemplate;
+use Sewik\Domain\Entity\QueryTemplate;
 use Sewik\Domain\TemplateRepositoryInterface;
 
 class DoctrineTemplateRepository implements TemplateRepositoryInterface
 {
-    private $entityManager;
+    private readonly EntityManagerInterface $entityManager;
     private $repository;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
         $this->repository = $this->entityManager->getRepository(QueryTemplate::class);

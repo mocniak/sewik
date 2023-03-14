@@ -3,17 +3,17 @@
 namespace Sewik\Tests\Domain;
 
 use PHPUnit\Framework\TestCase;
-use Sewik\Domain\Filter;
-use Sewik\Domain\Query;
+use Sewik\Domain\Dto\Filter;
+use Sewik\Domain\Dto\Query;
+use Sewik\Domain\Entity\QueryTemplate;
 use Sewik\Domain\QueryFactory;
-use Sewik\Domain\QueryTemplate;
 
 class QueryFactoryTest extends TestCase
 {
     /** @var QueryFactory */
     private $queryFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->queryFactory = new QueryFactory();
     }

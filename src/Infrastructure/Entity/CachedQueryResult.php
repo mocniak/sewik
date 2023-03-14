@@ -1,14 +1,14 @@
 <?php
 
-namespace Sewik\Infrastructure;
+namespace Sewik\Infrastructure\Entity;
 
-use Sewik\Domain\Query;
-use Sewik\Domain\QueryResult;
+use Sewik\Domain\Dto\Query;
+use Sewik\Domain\Dto\QueryResult;
 
 class CachedQueryResult
 {
-    private $queryResult;
-    private $queryHash;
+    private readonly QueryResult$queryResult;
+    private readonly string $queryHash;
 
     public function __construct(QueryResult $queryResult, Query $query)
     {

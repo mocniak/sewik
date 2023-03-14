@@ -2,10 +2,8 @@
 
 namespace Sewik\Infrastructure\FormType;
 
-use Sewik\Domain\AccidentsFilterDto;
-use Sewik\Domain\Filter;
-use Sewik\Domain\Query;
-use Sewik\Domain\QueryTemplate;
+use Sewik\Domain\Dto\AccidentsFilterDto;
+use Sewik\Domain\Dto\Filter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

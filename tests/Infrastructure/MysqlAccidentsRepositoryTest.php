@@ -1,17 +1,18 @@
 <?php
 
-namespace Sewik\Infrastructure;
+namespace Sewik\Tests\Infrastructure;
 
 use PHPUnit\Framework\TestCase;
-use Sewik\Domain\Accident;
-use Sewik\Domain\Filter;
+use Sewik\Domain\Dto\Filter;
+use Sewik\Domain\Entity\Accident;
+use Sewik\Infrastructure\MysqlAccidentsRepository;
 
 class MysqlAccidentsRepositoryTest extends TestCase
 {
     /** @var MysqlAccidentsRepository */
     private $repository;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->repository = new MysqlAccidentsRepository('localhost', 'root', 'dupa.8', 'sewik');
     }

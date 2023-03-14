@@ -1,5 +1,8 @@
 <?php
-namespace Sewik\Domain;
+
+namespace Sewik\Application\Response;
+
+use Sewik\Domain\Dto\Report;
 
 class ShowAllReportResponse
 {

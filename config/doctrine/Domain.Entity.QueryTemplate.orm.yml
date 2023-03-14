@@ -1,4 +1,4 @@
-Sewik\Domain\QueryTemplate:
+Sewik\Domain\Entity\QueryTemplate:
   type: entity
   table: query_templates
   id:

@@ -3,10 +3,10 @@
 namespace Sewik\Infrastructure;
 
 use Sewik\Domain\AccidentsRepositoryInterface;
+use Sewik\Domain\Dto\Filter;
 use Sewik\Domain\Entity\Accident;
 use Sewik\Domain\Entity\Participant;
 use Sewik\Domain\Entity\Vehicle;
-use Sewik\Domain\Filter;
 
 class MysqlAccidentsRepository implements AccidentsRepositoryInterface
 {
@@ -44,7 +44,7 @@ class MysqlAccidentsRepository implements AccidentsRepositoryInterface
         return $accidents;
     }
 
-    public function getAccident(int $accidentID): Accident
+    public function getAccident(int $accidentID): ?Accident
     {
         $vehicleStatement = $this->link->prepare("SELECT * FROM pojazdy WHERE zszd_id = :id");
         $vehicleStatement->bindValue(':id', $accidentID);

@@ -1,8 +1,20 @@
 <?php
 
-namespace Sewik\Domain;
+namespace Sewik\Application;
 
 use Ramsey\Uuid\UuidInterface;
+use Sewik\Application\Request\ListAccidentsRequest;
+use Sewik\Application\Response\ListAccidentsResponse;
+use Sewik\Application\Response\ShowAllReportResponse;
+use Sewik\Application\Response\ShowAllReportsRequest;
+use Sewik\Domain\AccidentsRepositoryInterface;
+use Sewik\Domain\DatabaseInterface;
+use Sewik\Domain\Dto\AccidentsFilterDto;
+use Sewik\Domain\Dto\Report;
+use Sewik\Domain\Exception\InvalidQueryException;
+use Sewik\Domain\FilterFactory;
+use Sewik\Domain\QueryFactory;
+use Sewik\Domain\TemplateRepositoryInterface;
 
 class SewikService
 {

@@ -1,8 +1,9 @@
 <?php
 
-namespace Sewik\Domain;
+namespace Sewik\Tests\Domain;
 
 use PHPUnit\Framework\TestCase;
+use Sewik\Domain\Dto\Filter;
 
 class FilterTest extends TestCase
 {

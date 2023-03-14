@@ -1,6 +1,6 @@
 <?php
 
-namespace Sewik\Domain;
+namespace Sewik\Application\Response;
 
 use Ramsey\Uuid\UuidInterface;
 
