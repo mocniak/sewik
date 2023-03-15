@@ -132,7 +132,7 @@ class Accident
         ?string $street = null,
         ?string $houseNumber = null,
         ?string $intersectionStreet = null,
-        ?\DateTimeImmutable $time = null,
+        ?\DateTimeImmutable $date = null,
         ?string $light = null,
         ?string $weather = null,
         ?string $siteCharacteristic = null,
@@ -159,7 +159,7 @@ class Accident
         $this->commune = $commune;
         $this->locality = $locality;
         $this->street = $street;
-        $this->time = $time;
+        $this->time = $date;
         $this->light = $light;
         $this->weather = $weather;
         $this->siteCharacteristic = $siteCharacteristic;

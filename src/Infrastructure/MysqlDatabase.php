@@ -27,12 +27,7 @@ class MysqlDatabase implements DatabaseInterface
     public function executeQuery(Query $query): QueryResult
     {
         $time = microtime(true);
-        try {
-            $statement = $this->link->query($query->getSqlQuery());
-        } catch (\Throwable $throwable) {
-            throw new InvalidQueryException('Query Failed: ' . $throwable->getMessage() . '. Query: ' . $query->getSqlQuery(), 0, $throwable);
-        }
-        $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $this->execute($query->getSqlQuery());
         if (count($result) > 0) {
             $headerRow = array_keys($result[0]);
         } else {
@@ -41,5 +36,15 @@ class MysqlDatabase implements DatabaseInterface
         $result = array_map(fn ($row) => array_values($row), $result);
 
         return new QueryResult($result, $headerRow, microtime(true) - $time);
+    }
+
+    public function execute(string $query): array|false
+    {
+        try {
+            $statement = $this->link->query($query);
+        } catch (\Throwable $throwable) {
+            throw new InvalidQueryException('Query Failed: ' . $throwable->getMessage() . '. Query: ' . $query, 0, $throwable);
+        }
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

@@ -13,6 +13,6 @@ class AccidentMother
 
     public static function createWithIdAndDate(int $id, \DateTimeImmutable $dateTime): Accident
     {
-        return new Accident(id: $id, time: $dateTime);
+        return new Accident(id: $id, date: $dateTime);
     }
 }

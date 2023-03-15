@@ -6,6 +6,8 @@ namespace Sewik\Tests\Behat;
 
 use Behat\Behat\Context\Context;
 use Sewik\Domain\Dto\QueryResult;
+use Sewik\Domain\Entity\Accident;
+use Sewik\Infrastructure\MysqlReports\AccidentsPerYearPerCountyReport;
 use Sewik\Infrastructure\MysqlReports\AccidentsPerYearReport;
 use Sewik\Infrastructure\Repository\AccidentRepository;
 use Sewik\Tests\Kit\AccidentMother;
@@ -14,13 +16,16 @@ use Webmozart\Assert\Assert;
 final class ReportContext implements Context
 {
     private ?QueryResult $result;
+    private array $arrayResult;
 
     public function __construct(
         private readonly AccidentRepository $accidentRepository,
-        private readonly AccidentsPerYearReport $report,
+        private readonly AccidentsPerYearReport $perYearReport,
+        private readonly AccidentsPerYearPerCountyReport $perYearPerCountyReport,
     )
     {
         $this->result = null;
+        $this->arrayResult = [];
     }
 
     /**
@@ -38,7 +43,7 @@ final class ReportContext implements Context
      */
     public function iAskForAccidentsPerYearReport()
     {
-        $this->result = $this->report->generate();
+        $this->result = $this->perYearReport->generate();
     }
 
     /**
@@ -52,4 +57,31 @@ final class ReportContext implements Context
         Assert::eq($this->result->getTableHeaders(), $expectedHeaders);
         Assert::eq(array_values($this->result->getTable()), $expectedRows);
     }
+
+    /**
+     * @Given there was an accident :arg3 on :arg1 in :arg2
+     */
+    public function thereWasAnAccidentOnIn($id, $date, $county)
+    {
+        $this->accidentRepository->add(
+            new Accident(id: (int)$id, county: $county, date: new \DateTimeImmutable($date))
+        );
+    }
+
+    /**
+     * @When I ask for accidents per year per county report
+     */
+    public function iAskForAccidentsPerYearPerCountyReport()
+    {
+        $this->arrayResult = $this->perYearPerCountyReport->generate();
+    }
+
+    /**
+     * @Then I see :arg2 accidents in :arg3 in :arg1
+     */
+    public function iSeeAccidentsInYearInCounty($expectedNumberOfAccidents, $year, $county)
+    {
+        Assert::eq($this->arrayResult[(int)$year][$county], $expectedNumberOfAccidents);
+    }
+
 }
