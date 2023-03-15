@@ -19,12 +19,12 @@ class Accident
     /**
      * @ORM\Column(type="string", name="WOJ", length=30, nullable=true)
      */
-    private string $voivodeship;
+    private ?string $voivodeship;
 
     /**
      * @ORM\Column(type="string", name="POWIAT", length=30, nullable=true)
      */
-    private string $county;
+    private ?string $county;
     /**
      * @var string
      */
@@ -37,10 +37,11 @@ class Accident
      * @var string
      */
     private $street;
+
     /**
-     * @var \DateTimeImmutable
+     * @ORM\Column(type="date_immutable", name="DATA_ZDARZ", nullable=true)
      */
-    private $time;
+    private \DateTimeImmutable $time;
     /**
      * @var string
      */

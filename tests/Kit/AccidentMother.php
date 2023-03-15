@@ -11,8 +11,8 @@ class AccidentMother
         return new Accident(1);
     }
 
-    public static function createWithIdAndDate(int $param, \DateTimeImmutable $param1): Accident
+    public static function createWithIdAndDate(int $id, \DateTimeImmutable $dateTime): Accident
     {
-        return new Accident(1);
+        return new Accident(id: $id, time: $dateTime);
     }
 }

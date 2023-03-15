@@ -17,8 +17,17 @@ class AccidentRepository
         $this->repository = $this->entityManager->getRepository(Accident::class);
     }
 
-    public function add(Accident $accident): void {
+    public function add(Accident $accident): void
+    {
         $this->entityManager->persist($accident);
+        $this->entityManager->flush();
+    }
+
+    public function removeAll(): void
+    {
+        foreach ($this->repository->findAll() as $accident) {
+            $this->entityManager->remove($accident);
+        }
         $this->entityManager->flush();
     }
 }

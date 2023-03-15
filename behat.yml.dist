@@ -3,6 +3,8 @@ default:
         default:
             contexts:
                 - Sewik\Tests\Behat\DemoContext
+                - Sewik\Tests\Behat\DoctrineContext
+                - Sewik\Tests\Behat\ReportContext
 
     extensions:
         FriendsOfBehat\SymfonyExtension:
