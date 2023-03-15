@@ -1,18 +1,23 @@
 doctrine:
   dbal:
-    # With Symfony 3.3, remove the `resolve:` prefix
     url: '%env(resolve:DATABASE_DSN)%'
     types:
       uuid: Ramsey\Uuid\Doctrine\UuidType
       queryResultType: Sewik\Infrastructure\FieldType\QueryResultType
   orm:
-    auto_generate_proxy_classes: '%kernel.debug%'
+    auto_generate_proxy_classes: true
     naming_strategy: doctrine.orm.naming_strategy.underscore
     auto_mapping: true
     mappings:
-      Sewik:
-        type: yml
-        dir: '%kernel.project_dir%/config/doctrine'
+#      Sewik:
+#        type: yml
+#        dir: '%kernel.project_dir%/config/doctrine'
+#        is_bundle: false
+#        prefix: Sewik
+#        alias: Sewik
+      Accidents:
         is_bundle: false
-        prefix: Sewik
-        alias: Sewik
+        type: annotation
+        dir: '%kernel.project_dir%/src/Domain/Entity'
+        prefix: 'Sewik\Domain\Entity'
+        alias: Accidents

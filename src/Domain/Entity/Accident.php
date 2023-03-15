@@ -4,17 +4,26 @@ namespace Sewik\Domain\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity()]
+/**
+ * @ORM\Entity()
+ */
 class Accident
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'NONE')]
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="integer")
+     */
     private int $id;
 
-    #[ORM\Column(length: 30, nullable: true, name: 'WOJ')]
+    /**
+     * @ORM\Column(type="string", name="WOJ", length=30, nullable=true)
+     */
     private string $voivodeship;
 
-    #[ORM\Column(length: 30, nullable: true, name: 'POWIAT')]
+    /**
+     * @ORM\Column(type="string", name="POWIAT", length=30, nullable=true)
+     */
     private string $county;
     /**
      * @var string
