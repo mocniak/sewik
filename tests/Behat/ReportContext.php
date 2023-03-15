@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sewik\Tests\Behat;
 
 use Behat\Behat\Context\Context;
+use Sewik\Domain\Dto\QueryResult;
 use Sewik\Infrastructure\MysqlReports\AccidentsPerYearReport;
 use Sewik\Infrastructure\Repository\AccidentRepository;
 use Sewik\Tests\Kit\AccidentMother;
@@ -12,7 +13,7 @@ use Webmozart\Assert\Assert;
 
 final class ReportContext implements Context
 {
-    private $result;
+    private ?QueryResult $result;
 
     public function __construct(
         private readonly AccidentRepository $accidentRepository,
@@ -45,10 +46,10 @@ final class ReportContext implements Context
      */
     public function iSeeAccidentsIn(string $numberOfAccidents, string $year)
     {
-        $expectedResult = [
-            ['rok', 'zdarzenia'],
-            ['2020', '2'],
-        ];
-        Assert::eq($this->result, $expectedResult);
+        $expectedHeaders = ['rok', 'zdarzenia'];
+        $expectedRows = [[2020, 2]];
+
+        Assert::eq($this->result->getTableHeaders(), $expectedHeaders);
+        Assert::eq(array_values($this->result->getTable()), $expectedRows);
     }
 }

@@ -14,11 +14,11 @@ class MysqlDatabase implements DatabaseInterface
     public function __construct(string $host, string $user, string $password, string $database)
     {
         try {
-        $this->link = new \PDO(
-            'mysql:dbname=' . $database . ';host=' . $host,
-            $user,
-            $password,
-            [\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"]);
+            $this->link = new \PDO(
+                'mysql:dbname=' . $database . ';host=' . $host,
+                $user,
+                $password,
+                [\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"]);
         } catch (\Throwable $e) {
             throw new \RuntimeException("Connection failed: %s\n", 0, $e);
         }
@@ -33,11 +33,12 @@ class MysqlDatabase implements DatabaseInterface
             throw new InvalidQueryException('Query Failed: ' . $throwable->getMessage() . '. Query: ' . $query->getSqlQuery(), 0, $throwable);
         }
         $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
-        if(count($result)>0) {
+        if (count($result) > 0) {
             $headerRow = array_keys($result[0]);
         } else {
             $headerRow = [];
         }
+        $result = array_map(fn ($row) => array_values($row), $result);
 
         return new QueryResult($result, $headerRow, microtime(true) - $time);
     }

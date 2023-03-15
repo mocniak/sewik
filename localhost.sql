@@ -96,43 +96,6 @@ GROUP BY dzien_tygodnia
 ORDER BY CAST(dzien_tygodnia AS UNSIGNED) ASC;
 
 
-SELECT r.rok, zdarzenia, zmarli, ciezko_ranni, lekko_ranni
-FROM (SELECT YEAR(DATA_ZDARZ) AS rok, count(*) AS zdarzenia
-      FROM zdarzenie
-      WHERE miejscowosc = 'warszawa'
-      GROUP BY rok) AS r
-         LEFT JOIN (SELECT rok, count(*) AS zmarli
-                    FROM (SELECT ZSZD_ID, STUC_KOD
-                          FROM uczestnicy
-                          WHERE uczestnicy.zszd_id IN (SELECT id
-                                                       FROM zdarzenie
-                                                       WHERE miejscowosc =
-                                                             'warszawa') WHERE STUC_KOD IN ('ZM'
-                              , 'ZC'
-                          )) AS u
-                             LEFT JOIN (SELECT id, YEAR(DATA_ZDARZ) AS rok FROM zdarzenie) AS z ON z.ID = u.ZSZD_ID
-                    GROUP BY ROK) AS zm ON r.rok = zm.rok
-         LEFT JOIN (SELECT rok, count(*) AS ciezko_ranni
-                    FROM (SELECT ZSZD_ID, STUC_KOD
-                          FROM uczestnicy
-                          WHERE uczestnicy.zszd_id IN
-                                (SELECT id FROM zdarzenie WHERE miejscowosc = 'warszawa') WHERE STUC_KOD = 'RC') AS u
-                             LEFT JOIN (SELECT id, YEAR(DATA_ZDARZ) AS rok FROM zdarzenie) AS z ON z.ID = u.ZSZD_ID
-                    GROUP BY ROK) AS rc ON r.rok = rc.rok
-         LEFT JOIN (SELECT rok, count(*) AS lekko_ranni
-                    FROM (SELECT ZSZD_ID, STUC_KOD
-                          FROM uczestnicy
-                          WHERE uczestnicy.zszd_id IN
-                                (SELECT id FROM zdarzenie WHERE miejscowosc = 'warszawa') WHERE STUC_KOD = 'RL') AS u
-                             LEFT JOIN (SELECT id, YEAR(DATA_ZDARZ) AS rok FROM zdarzenie) AS z ON z.ID = u.ZSZD_ID
-                    GROUP BY ROK) AS rl ON r.rok = rl.rok;
-
-
-SELECT DISTINCT POWIAT
-FROM zdarzenie
-ORDER BY POWIAT ASC;
-
-
 UPDATE zdarzenie
 SET powiat = 'POWIAT CIECHANOWSKI'
 WHERE POWIAT = 'POWIAT  CIECHANOWSKI';
@@ -1432,29 +1395,6 @@ FROM (SELECT ZSZD_ID, ZSPO_ID
 WHERE DATA_ZDARZ BETWEEN '2018-01-01' AND '2018-12-31'
 GROUP BY CHMZ_KOD;
 
-
-DELETE
-from sewik.zdarzenie
-WHERE ID IN (SELECT id FROM sewik_2018.zdarzenie);
-DELETE
-from sewik.pojazdy
-WHERE ZSZD_ID IN (SELECT id FROM sewik_2018.zdarzenie);
-DELETE
-from sewik.uczestnicy
-WHERE ZSZD_ID IN (SELECT id FROM sewik_2018.zdarzenie);
-
-
-INSERT INTO sewik.zdarzenie
-SELECT *
-FROM sewik_2018.zdarzenie;
-INSERT INTO sewik.pojazdy
-SELECT *
-FROM sewik_2018.pojazdy;
-INSERT INTO sewik.uczestnicy
-SELECT *
-FROM sewik_2018.uczestnicy;
-
-
 SELECT s.opis, r.`z winy rowerzystow`, razem - r.`z winy rowerzystow` as inni, razem
 FROM (SELECT SPSZ_KOD, COUNT(1) as razem
       FROM uczestnicy
@@ -1530,225 +1470,6 @@ WHERE spip_kod IS NOT NULL
   AND ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
 GROUP BY year;
 
-SELECT opis,
-       r2007,
-       r2008,
-       r2009,
-       r2010,
-       r2011,
-       r2012,
-       r2013,
-       r2014,
-       r2015,
-       r2015,
-       r2016,
-       r2017,
-       r2018
-FROM (SELECT spip_kod, count(*) as zdarzenia
-      FROM zdarzenie
-      WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-        AND spip_kod IS NOT NULL
-      GROUP BY spip_kod
-      order BY zdarzenia DESC) as z
-         LEFT JOIN (SELECT spip_kod, count(*) as r2007
-                    FROM zdarzenie
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spip_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2007-01-01' AND '2007-12-31'
-                    GROUP BY spip_kod) as z_2007 on z.spip_kod = z_2007.spip_kod
-         LEFT JOIN (SELECT spip_kod, count(*) as r2008
-                    FROM zdarzenie
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spip_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2008-01-01' AND '2008-12-31'
-                    GROUP BY spip_kod) as z_2008 on z.spip_kod = z_2008.spip_kod
-         LEFT JOIN (SELECT spip_kod, count(*) as r2009
-                    FROM zdarzenie
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spip_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2009-01-01' AND '2009-12-31'
-                    GROUP BY spip_kod) as z_2009 on z.spip_kod = z_2009.spip_kod
-         LEFT JOIN (SELECT spip_kod, count(*) as r2010
-                    FROM zdarzenie
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spip_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2010-01-01' AND '2010-12-31'
-                    GROUP BY spip_kod) as z_2010 on z.spip_kod = z_2010.spip_kod
-         LEFT JOIN (SELECT spip_kod, count(*) as r2011
-                    FROM zdarzenie
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spip_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2011-01-01' AND '2011-12-31'
-                    GROUP BY spip_kod) as z_2011 on z.spip_kod = z_2011.spip_kod
-         LEFT JOIN (SELECT spip_kod, count(*) as r2012
-                    FROM zdarzenie
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spip_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2012-01-01' AND '2012-12-31'
-                    GROUP BY spip_kod) as z_2012 on z.spip_kod = z_2012.spip_kod
-         LEFT JOIN (SELECT spip_kod, count(*) as r2013
-                    FROM zdarzenie
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spip_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2013-01-01' AND '2013-12-31'
-                    GROUP BY spip_kod) as z_2013 on z.spip_kod = z_2013.spip_kod
-         LEFT JOIN (SELECT spip_kod, count(*) as r2014
-                    FROM zdarzenie
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spip_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2014-01-01' AND '2014-12-31'
-                    GROUP BY spip_kod) as z_2014 on z.spip_kod = z_2014.spip_kod
-         LEFT JOIN (SELECT spip_kod, count(*) as r2015
-                    FROM zdarzenie
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spip_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2015-01-01' AND '2015-12-31'
-                    GROUP BY spip_kod) as z_2015 on z.spip_kod = z_2015.spip_kod
-         LEFT JOIN (SELECT spip_kod, count(*) as r2016
-                    FROM zdarzenie
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spip_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2016-01-01' AND '2016-12-31'
-                    GROUP BY spip_kod) as z_2016 on z.spip_kod = z_2016.spip_kod
-         LEFT JOIN (SELECT spip_kod, count(*) as r2017
-                    FROM zdarzenie
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spip_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2017-01-01' AND '2017-12-31'
-                    GROUP BY spip_kod) as z_2017 on z.spip_kod = z_2017.spip_kod
-         LEFT JOIN (SELECT spip_kod, count(*) as r2018
-                    FROM zdarzenie
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spip_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2018-01-01' AND '2018-12-31'
-                    GROUP BY spip_kod) as z_2018 on z.spip_kod = z_2018.spip_kod
-         LEFT JOIN spip as s on s.kod = z.spip_kod;
-
-
-SELECT opis,
-       r2007,
-       r2008,
-       r2009,
-       r2010,
-       r2011,
-       r2012,
-       r2013,
-       r2014,
-       r2015,
-       r2015,
-       r2016,
-       r2017,
-       r2018
-FROM (SELECT SPSZ_KOD, count(*) as zdarzenia
-      FROM uczestnicy
-      WHERE ZSZD_ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-        AND ZSPO_ID NOT IN (SELECT ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-        AND SPSZ_KOD IS NOT NULL
-      GROUP BY SPSZ_KOD
-      order BY zdarzenia DESC) as z
-         LEFT JOIN (SELECT spsz_kod, count(*) as r2007
-                    FROM uczestnicy
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spsz_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2007-01-01' AND '2007-12-31'
-                    GROUP BY spsz_kod) as z_2007 on z.spsz_kod = z_2007.spsz_kod
-         LEFT JOIN (SELECT spsz_kod, count(*) as r2008
-                    FROM uczestnicy
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spsz_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2008-01-01' AND '2008-12-31'
-                    GROUP BY spsz_kod) as z_2008 on z.spsz_kod = z_2008.spsz_kod
-         LEFT JOIN (SELECT spsz_kod, count(*) as r2009
-                    FROM uczestnicy
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spsz_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2009-01-01' AND '2009-12-31'
-                    GROUP BY spsz_kod) as z_2009 on z.spsz_kod = z_2009.spsz_kod
-         LEFT JOIN (SELECT spsz_kod, count(*) as r2010
-                    FROM uczestnicy
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spsz_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2010-01-01' AND '2010-12-31'
-                    GROUP BY spsz_kod) as z_2010 on z.spsz_kod = z_2010.spsz_kod
-         LEFT JOIN (SELECT spsz_kod, count(*) as r2011
-                    FROM uczestnicy
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spsz_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2011-01-01' AND '2011-12-31'
-                    GROUP BY spsz_kod) as z_2011 on z.spsz_kod = z_2011.spsz_kod
-         LEFT JOIN (SELECT spsz_kod, count(*) as r2012
-                    FROM uczestnicy
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spsz_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2012-01-01' AND '2012-12-31'
-                    GROUP BY spsz_kod) as z_2012 on z.spsz_kod = z_2012.spsz_kod
-         LEFT JOIN (SELECT spsz_kod, count(*) as r2013
-                    FROM uczestnicy
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spsz_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2013-01-01' AND '2013-12-31'
-                    GROUP BY spsz_kod) as z_2013 on z.spsz_kod = z_2013.spsz_kod
-         LEFT JOIN (SELECT spsz_kod, count(*) as r2014
-                    FROM uczestnicy
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spsz_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2014-01-01' AND '2014-12-31'
-                    GROUP BY spsz_kod) as z_2014 on z.spsz_kod = z_2014.spsz_kod
-         LEFT JOIN (SELECT spsz_kod, count(*) as r2015
-                    FROM uczestnicy
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spsz_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2015-01-01' AND '2015-12-31'
-                    GROUP BY spsz_kod) as z_2015 on z.spsz_kod = z_2015.spsz_kod
-         LEFT JOIN (SELECT spsz_kod, count(*) as r2016
-                    FROM uczestnicy
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spsz_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2016-01-01' AND '2016-12-31'
-                    GROUP BY spsz_kod) as z_2016 on z.spsz_kod = z_2016.spsz_kod
-         LEFT JOIN (SELECT spsz_kod, count(*) as r2017
-                    FROM uczestnicy
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spsz_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2017-01-01' AND '2017-12-31'
-                    GROUP BY spsz_kod) as z_2017 on z.spsz_kod = z_2017.spsz_kod
-         LEFT JOIN (SELECT spsz_kod, count(*) as r2018
-                    FROM uczestnicy
-                    WHERE ID IN (SELECT ZSZD_ID FROM pojazdy WHERE RODZAJ_POJAZDU = 'IS101')
-                      AND spsz_kod IS NOT NULL
-                      AND DATA_ZDARZ BETWEEN '2018-01-01' AND '2018-12-31'
-                    GROUP BY spsz_kod) as z_2018 on z.spsz_kod = z_2018.spsz_kod
-         LEFT JOIN spip as s on s.kod = z.SPSZ_KOD;
-
-CREATE VIEW rowery AS
-SELECT *
-FROM pojazdy
-WHERE RODZAJ_POJAZDU = 'IS101';
-CREATE VIEW rowerzysci AS
-SELECT *
-FROM uczestnicy
-WHERE ZSPO_ID IN (SELECT ID FROM rowery);
-
-CREATE VIEW zdarzenia_z_rowerami AS
-SELECT *
-FROM zdarzenie
-WHERE ID IN (SELECT ZSZD_ID from rowery);
-
-SELECT DISTINCT SPSZ_KOD
-from uczestnicy;
-
-SELECT year(data_zdarz) as rok, count(1) as `01`
-from (SELECT id, ZSZD_ID FROM uczestnicy) as u
-    LEFT JOIN (SELECT ID, DATA_ZDARZ FROM zdarzenie) as z
-on z.ID = u.ZSZD_ID
-GROUP BY rok;
-
-
-SELECT year(DATA_ZDARZ) as rok, count(1) as `01`
-FROM (SELECT * FROM uczestnicy WHERE SPSZ_KOD = '01' AND ZSZD_ID IN (SELECT ZSZD_ID from rowery)) u
-    left JOIN (SELECT ID, DATA_ZDARZ FROM zdarzenie) z on z.id = u.ZSZD_ID
-GROUP BY rok;
-
 DELETE
 FROM sewik.pojazdy
 WHERE ZSZD_ID IN (SELECT id FROM sewik.zdarzenie WHERE DATA_ZDARZ < '2007-01-01');
@@ -1794,8 +1515,6 @@ SELECT * FROM pojazdy WHERE ZSZD_ID IN (
     ENCLOSED BY '"' LINES TERMINATED BY '\n';
 
 
-use sewik_all;
-
 ## migrowanie pojazdów do wspolnego standardu
 
 SELECT DISTINCT RODZAJ_POJAZDU from sewik_all.pojazdy;
@@ -1822,3 +1541,5 @@ UPDATE uczestnicy SET DATA_UR = null WHERE DATA_UR < '1900-01-01';
 SELECT count(1), SSRU_KOD from uczestnicy GROUP BY SSRU_KOD;
 
 SELECT ZSZD_ID FROM uczestnicy WHERE SSRU_KOD = 'O' LIMIT 10;
+
+SELECT COUNT(1) as zdarzenia, YEAR(DATA_ZDARZ) as rok FROM zdarzenie GROUP BY rok;
