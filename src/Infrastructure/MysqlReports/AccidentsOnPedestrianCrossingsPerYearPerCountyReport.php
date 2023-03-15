@@ -12,13 +12,13 @@ class AccidentsOnPedestrianCrossingsPerYearPerCountyReport
 
     public function generate(): array
     {
-        $counties = $this->database->execute('SELECT DISTINCT CONCAT_WS(\'/\', WOJ, POWIAT) as POWIAT FROM accident;');
-        $years = $this->database->execute('SELECT DISTINCT YEAR(DATA_ZDARZ) as rok FROM accident;');
+        $counties = $this->database->execute('SELECT DISTINCT CONCAT_WS(\'/\', WOJ, POWIAT) as POWIAT FROM zdarzenie;');
+        $years = $this->database->execute('SELECT DISTINCT YEAR(DATA_ZDARZ) as rok FROM zdarzenie;');
         $accidentsByCounties = [];
         foreach ($counties as $countyRow) {
             $countyName = $countyRow['POWIAT'];
             $accidentsByCounties[$countyName] = $this->database->execute(
-                'SELECT YEAR(DATA_ZDARZ) as rok, COUNT(1) as zdarzenia FROM accident WHERE CONCAT_WS(\'/\', WOJ, POWIAT) = \'' . $countyName . '\' GROUP BY rok;'
+                'SELECT YEAR(DATA_ZDARZ) as rok, COUNT(1) as zdarzenia FROM zdarzenie WHERE SZRD_KOD=\'04\' AND CHMZ_KOD = \'01\' AND CONCAT_WS(\'/\', WOJ, POWIAT) = \'' . $countyName . '\' GROUP BY rok;'
             );
         }
         $result = [];

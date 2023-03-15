@@ -2,7 +2,7 @@
 
 namespace Sewik\Infrastructure\Command;
 
-use Sewik\Infrastructure\MysqlReports\AccidentsPerYearPerCountyReport;
+use Sewik\Infrastructure\MysqlReports\AccidentsOnPedestrianCrossingsPerYearPerCountyReport;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,7 +13,7 @@ class ExportReportToCsvCommand extends Command
     protected static $defaultDescription = 'Export a report to csv file';
 
     public function __construct(
-        private readonly AccidentsPerYearPerCountyReport $report
+        private readonly AccidentsOnPedestrianCrossingsPerYearPerCountyReport $report
     )
     {
         parent::__construct();
