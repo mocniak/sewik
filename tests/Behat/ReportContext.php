@@ -7,6 +7,7 @@ namespace Sewik\Tests\Behat;
 use Behat\Behat\Context\Context;
 use Sewik\Domain\Dto\QueryResult;
 use Sewik\Domain\Entity\Accident;
+use Sewik\Infrastructure\MysqlReports\AccidentsOnPedestrianCrossingsPerYearPerCountyReport;
 use Sewik\Infrastructure\MysqlReports\AccidentsPerYearPerCountyReport;
 use Sewik\Infrastructure\MysqlReports\AccidentsPerYearReport;
 use Sewik\Infrastructure\Repository\AccidentRepository;
@@ -22,6 +23,7 @@ final class ReportContext implements Context
         private readonly AccidentRepository $accidentRepository,
         private readonly AccidentsPerYearReport $perYearReport,
         private readonly AccidentsPerYearPerCountyReport $perYearPerCountyReport,
+        private readonly AccidentsOnPedestrianCrossingsPerYearPerCountyReport $pedestrianCrossingsPerYearPerCountyReport,
     )
     {
         $this->result = null;
@@ -61,10 +63,20 @@ final class ReportContext implements Context
     /**
      * @Given there was an accident :arg3 on :arg1 in :arg2
      */
-    public function thereWasAnAccidentOnIn($id, $date, $county)
+    public function thereWasAnAccidentOnDateInCounty($id, $date, $county)
     {
         $this->accidentRepository->add(
             new Accident(id: (int)$id, county: $county, date: new \DateTimeImmutable($date))
+        );
+    }
+
+    /**
+     * @Given there was an accident :arg3 on :arg1 in :arg2 voivodeship :voivodeship
+     */
+    public function thereWasAnAccidentOnInVoivodeship($id, $date, $county, $voivodeship)
+    {
+        $this->accidentRepository->add(
+            new Accident(id: (int)$id, voivodeship: $voivodeship, county: $county, date: new \DateTimeImmutable($date))
         );
     }
 
@@ -77,10 +89,19 @@ final class ReportContext implements Context
     }
 
     /**
+     * @When I ask for accidents on pedestrian crossings per year per county report
+     */
+    public function iAskForAccidentsOnPedestrianCrossingsPerYearPerCountyReport()
+    {
+        $this->arrayResult = $this->pedestrianCrossingsPerYearPerCountyReport->generate();
+    }
+
+    /**
      * @Then I see :arg2 accidents in :arg3 in :arg1
      */
     public function iSeeAccidentsInYearInCounty($expectedNumberOfAccidents, $year, $county)
     {
+        var_dump($this->arrayResult);
         Assert::eq($this->arrayResult[(int)$year][$county], $expectedNumberOfAccidents);
     }
 
